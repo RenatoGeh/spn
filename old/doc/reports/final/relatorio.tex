@@ -1,0 +1,609 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[top=1.0in,bottom=1.0in]{geometry}
+\usepackage{hyperref}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage[backend=biber,url=true,doi=true,eprint=false]{biblatex}
+\usepackage{enumitem}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes}
+
+\addbibresource{../common/references.bib}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+\titleformat{\section}
+  {\normalfont\scshape\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\scshape\bfseries}{\thesubsection}{1em}{}
+\titleformat{\paragraph}
+  {\normalfont}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}
+  {\normalfont}{\thesubparagraph}{1em}{}
+
+\captionsetup[table]{labelsep=space}
+
+\theoremstyle{plain}
+
+\newtheorem*{spn-def}{Definição}
+\newtheorem*{spn-thm}{Teorema}
+
+\title{\textbf{Aprendizado Automático de Sum-Product Networks}}
+
+\begin{document}
+\date{}
+\author{}
+\vspace*{-40pt}
+{\let\newpage\relax\maketitle}
+
+Relatório final - MAC0215 (Atividade Curricular em Pesquisa)
+
+Aluno: Renato Lui Geh (Bacharelado em Ciência da Computação)
+
+Orientador: Denis Deratani Mauá
+
+\section{Introdução}
+
+\paragraph{
+  O intuito deste projeto de Iniciação Científica, como visto no relatório inicial do projeto
+  \cite{project-def}, era aprender a estrutura e propriedades de uma Sum-Product Network, um Modelo
+  Gráfico Probabilístico; entender a motivação por trás do estudo de tais redes probabilísticas,
+  como Redes Bayesianas; adquirir toda a base matemática por trás destas redes e finalmente
+  conseguir entender como aplicar aprendizado e inferência em Sum-Product Networks.
+}
+
+\paragraph{
+  Com o tempo disposto neste semestre, conseguiu-se estudar grande parte da área teórica por trás
+  de Sum-Product Networks, lendo-se a base matemática por trás de Redes Bayesianas e Sum-Product
+  Networks -- como será mostrado nas seções seguintes -- e entendendo conceitos de Teoria de Grafos
+  e probabilidade lendo-se tanto Darwiche\cite{bayes-net-darwiche} quanto estudando-se a matéria
+  dada em MAC0425 Inteligência Artificial; estudou-se definições, teoremas e propriedades de
+  Sum-Product Networks em dois diferentes artigos\cite{poon-domingos}\cite{gens-domingos}; também
+  foi estudado métodos de aprendizagem, como Regressão Linear, Naive Bayes, Nearest Neighbour e
+  Decision Trees tanto por estudo próprio quanto pelas aulas dadas em MAC0425; e finalmente foi
+  estudado um método de aprendizado em Sum-Product Networks em \cite{poon-domingos}.
+}
+
+\paragraph{
+  Como a maioria dos estudos feitos para este projeto são de caráter teórico, as evidências de
+  estudo mais concretas são os relatórios publicados semanalmente. Na seção seguinte detalhar-se-á
+  os estudos citados nesta seção.
+}
+
+\section{Histórico}
+
+\paragraph{
+  Para cada subseção nesta seção existe um relatório associado explicitando o trabalho em maiores
+  detalhes. Cada subseção equivale a uma semana. Cada semana possue um relatório. O intuito de se
+  fazer um relatório para cada semana é manter um resumo de toda a matéria vista na semana, além
+  de servir como ``notas de aula'' sobre o que foi lido. Como o que é transcrito para os relatórios
+  é um resumo da matéria, este também serve como um jeito de servir como referência posteriormente.
+  Adicionalmente, tais relatórios também servem como uma forma gradual e didática de se aprender
+  Sum-Product Networks, simulando os meus ``passos''.
+}
+
+\paragraph{
+  Cada subseção está organizada em diferentes blocos enumerados a seguir:
+}
+
+\begin{itemize}
+  \item Breve resumo da semana/relatório.
+  \item Enumeração dos assuntos vistos.
+  \item Resumo dos assuntos.
+\end{itemize}
+
+\paragraph{
+  A breve descrição da semana/relatório consiste apenas na explicação do que foi feito na semana e
+  eventualmente resumido no relatório. A discussão detalhada dos assuntos entrará em maiores
+  detalhes sobre o estudo, explicando o que foi feito de concreto na semana. O resumo do relatório
+  é mais técnico e entra em mais detalhes na matéria.
+}
+
+\subsection{Aprendizado Automático de Sum-Product Networks (SPN)}
+
+\paragraph{
+  Nesta semana foi feita a definição do projeto (relatório inicial).\cite{project-def}
+}
+
+\paragraph{
+  Durante essa semana pesquisou-se o que Sum-Product Networks de fato são, foi estudada a base
+  mínima de probabilidade necessária e foram lidas as aplicações de Sum-Product Networks. Os
+  seguintes tópicos foram estudados:
+}
+
+\begin{itemize}
+  \item Distribuições de probabilidade multivariadas.
+  \item Escopo de uma distribuição.
+  \item Espaço de uma distribuição multivariada.
+  \item Inferência.
+  \item Definição de uma Sum-Product Network.
+  \item Vantagens de Sum-Product Networks.
+  \item Aplicações de Sum-Product Networks.
+\end{itemize}
+
+\paragraph{
+  O relatório associado a essa semana que contém os tópicos citados acima é \textit{Aprendizado
+  Automático de Sum-Product Networks (SPN)}\cite{project-def}.
+}
+
+\paragraph{
+  Esta semana foi importante para ter a base matemática para entender Sum-Product Networks. SPNs
+  são redes probabilísticas que podem ser representadas como um digrafo acíclico com
+  folhas representando probabilidades. Como cada folha é uma distribuição monovariável, então uma
+  SPN que tenha mais de uma folha e tenha ao menos um nó produto é uma distribuição de
+  probabilidade multivariada. Isso ocorre por causa da definição de consistência de uma SPN, que
+  pode ser lida em \cite{report-9}. Além disso este relatório representa os primeiros contatos com
+  SPNs, estudando-se definição (superficialmente), vantagens de SPNs sobre outras redes e
+  aplicações mais práticas.
+}
+
+\subsection{Modeling and Reasoning with Bayesian Networks: Compiling Bayesian Networks}
+
+\paragraph{
+  Esta semana foi a primeira das muitas em que foi lido o livro \textit{Modeling and Reasoning with
+  Bayesian Networks}\cite{bayes-net-darwiche}. Nesta semana particularmente foi lido o capítulo
+  12 ``Compiling Bayesian Networks''.
+}
+
+\paragraph{
+  Podemos enumerar os tópicos estudados nesta semana da seguinte forma:
+}
+
+\begin{itemize}
+  \item Redes Bayesianas.
+  \item CPT, MPE e MAP.
+  \item Consistência de variáveis dada uma evidência.
+  \item Network polynomial.
+  \item Circuit propagation e derivadas parciais.
+\end{itemize}
+
+\paragraph{
+  O relatório associado a essa semana que contém os tópicos citados acima é \textit{Modeling and
+  Reasoning with Bayesian Networks: Compiling Bayesian Networks}\cite{report-1}.
+}
+
+\paragraph{
+  O capítulo ``Compiling Bayesian Networks'' pode ser visto como um precursor para a criação de
+  Sum-Product Networks. Neste capítulo Darwiche propõe um método de se representar uma Rede
+  Bayesiana como um digrafo acíclico onde as folhas são parâmetros ou indicadores e os
+  nós internos são somas ou produtos de tal forma que o resultado deste circuito aritmético na raíz
+  é a network polynomial da distribuição.
+}
+
+\paragraph{
+  Poon e Domingos expandem esta ideia em seu artigo \textit{Sum-Product Networks: A New Deep
+  Architecture}\cite{poon-domingos} com mais formalização e com a diferença das folhas, ao invés
+  de serem ou parâmetros ou indicadores, serem distribuições monovariáveis com os pesos nas arestas
+  originárias de nós somas.
+}
+
+\paragraph{
+  Também foi estudado o que significa uma variável da rede estar consistente com um conjunto de
+  indicadores. Esse conjunto de indicadores pode ser chamado de evidência, e representa o
+  conhecimento \textit{a priori} de mundo. O conceito de consistência de uma variável dada uma
+  evidência é muito importante para SPNs.
+}
+
+\paragraph{
+  Neste capítulo temos o primeiro contato com network polynomials, um conceito fundamental para o
+  entendimento de Sum-Product Networks. Além disso, foram estudados algumas nomenclaturas usadas
+  em probabilidade, como CPT, MPE e MAP (seus significados podem ser vistos no relatório). Além
+  disso foi estudado Redes Bayesianas superficialmente para podermos entender como compila-las em
+  circuitos aritméticos.
+}
+
+\paragraph{
+  Outro ponto fundamental foi o estudo de propagação do circuito. Propagação do circuito significa
+  usar as derivadas parciais das variáveis de tal forma que não precisemos recalcular os parâmetros
+  do circuito aritmético se mudarmos a evidência. No final do relatório também analisamos a
+  complexidade dos algoritmos de \textit{bottom-up} (calcular inferência) e \textit{top-down}
+  (calcular as derivadas parciais).
+}
+
+\subsection{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.1-6.5}
+
+\paragraph{
+  Nesta semana foi lida a primeira parte do capítulo 6 do livro \textit{Modeling and Reasoning with
+  Bayesian Networks}\cite{bayes-net-darwiche}. A primeira parte consiste nas subseções 1-5.
+}
+
+\paragraph{
+  Os tópicos 6.1-6.5 dizem respeito aos seguintes assuntos:
+}
+
+\begin{itemize}
+  \item Factors.
+  \item Soma e multiplicação de factors.
+  \item Eliminação de variáveis.
+  \item Ordem de eliminação.
+\end{itemize}
+
+\paragraph{
+  O relatório associado a essa semana que contém os tópicos citados acima é \textit{Modeling and
+  Reasoning with Bayesian Networks: Inference by Variable Elimination 6.1-6.5}\cite{report-2}.
+}
+
+\paragraph{
+  Eliminação de variáveis é um método por estrutura de simplificar uma rede para torna-la mais
+  tratável. Ao contrário da estrutura local (que será visto mais a frente), métodos por estrutura
+  não usam os parâmetros dados pela query na hora da inferência. Isso as tornam mais gerais, mas
+  não possuem melhor performance quando comparadas a métodos que usam estrutura local.
+}
+
+\paragraph{
+  Factors podem ser vistos como funções que mapeiam cada instância das variáveis em um número
+  não-negativo. Também chamados de potenciais, factors servem para representar um jeito mais
+  compacto de se fazer operações em CPTs.
+}
+
+\paragraph{
+  Soma (\textit{summing out}) de uma variável $X$ é uma operação para se tentar eliminar a
+  referência de uma variável em uma CPT. Multiplicação pode ser visto como a operação de união de
+  variáveis.
+}
+
+\paragraph{
+  Eliminação de variáveis consiste no uso de multiplicação e soma de variáveis para se descartar
+  uma variável da Rede Bayesiana. Foram vistos algumas propriedades, algoritmos e a definição de
+  se eliminar variáveis.
+}
+
+\paragraph{
+  A ordem da eliminação de cada variável influencia na complexidade do algoritmo. Quer-se sempre
+  eliminar variáveis em uma ordem menos custosa. Foi visto um algoritmo bem simples mas intuitivo
+  de como achar a menor ordem de eliminação, mas este algoritmo era custoso, já que precisava
+  calcular cada ordem individualmente.
+}
+
+\subsection{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.6-6.9}
+
+\paragraph{
+  Nesta semana foi lida a segunda parte do capítulo 6 do livro \textit{Modeling and Reasoning with
+  Bayesian Networks}\cite{bayes-net-darwiche}. A segunda parte consiste nas subseções 6-9.
+}
+
+\paragraph{
+  Os tópicos 6.6-6.9 dizem respeito aos seguintes assuntos:
+}
+
+\begin{itemize}
+  \item Escolhendo uma ordem de eliminação.
+  \item Computando marginais posteriores.
+  \item Estrutura e complexidade da rede.
+  \item Estrutura e complexidade da query.
+\end{itemize}
+
+\paragraph{
+  O relatório associado a essa semana que contém os tópicos citados acima é \textit{Modeling and
+  Reasoning with Bayesian Networks: Inference by Variable Elimination 6.6-6.9}\cite{report-5}.
+}
+
+\paragraph{
+  Além do que foi lido no livro, também foram pesquisados os seguintes assuntos:
+}
+
+\begin{itemize}
+  \item Subgrafos, subgrafos induzidos, cliques, spanning subgrafos.
+  \item Tree networks, polytrees e multiply connected.
+  \item P, NP, NP-dificuldade e NP-completude.
+\end{itemize}
+
+\paragraph{
+  Conforme os tópicos 6.6-6.9 foram lidos, assuntos que fossem dependências do que o autor citava
+  foram pesquisados e adicionados no relatório. Portanto, os itens da segunda lista dessa seção
+  estão presentes no relatório, com explicações e definições.
+}
+
+\paragraph{
+  Primeiro foram vistos dois algoritmos não tão triviais para se achar uma melhor ordem de
+  eliminação. Os dois algoritmos são similares, suas únicas diferenças sendo a heurística usada.
+  A primeira tenta construir uma ordem que tenha menor factor possível. A segunda tenta adicionar
+  o menor número possível de arestas no grafo de interação.
+}
+
+\paragraph{
+  Para entender o grafo de interação, foi preciso primeiro pesquisar sobre subgrafos, subgrafos
+  induzidos, cliques e spanning subgrafos. Um grafo de interação tem seus nós como variáveis que
+  aparecem nos factors. Existe uma aresta entre dois nós se as duas variáveis aparecem no mesmo
+  factor. Pode-se ver este grafo como um clique, tornando o problema de se achar uma ordem um
+  problema de busca e eliminação de cliques. No entanto, achar uma boa ordem é NP-difícil.
+}
+
+\paragraph{
+  Para se entender o que significa NP-difícil, foi pesquisado P, NP, NP-dificuldade e
+  NP-completude. Este estudo foi adicionado no apêndice do relatório por ser mais geral que no caso
+  do estudo sobre subgrafos.
+}
+
+\paragraph{
+  O próximo tópico do livro era como se computar marginais posteriores. Foi então pesquisado o que
+  significavam marginais posteriores e marginais conjuntas. Para isso foi usado o próprio livro do
+  Darwiche\cite{bayes-net-darwiche} que as definia em um outro capítulo. Em seguida foi visto como
+  usar eliminação de variáveis para computar marginais conjuntas. Também foram vistas várias notações.
+}
+
+\paragraph{
+  O assunto seguinte era sobre estrutura e complexidade da rede. A complexidade de duas Redes
+  Bayesianas não se restringe apenas ao número de variáveis, mas também a sua estrutura. Um mesmo
+  número de variáveis pode ter ordens ótimas de eliminação com diferentes complexidades. Isso se
+  deve ao fator de treewidth da rede.
+}
+
+\paragraph{
+  Para se entender treewidth foi preciso estudar tree networks, polytrees e multiply connected. O
+  livro menciona de forma superficial o que elas são, sendo suas definições postas no relatório.
+}
+
+\paragraph{
+  Em seguida foi visto um jeito de se tentar melhorar a estrutura de uma rede para simplificar a
+  complexidade. Foi lido sobre como se efetuar um corte em uma árvore, o que inclue aparar tanto
+  nós quanto arestas da Rede Bayesiana.
+}
+
+\subsection{Modeling and Reasoning with Bayesian Networks: Inference with Local Structure 13.1-13.3}
+
+\paragraph{
+  Nesta semana foram lidos os tópicos 1-3 do capítulo 13 do livro \textit{Modeling and Reasoning
+  with Bayesian Networks}\cite{bayes-net-darwiche}.
+}
+
+\paragraph{
+  Os seguintes assuntos foram estudados:
+}
+
+\begin{itemize}
+  \item Comparação entre estrutura local e baseado em estrutura.
+  \item Impacto de estrutura local na complexidade da inferência.
+  \item Independência contexto-específica.
+  \item Determinismo.
+  \item Evidência em estrutura local.
+\end{itemize}
+
+\paragraph{
+  O relatório associado a essa semana que contém os tópicos citados acima é \textit{Modeling and
+  Reasoning with Bayesian Networks: Inference with Local Structure 13.1-13.3}\cite{report-8}.
+}
+
+\paragraph{
+  Estrutura local é o uso dos parâmetros da rede para melhorarmos a complexidade da inferência.
+  Em baseado em estrutura, inferência de uma rede é limitado plea treewidth da rede. No entanto,
+  com estrutura local, podemos computar em tempo tratável uma rede com treewidth intratável.
+}
+
+\paragraph{
+  Foram lidos alguns exemplos de uso de estrutura local para deixar a rede mais simples. Uma delas
+  é com o uso de restrições lógicas. Se um nó pai tem uma relação de ou-lógico com seus filhos,
+  então podemos simplificar a rede fatorando a network polynomial de tal forma que tenhamos um
+  circuito aritmético tratável, mesmo que o número de filhos seja exponencial.
+}
+
+\paragraph{
+  Em seguida foi lido sobre independência contexto-específica. A relação entre nós de tal forma que
+  podemos calcular a probabilidade de uma variável independentemente do valor dos outros nós se
+  chama independência contexto-específica.
+}
+
+\paragraph{
+  O próximo assunto tratava sobre determinismo de uma rede, que é uma relação de estrutura local
+  onde os parâmetros da rede tem valor zero.
+}
+
+\paragraph{
+  Finalmente, foi visto sobre como usar evidência como um jeito de se simplificar a rede. Usar a
+  evidência de uma rede é um jeito de se fazer estrutura local.
+}
+
+\subsection{Uma Introdução a Sum-Product Networks}
+
+\paragraph{
+  Nesta semana dediquei-me a escrita de um relatório onde, baseado em dois papers (Domingos, Poon
+  \cite{poon-domingos} e Domingos, Gens \cite{gens-domingos}), pretende introduzir Sum-Product
+  Networks de forma que, lendo-se todos os relatórios anteriores, consiga entender o que são
+  Sum-Product Networks. A ênfase desta semana foi na definição e nas propriedades mais importantes
+  de uma Sum-Product Network. Posteriormente planeja-se completar o relatório com os outros
+  assuntos mencionados nesses e em outros papers.
+}
+
+\paragraph{
+  Os tópicos incluídos neste relatório foram:
+}
+
+\begin{itemize}
+  \item Distribuição normalizada de produtos de factors.
+  \item Função de partição.
+  \item Definições de Sum-Product Networks.
+  \item Validade, completude e consistência de uma Sum-Product Network.
+\end{itemize}
+
+\paragraph{
+  O relatório associado a essa semana que contém os tópicos citados acima é \textit{Uma Introdução
+  a Sum-Product Networks}\cite{report-9}.
+}
+
+\paragraph{
+  Foram lidos os papers \textit{Sum-Product Networks: A New Deep Architecture}\cite{poon-domingos}
+  de P. Domingos e H. Poon e \textit{Learning the Structure of Sum-Product Networks}
+  \cite{gens-domingos} de R. Gens e P. Domingos. Em particular, foi lida a introdução, definição
+  e em seguida propriedades de Sum-Product Networks dos dois papers. Em Domingos e Poon a definição
+  de SPNs é mais geral, enquanto que Gens e Domingos assumem uma SPN que seja sempre válida. No
+  relatório foi escrita primeiro a definição em Domingos e Poon e, após termos uma noção do que
+  são SPNs, a de Gens e Domingos.
+}
+
+\paragraph{
+  Antes de entrarmos em detalhes sobre SPNs, precisou-se estudar o que são distribuições
+  normalizadas de produtos de factors e funções partição. Foi lida a introdução contida em Poon e
+  Domingos como referência. Após estudarmos a base, foram escritas as duas definições de
+  Sum-Product Networks.
+}
+
+\paragraph{
+  Em seguida foi lido sobre as três principais propriedades em SPNs: validade, completude e
+  consistência. Uma SPN válida é importante pois computa a probabilidade de uma evidência em tempo
+  linear e de forma correta. Uma SPN inválida sempre tem valor aproximado.
+}
+
+\paragraph{
+  Finalmente, leu-se sobre o primeiro teorema em Sum-Product Networks, que dita que uma SPN é
+  válida se ela é completa e consistente. Em seguida foi feita a prova deste teorema usando o
+  paper de Poon e Domingos como ponto de partida.
+}
+
+\subsection{Aprendizado Automático de Sum-Product Networks (Pôster)}
+
+\paragraph{
+  Nesta semana foi feito o pôster para MAC0215.
+}
+
+\begin{itemize}
+  \item Motivações.
+  \item Definições.
+  \item Propriedades.
+  \item Aprendizado.
+  \item Algoritmo de Aprendizado.
+  \item Experimentos.
+\end{itemize}
+
+\paragraph{
+  O pôster associado aos tópicos acima é \textit{Aprendizado Automático de Sum-Product Networks}
+  \cite{poster-spn}.
+}
+
+\paragraph{
+  Para fazer o pôster releu-se os dois artigos \cite{poon-domingos} e \cite{gens-domingos}. Também
+  foi feita uma breve pesquisa na motivação dos criadores de se criar Sum-Product Networks. Em
+  seguida foi relida as definições dadas pelos dois artigos e transcrita de maneira mais sucinta
+  possível para o pôster. Tentou-se manter as propriedades claras mas ao mesmo tempo pequenas e
+  fáceis de ler e em seguida foi dada uma explicação da razão pela qual deseja-se validade em uma
+  SPN.
+}
+
+\paragraph{
+  Até este ponto do projeto não havia sido lido nada sobre aprendizado em Sum-Product Networks.
+  Antes de entrar neste ponto era preciso saber toda a base que foi vista nos relatórios
+  anteriores. Para fazer o pôster, no entanto, era preciso ter a ideia de aprendizado de SPNs em
+  mente, e portanto foi lida a parte sobre aprendizado em Poon e Domingos \cite{poon-domingos} e
+  também em Gens e Domingos \cite{gens-domingos}.
+}
+
+\paragraph{
+  Foi feita uma divisão entre dois tipos de aprendizado em SPNs. A primeira refere-se ao
+  aprendizado dos pesos de uma SPN já existente. Já na segunda aprende-se tanto a estrutura quanto
+  os parâmetros da SPN. O primeiro algoritmo de aprendizado em SPNs pertence a primeira classe e
+  foi dada em \cite{poon-domingos}. Gens e Domingos criaram o primeiro algoritmo da segunda classe
+  em \cite{gens-domingos}.
+}
+
+\paragraph{
+  Decidiu-se estudar mais profundamente o algoritmo dado por Poon e Domingos por ser mais simples
+  e também por ter experimentos mais concretos. Foi lido sobre Gradient Descent e
+  Expectation-Maximization, duas técnicas de otimização usadas para atualizar e inferir os pesos
+  da SPN durante o aprendizado. Em seguida foi lido sobre como o algoritmo funcionava.
+}
+
+\paragraph{
+  Para ter resultados mais concretos para o pôster, foram simulados os experimentos citados em
+  \cite{poon-domingos}. As imagens sobre compleção de imagem e a tabela de taxa de acerto em
+  reconhecimento de imagens no poster fazem parte do conjunto de experimentos feitos no artigo.
+}
+
+\paragraph{
+  Finalmente, foi discutido com o orientador sobre quais seriam os futuros trabalhos que poderiam
+  ser feitos no projeto, adicionando isso ao pôster.
+}
+
+\subsection{Palestras e relatório final}
+
+\paragraph{
+  Nesta semana foram assistidas palestras na matéria de MAC0425 Inteligência Artificial e foi
+  escrito o relatório final.
+}
+
+\begin{itemize}
+  \item \textit{Aprendizagem de redes bayesianas} - Walter Perez
+  \item \textit{Redes neurais e Deep Learning} - Jessica de Souza
+  \item \textit{Sum-Product Networks} - Julissa Villanueva
+  \item \textit{Algoritmos genéticos e programação genética} - Nelson Lago
+  \item \textit{Programação dinâmica e Aprendizado por reforço aplicado ao jogo Tetris} - Suelen
+    Carvalho
+  \item Relatório final
+\end{itemize}
+
+\paragraph{
+  Para esta semana planejou-se assistir as palestras dos alunos de mestrado em MAC0425 Inteligência
+  Artificial, em especial as palestras citadas acima. Além disso essa semana foi reservada para o
+  relatório final da matéria de MAC0215.
+}
+
+\section{Resultados}
+
+\paragraph{
+  Nesta seção irei primeiro descrever os resultados pessoais desta matéria e do projeto e em
+  seguida irei abordar os resultados acadêmicos do projeto.
+}
+
+\paragraph{
+  Durante o semestre aprendi muito sobre Inteligência Artificial. É uma área que pretendo seguir no
+  futuro, especialmente com relação a pesquisa, e gostei bastante do assunto que estou estudando.
+  Por isso, acho que meus estudos em MAC0215 impactaram fortemente na minha produtividade da
+  Iniciação Científica. Com \textit{deadlines} impostos, me senti pressionado a estudar e a
+  apresentar resultados. Não conseguiria apresentar os resultados de forma tão produtiva se não
+  tivesse me inscrito nesta matéria.
+}
+
+\paragraph{
+  Como a área que estou estudando -- principalmente neste estágio dos meus estudos -- é muito
+  teórica, apresentar resultados concretos é difícil. Meus resultados neste projeto foram mais em
+  adquirir conhecimento e construir uma base para que, em seguida, consiga atingir resultados mais
+  concretos. Além disso, por essa área em especial ser relativamente nova (o primeiro paper em SPNs
+  é de 2011, enquanto que a primeira vaga ideia de um circuito aritmético similar a SPNs data de
+  2003\cite{diff-approach-darwiche}), o conteúdo base por trás de toda esta teoria é relativamente
+  grande, já que se trata de tecnologia de ponta. Portanto, os únicos resultados que posso
+  apresentar são os relatórios que escrevi, os quais planejo continuar escrevendo mesmo após a
+  conclusão da matéria, já que são um jeito muito bom de tanto aprender a matéria quanto arquivar
+  para futuras consultas.
+}
+
+\section{Conclusão}
+
+\paragraph{
+  Cada semana foi dedicado sábado e domingo para se escrever os relatórios, enquanto que de segunda
+  a sexta eram lidos os artigos ou capítulos do livro. No entanto, em casos em que houvesse EPs ou
+  provas, foi reservada a semana para estudo ou para os EPs. Por causa disso existem algumas
+  semanas que não possuem relatório. Em casos em que a matéria lida era muito grande e não era
+  possível escrever o relatório a tempo, juntou-se as duas semanas em um relatório.
+}
+
+\paragraph{
+  Apesar de tudo isso, acredito que estudei no mínimo 100 horas. Os relatórios ajudam tanto para
+  memorizar quando para revisar o conteúdo visto durante a semana, e portanto acredito serem uma
+  forma de estudo.
+}
+
+\paragraph{
+  Adicionalmente, as aulas de MAC0425 (Inteligência Artificial) contribuíram bastante no estudo da
+  Iniciação Científica, já que o conteúdo de aula e o que foi visto no projeto tem partes iguais,
+  principalmente os assuntos sobre Aprendizado e Incerteza na aula de MAC0425, que são diretamente
+  relacionadas ao projeto.
+}
+
+\newpage
+
+\printbibliography
+
+\end{document}

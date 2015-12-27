@@ -1,0 +1,163 @@
+\RequireVersions{
+  *{application}{TeX}     {1990/03/25 v3.x}
+  *{format} {LaTeX2e}     {2011/06/27 v2.e}
+  *{class}  {beamer}      {2012/10/15 v3.24}
+  *{package}{beamerbasercs}{2012/11/13 v16a617839f)}
+  *{package}{beamerbasemodes}{2012/04/15 v6557182d97)}
+  *{package}{beamerbasedecode}{2010/05/01 v082c6111d)}
+  *{package}{ifpdf}       {2011/01/30 v2.3}
+  *{package}{beamerbaseoptions}{2010/04/27 v982469101dd6)}
+  *{package}{keyval}      {1999/03/16 v1.13}
+  *{package}{geometry}    {2010/09/12 v5.6}
+  *{package}{ifvtex}      {2010/03/01 v1.5}
+  *{package}{ifxetex}     {2010/09/12 v0.6}
+  *{file}   {size11.clo}  {2007/10/19 v1.4h}
+  *{package}{pgfcore}     {2010/04/11 v2.10}
+  *{package}{graphicx}    {1999/02/16 v1.0f}
+  *{package}{graphics}    {2009/02/05 v1.0o}
+  *{package}{trig}        {1999/03/16 v1.09}
+  *{file}   {graphics.cfg}{2010/04/23 v1.9}
+  *{file}   {pdftex.def}  {2011/05/27 v0.06d}
+  *{package}{infwarerr}   {2010/04/08 v1.3}
+  *{package}{ltxcmds}     {2011/11/09 v1.22}
+  *{package}{pgfsys}      {2010/06/30 v2.10}
+  *{package}{pgfrcs}      {2010/10/25 v2.10}
+  *{package}{everyshi}    {2001/05/15 v3.00}
+  *{file}   {pgfrcs.code.tex}{0000/00/00 v0.0}
+  *{file}   {pgfsys.code.tex}{0000/00/00 v0.0}
+  *{file}   {pgfsyssoftpath.code.tex}{2008/07/18 v1.7)}
+  *{file}   {pgfsysprotocol.code.tex}{2006/10/16 v1.4)}
+  *{package}{xcolor}      {2007/01/21 v2.11}
+  *{file}   {color.cfg}   {2007/01/18 v1.5}
+  *{file}   {pgfcore.code.tex}{0000/00/00 v0.0}
+  *{package}{xxcolor}     {2003/10/24 v0.1}
+  *{package}{hyperref}    {2012/11/06 v6.83m}
+  *{package}{hobsub-hyperref}{2012/05/28 v1.13}
+  *{package}{hobsub-generic}{2012/05/28 v1.13}
+  *{package}{hobsub}      {2012/05/28 v1.13}
+  *{package}{ifluatex}    {2010/03/01 v1.3}
+  *{package}{intcalc}     {2007/09/27 v1.1}
+  *{package}{etexcmds}    {2011/02/16 v1.5}
+  *{package}{kvsetkeys}   {2012/04/25 v1.16}
+  *{package}{kvdefinekeys}{2011/04/07 v1.3}
+  *{package}{pdftexcmds}  {2011/11/29 v0.20}
+  *{package}{pdfescape}   {2011/11/25 v1.13}
+  *{package}{bigintcalc}  {2012/04/08 v1.3}
+  *{package}{bitset}      {2011/01/30 v1.1}
+  *{package}{uniquecounter}{2011/01/30 v1.2}
+  *{package}{letltxmacro} {2010/09/02 v1.4}
+  *{package}{hopatch}     {2012/05/28 v1.2}
+  *{package}{xcolor-patch}{2011/01/30 v0.0}
+  *{package}{atveryend}   {2011/06/30 v1.8}
+  *{package}{atbegshi}    {2011/10/05 v1.16}
+  *{package}{refcount}    {2011/10/16 v3.4}
+  *{package}{hycolor}     {2011/01/30 v1.7}
+  *{package}{auxhook}     {2011/03/04 v1.3}
+  *{package}{kvoptions}   {2011/06/30 v3.11}
+  *{file}   {pd1enc.def}  {2012/11/06 v6.83m}
+  *{file}   {hyperref.cfg}{2002/06/06 v1.2}
+  *{package}{url}         {2013/09/16 v3.4}
+  *{file}   {hpdftex.def} {2012/11/06 v6.83m}
+  *{package}{rerunfilecheck}{2011/04/15 v1.7}
+  *{package}{beamerbaserequires}{2010/05/01 v082c6111d)}
+  *{package}{beamerbasecompatibility}{2012/05/01 v67c48b3b652d)}
+  *{package}{beamerbasefont}{2012/09/19 v733629cd0c6c)}
+  *{package}{amssymb}     {2013/01/14 v3.01}
+  *{package}{amsfonts}    {2013/01/14 v3.01}
+  *{package}{beamerbasetranslator}{2010/06/11 v85fd1cc7fc42)}
+  *{package}{translator}  {2010/06/12 v1.10}
+  *{file}   {translator-language-mappings.tex}{0000/00/00 v0.0}
+  *{package}{beamerbasemisc}{2012/02/24 v2ff5461be705)}
+  *{package}{beamerbasetwoscreens}{2010/05/01 v082c6111d)}
+  *{package}{beamerbaseoverlay}{2012/11/11 v6afbc49b1109)}
+  *{package}{beamerbasetitle}{2010/09/21 v0446ed0b6ae)}
+  *{package}{beamerbasesection}{2012/11/11 v0056eef6f17f)}
+  *{package}{beamerbaseframe}{2012/09/13 v846607320)}
+  *{package}{beamerbaseverbatim}{2012/08/30 v135076b3)}
+  *{package}{beamerbaseframesize}{2011/09/12 v70f9d8411e54)}
+  *{package}{beamerbaseframecomponents}{2012/09/13 v846607320)}
+  *{package}{beamerbasecolor}{2010/06/06 v1a9b48be06d)}
+  *{package}{beamerbasenotes}{2010/05/01 v082c6111d)}
+  *{package}{beamerbasetoc}{2012/10/02 v5ed0f4010e8a)}
+  *{package}{beamerbasetemplates}{2010/05/01 v082c6111d)}
+  *{package}{beamerbaseauxtemplates}{2012/05/01 v67c48b3b652d)}
+  *{package}{beamerbaseboxes}{2012/05/13 v56972908a390)}
+  *{package}{beamerbaselocalstructure}{2012/11/13 v79dac19)}
+  *{package}{enumerate}   {1999/03/05 v3.00}
+  *{package}{beamerbasenavigation}{2012/04/03 v42a0f21a412d)}
+  *{package}{beamerbasetheorems}{2010/06/06 v7e7cc5e53e9d)}
+  *{package}{amsmath}     {2013/01/14 v2.14}
+  *{package}{amstext}     {2000/06/29 v2.01}
+  *{package}{amsgen}      {1999/11/30 v2.0}
+  *{package}{amsbsy}      {1999/11/29 v1.2d}
+  *{package}{amsopn}      {1999/12/14 v2.01}
+  *{package}{amsthm}      {2004/08/06 v2.20}
+  *{package}{beamerbasethemes}{2010/05/01 v082c6111d)}
+  *{package}{beamerthemedefault}{2010/06/17 v02a7cf4d8ae)}
+  *{package}{beamerfontthemedefault}{2010/06/17 v02a7cf4d8ae)}
+  *{package}{beamercolorthemedefault}{2010/06/17 v02a7cf4d8ae)}
+  *{package}{beamerinnerthemedefault}{2012/05/01 v67c48b3b652d)}
+  *{package}{beamerouterthemedefault}{2012/10/02 v5ed0f4010e8a)}
+  *{package}{beamerthemeazul}{0000/00/00 v0.0}
+  *{package}{epstopdf}    {2010/02/09 v2.5}
+  *{package}{epstopdf-base}{2010/02/09 v2.5}
+  *{package}{grfext}      {2010/08/19 v1.1}
+  *{file}   {epstopdf-sys.cfg}{2010/07/13 v1.3}
+  *{package}{subfigure}   {2002/03/15 v2.1.5}
+  *{file}   {subfigure.cfg}{0000/00/00 v0.0}
+  *{package}{babel}       {2013/12/03 v3.9h}
+  *{file}   {portuges.ldf}{2008/03/18 v1.2q}
+  *{package}{inputenc}    {2008/03/30 v1.1d}
+  *{file}   {utf8.def}    {2008/04/05 v1.1m}
+  *{file}   {t1enc.dfu}   {2008/04/05 v1.1m}
+  *{file}   {ot1enc.dfu}  {2008/04/05 v1.1m}
+  *{file}   {omsenc.dfu}  {2008/04/05 v1.1m}
+  *{package}{ragged2e}    {2009/05/21 v2.1}
+  *{package}{everysel}    {2011/10/28 v1.2}
+  *{package}{mathtools}   {2013/02/12 v1.13}
+  *{package}{calc}        {2007/08/22 v4.3}
+  *{package}{mhsetup}     {2010/01/21 v1.2a}
+  *{package}{latexsym}    {1998/08/17 v2.2e}
+  *{package}{beamerposter}{2009/09/02 v1.10}
+  *{package}{xkeyval}     {2012/10/14 v2.6b}
+  *{file}   {xkeyval.tex} {2012/10/14 v2.6b}
+  *{package}{type1cm}     {2002/09/05 v0.04}
+  *{package}{fp}          {1995/04/02 v0.0}
+  *{package}{defpattern}  {1994/10/12 v0.0}
+  *{package}{fp-basic}    {1996/05/13 v0.0}
+  *{package}{fp-addons}   {1995/03/15 v0.0}
+  *{package}{fp-snap}     {1995/04/05 v0.0}
+  *{package}{fp-exp}      {1995/04/03 v0.0}
+  *{package}{fp-trigo}    {1995/04/14 v0.0}
+  *{package}{fp-pas}      {1994/08/29 v0.0}
+  *{package}{fp-random}   {1995/02/23 v0.0}
+  *{package}{fp-eqn}      {1995/04/03 v0.0}
+  *{package}{fp-upn}      {1996/10/21 v0.0}
+  *{package}{fp-eval}     {1995/04/03 v0.0}
+  *{package}{paralist}    {2013/06/09 v2.4}
+  *{package}{algorithm2e} {2013/01/06 v5.00}
+  *{package}{ifthen}      {2001/05/26 v1.1c}
+  *{package}{xspace}      {2009/10/20 v1.13}
+  *{package}{relsize}     {2013/03/29 v4.1}
+  *{package}{snapshot}    {2002/03/05 v1.14}
+  *{file}   {supp-pdf.mkii}{0000/00/00 v0.0}
+  *{package}{nameref}     {2012/10/27 v2.43}
+  *{package}{gettitlestring}{2010/12/03 v1.4}
+  *{file}   {poster.out}  {0000/00/00 v0.0}
+  *{file}   {poster.out}  {0000/00/00 v0.0}
+  *{file}   {translator-basic-dictionary-English.dict}{0000/00/00 v0.0}
+  *{file}   {translator-bibliography-dictionary-English.dict}{0000/00/00 v0.0}
+  *{file}   {translator-environment-dictionary-English.dict}{0000/00/00 v0.0}
+  *{file}   {translator-months-dictionary-English.dict}{0000/00/00 v0.0}
+  *{file}   {translator-numbers-dictionary-English.dict}{0000/00/00 v0.0}
+  *{file}   {translator-theorem-dictionary-English.dict}{0000/00/00 v0.0}
+  *{file}   {ime.png}     {Graphic v0.0}
+  *{file}   {spn_1.png}   {Graphic v0.0}
+  *{file}   {spn_2.png}   {Graphic v0.0}
+  *{file}   {completions/plane0.png}{0000/00/00 v0.0}
+  *{file}   {completions/face0.png}{0000/00/00 v0.0}
+  *{file}   {completions/stop0.png}{0000/00/00 v0.0}
+  *{file}   {completions/dollar0.png}{0000/00/00 v0.0}
+  *{file}   {poster.bbl}  {0000/00/00 v0.0}
+  *{file}   {ime.png}     {Graphic v0.0}
+}

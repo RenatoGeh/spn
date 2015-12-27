@@ -1,0 +1,815 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[top=1.0in,bottom=1.0in]{geometry}
+\usepackage{hyperref}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage[backend=biber,url=true,doi=true,eprint=false]{biblatex}
+\usepackage{enumitem}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes}
+
+\addbibresource{../common/references.bib}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+\titleformat{\section}
+  {\normalfont\scshape\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\scshape\bfseries}{\thesubsection}{1em}{}
+\titleformat{\paragraph}
+  {\normalfont}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}
+  {\normalfont}{\thesubparagraph}{1em}{}
+
+\captionsetup[table]{labelsep=space}
+
+\theoremstyle{plain}
+
+\newtheorem*{spn-def}{Definição}
+\newtheorem*{spn-thm}{Teorema}
+
+\title{\textbf{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.6-6.9}}
+
+\begin{document}
+\date{}
+\author{}
+\vspace*{-40pt}
+{\let\newpage\relax\maketitle}
+
+Relatório semana 5 - MAC0215 (Atividade Curricular em Pesquisa)
+
+Aluno: Renato Lui Geh (Bacharelado em Ciência da Computação)
+
+Orientador: Denis Deratani Mauá
+
+\section{Atividades realizadas na semana}
+
+\paragraph{
+  Durante a semana foram lidos os seguintes tópicos do livro \textit{Modeling and Reasoning with
+  Bayesian Networks}\cite{bayes-net-darwiche}:
+}
+
+\begin{description}
+  \item[6] - Inference by Variable Elimination
+  \begin{description}
+    \item[6.6] - Choosing an Elimination Order
+    \item[6.7] - Computing Posterior Marginals
+    \item[6.8] - Network Structure and Complexity
+    \item[6.9] - Query Structure and Complexity
+  \end{description}
+\end{description}
+
+\section{Definição das atividades}
+
+\paragraph{
+  Foram estudados como encontrar a melhor ordem de eliminação de variáveis\cite{report-2},
+  definimos o que são grafos de interação de Redes Bayesianas, como calcularmos marginais
+  posteriores (\textit{posterior marginals}), algumas propriedades da estrutura de uma rede e como
+  podar (\textit{prune}) nós e arestas de uma Rede Bayesiana.
+}
+
+\paragraph{
+  Esta seção será dividida em subseções onde veremos os itens enumerados no parágrafo acima. A cada
+  tópico que não tenha sido apresentado ainda vamos abordar a teoria por trás e introduzir o
+  assunto. Separaremos tais explicações em uma subsubseção equivalente. Abaixo está a lista de
+  tópicos que iremos abordar.
+}
+
+\begin{enumerate}
+  \item Escolhendo uma ordem de eliminação
+    \begin{enumerate}[label*=\arabic*.]
+      \item Subgraphs, induced subgraphs, cliques e spanning subgraphs
+      \item Grafo de interação
+    \end{enumerate}
+  \item Computando posterior marginals
+    \begin{enumerate}[label*=\arabic*.]
+      \item Posterior marginals e joint marginals
+      \item Eliminação de variáveis e posterior marginals
+    \end{enumerate}
+  \item Estrutura e complexidade da rede
+    \begin{enumerate}[label*=\arabic*.]
+      \item Treewidth
+      \item Tree networks, polytrees e multiply connected
+    \end{enumerate}
+  \item Pruning
+    \begin{enumerate}[label*=\arabic*.]
+      \item Pruning nodes
+      \item Pruning edges
+      \item Network pruning
+    \end{enumerate}
+  \item Apêndice
+    \begin{enumerate}[label*=\arabic*.]
+      \item P e NP
+      \item NP-hard e NP-complete
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Escolhendo uma ordem de eliminação}
+
+\paragraph{
+  Como vimos no relatório anterior\cite{report-2}, queremos criar factors que sejam os menores
+  possíveis. A ordem de eliminação que tiver menor $w$ será a melhor. Dizemos que o $w$ de uma
+  ordem de eliminação é o maior $width$ de todos os factors da ordem de eliminação.
+}
+
+\paragraph{
+  Antes de acharmos a melhor ordem de eliminação precisamos saber como calcular o $w$ de uma ordem.
+  Um jeito ingênuo de acharmos é, a cada interação $i$ de uma multiplicação e soma, acharmos o
+  $w_i$ com respeito a $\pi(i)$. No final retornamos o maior $w_i$.
+}
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{*{4}{l|} l}
+      i & $\pi(i)$ & $\mathcal{S}$ & $f_i$ & $w$ \\
+      \hline
+      & & $\Theta_A \Theta_{B|A} \Theta_{C|A} \Theta_{D|BC} \Theta_{E|C}$ & & \\
+      & & & & \\
+      1 & B & $\Theta_A \Theta_{C|A} \Theta_{E|C} f_1(A, C, D)$ & $f_1 = \sum_B \Theta_{B|A} \Theta_{D|BC}$ & 3 \\
+      2 & C & $\Theta_A f_2(A, D, E)$ & $f_2 = \sum_C \Theta_{C|A} \Theta_{E|C} f_1(A, C, D)$ & 3 \\
+      3 & A & $f_3(D, E)$ & $f_3 = \sum_A \Theta_A f_2(A, D, E)$ & 2 \\
+      4 & D & $f_4(E)$ & $f_4 = \sum_D f_3(D, E)$ & 1 \\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\paragraph{
+  Na tabela acima a segunda coluna indica a variável $\pi(i)$ que queremos eliminar. A terceira
+  coluna é o resultado da substituição de $\pi(i)$ pelo factor resultante na quarta coluna, onde
+  multiplicamos e somamos as CPTs onde $\pi(i)$ está presente. A última coluna é o $w_i$ de cada
+  eliminação. Pode-se ver que o $w$ dessa ordem é 3, já que é o maior $w$ entre todas as iterações.
+  Note que não precisamos realmente computar a eliminação das variáveis. De fato não fazemos tais
+  eliminações, mas a cada $\pi(i)$ que aparecem nos factors $f(\textbf{X}_k)$ substituímos tais
+  factors por um novo factor sob as variáveis $\cup_k \textbf{X}_k \setminus {\pi(i)}$.
+}
+
+\paragraph{
+  Um outro jeito de se achar a $width$ de uma ordem de eliminação é por meio de um grafo não
+  direcionado que representa as interações das CPTs de uma Rede Bayesiana. Antes de definirmos
+  esse grafo vamos introduzir alguns conceitos fundamentais sobre grafos.
+}
+
+\subsubsection{Subgraphs, induced subgraphs, cliques e spanning subgraphs}
+
+\paragraph{
+  Vamos definir $V(G)$ como o conjunto de vértices do grafo G. Similarmente, $E(G)$ é o conjunto de
+  arestas do grafo $G$. Dizemos que um grafo é não direcionado se para cada vértice $x, y$ em $G$,
+  tanto $xy$ quanto $yx$ são arestas válidas em $G$.
+}
+
+\paragraph{
+  Primeiro vamos ver a definição de subgrafo:
+}
+
+\begin{spn-def} Um grafo $H$ é um subgrafo de $G$ se $V(H)$ é um subconjunto de $V(G)$ e $E(H)$ é
+  subconjunto de $E(G)$. Dizemos que $G$ é o supergrafo de $H$ se $H$ é subgrafo de $G$.
+\end{spn-def}
+
+\paragraph{
+  Vamos agora definir o que é um grafo induzido:
+}
+
+\begin{spn-def} Um subgrafo $H$ de um grafo $G$ é dito induzido se para cada par de vértices $x, y$
+  em $H$, $xy$ é uma aresta de $H$ se e somente se $xy$ é uma aresta em $G$. Ou seja, $H$ é
+  um subgrafo induzido de $G$ se as arestas em $H$ são exatamente as arestas que aparecem em $G$
+  sob o mesmo conjunto de vértices. Se $V(H)$ é um subconjunto $S$ de $V(G)$, então $H$ pode ser
+  escrito como $G[S]$ e é dito ser induzido por $S$.
+\end{spn-def}
+
+\paragraph{
+  Agora iremos definir o que é a completude de um grafo:
+}
+
+\begin{spn-def} Dizemos que um grafo $G$ é completo se todo par de vértices distintos em $G$ é
+  conectado por uma aresta única.
+\end{spn-def}
+
+\paragraph{
+  Definimos agora o que é um clique:
+}
+
+\begin{spn-def} Um clique é um subconjunto de vértices de um grafo não direcionado tal que o
+  subgrafo induzido dele seja completo. Ou seja, todo par distinto de vértices em um clique é
+  adjacente.
+\end{spn-def}
+
+\paragraph{
+  Vamos também definir o que é um \textit{spanning subgraph}:
+}
+
+\begin{spn-def} Dizemos que um subgrafo $H$ cobre (\textit{spans}) um grafo $G$ se ele tem mesmo
+  conjunto de vértices que $G$. $H$ é então dito o \textit{spanning subgraph} de $G$.
+\end{spn-def}
+
+\subsubsection{Grafo de interação}
+
+\paragraph{
+  Agora que temos uma noção básica sobre grafos podemos definir o grafo de interação.
+}
+
+\begin{spn-def} Seja $f_1,...,f_n$ o conjunto de factors. O \textit{grafo de interação} $G$ desses
+  factors é um grafo não direcionado construído de tal forma que os nós de $G$ são as variáveis que
+  aparecem nos factors $f_1,...,f_n$. Há uma aresta entre duas variáveis em $G$ se e somente se
+  essas variáveis aparecem no mesmo factor.
+\end{spn-def}
+
+\paragraph{
+  Em outras palavras, as variáveis $\textbf{X}_i$ de cada factor $f_i$ formam um clique em $G$, ou
+  seja, as variáveis emparelhadas são adjacentes.
+}
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{l | c}
+      $\mathcal{S}_1: \Theta_A \Theta_{B|A} \Theta_{C|A} \Theta_{D|BC} \Theta_{E|C}$ & \input{graphs/s1-content} \\
+      \hline
+      $\mathcal{S}_2: \Theta_A \Theta_{C|A} \Theta_{E|C} f_1(A, C, D)$ & \input{graphs/s2-content} \\
+      \hline
+      $\mathcal{S}_3: \Theta_A f_2(A, D, E)$ & \input{graphs/s3-content} \\
+      \hline
+      & \\
+      $\mathcal{S}_4: f_3(D, E)$ & \input{graphs/s4-content} \\
+      & \\
+      \hline
+      & \\
+      $\mathcal{S}_5: f_4(E)$ & \input{graphs/s5-content} \\
+      & \\
+    \end{tabular}
+    \caption{Grafo de interação resultante da eliminação das variáveis B, C, A, D nessa ordem.}
+  \end{center}
+\end{table}
+
+\paragraph{
+  A Tabela 1 mostra como fica o grafo de interação ao eliminarmos as variáveis B, C, A, D nessa
+  ordem. É importante notar que:
+}
+
+\begin{enumerate}
+  \item Se $G$ é o grafo de interação dos factors $\mathcal{S}$, então eliminar a variável $\pi(i)$
+    de $\mathcal{S}$ leva a construção de um factor sob os vizinhos de $\pi(i)$ em $G$. Por exemplo,
+    eliminar a variável $B$ do factor $\mathcal{S}_1$ da Tabela 1 gera um factor sob as variáveis
+    $A$, $C$, $D$, que são os vizinhos de $B$ no grafo de interação.
+  \item Seja $\mathcal{S}'$ os factors que resultam da eliminação da variável $\pi(i)$ dos factors
+    $\mathcal{S}$. Se $G'$ e $G$ são os grafos de interação de $\mathcal{S}'$ e $\mathcal{S}$
+    respectivamente, então $G'$ pode ser obtido de $G$ da seguinte forma:
+    \begin{enumerate}
+      \item Adicione uma aresta em $G$ entre cada par de vizinhos da variável $\pi(i)$ que não
+        estejam já conectados por uma aresta.
+      \item Remova a variável $\pi(i)$ de $G$.
+    \end{enumerate}
+\end{enumerate}
+
+\paragraph{
+  Pode-se ver que (a) corresponde a multiplicar os factors que contém a variável $\pi(i)$ em
+  $\mathcal{S}$ e (b) equivale a somar a variável $\pi(i)$ do factor resultante.
+}
+
+\paragraph{
+  Computar a \textit{width} de uma ordem é útil quando temos um número pequeno de ordens. No
+  entanto, quando temos um número muito grande de ordens precisamos achar uma ordem ótima de um
+  jeito melhor. Achar uma ordem ótima é NP-difícil (\textit{NP-hard}), mas podemos usar várias
+  heurísticas que resultam em boas ordens.
+}
+
+\paragraph{
+  Uma das heurísticas mais populares é a \textit{min-degree}: sempre elimine a variável que
+  acarreta na construção do menor factor possível. Se usarmos o grafo de interação podemos ver que
+  a heurística diz que devemos eliminar a variável que tem o menor número de vizinhos no grafo de
+  interação atual. A min-degree é ótima para redes que possuem uma ordem de eliminação de
+  \textit{width} $\leq$ 2.
+}
+
+\paragraph{
+  Outra heurística que na maioria das vezes é mais efetiva que a min-degree é a \textit{min-fill},
+  onde nós eliminamos a variável de tal forma que precisemos adicionar o menor número possível de
+  arestas no grafo de interação.
+}
+
+\subsection{Computando posterior marginals}
+
+\paragraph{
+  Vamos mostrar agora como computar posterior marginals a partir de eliminação de variáveis. Mas
+  primeiro vamos definir o que é posterior marginal e joint marginals.
+}
+
+\subsubsection{Posterior marginals e joint marginals}
+
+\paragraph{
+  Dada uma distribuição de probabilidade conjunta\cite{project-def} $Pr(x_1,...,x_n)$ a
+  distribuição marginal $Pr(x_1,...,x_m), m \leq n$ é definida como:
+}
+
+\begin{equation}
+  Pr(x_1,...,x_m) = \sum_{x_{m+1},...,x_n} Pr(x_1,...,x_n)
+\end{equation}
+
+\paragraph{
+  Ou seja, a distribuição marginal pode ser vista como uma \textit{projeção} da distribuição
+  conjunta num conjunto menor $X_1,...,X_m$.
+}
+
+\paragraph{
+  Quando a distribuição marginal é computada dada uma evidência $\textbf{e}$,
+}
+
+\begin{equation}
+  Pr(x_1,...,x_m|\textbf{e}) = \sum_{x_{m+1},...,x_n} Pr(x_1,...,x_n|\textbf{e}),
+\end{equation}
+
+\paragraph{
+  Então dizemos que ela é uma \textit{posterior marginal}. Quando uma distribuição marginal não é
+  dada nenhuma evidência, então dizemos que ela é uma \textit{prior marginal}.
+}
+
+\paragraph{
+  Vamos agora definir uma marginal conjunta (\textit{joint marginal}). Uma joint marginal é uma
+  variação da posterior marginal da forma $P(\textbf{Q}, \textbf{e})$. Ou seja, ao invés de
+  computarmos a probabilidade de \textbf{q} dado \textbf{e}, $Pr(\textbf{q}|\textbf{e})$, nós
+  computamos a probabilidade de \textbf{q} e \textbf{e}, $Pr(\textbf{q}, \textbf{e})$. Por exemplo,
+  tomemos as Tabelas 2 e 3 dados $\textbf{Q} = \{D, E\}$ e $\textbf{e}: A = true, B = false$ na
+  mesma rede da Tabela 1:
+}
+
+\begin{table}[h]
+  \begin{center}
+    \captionsetup{justification=centering}
+    \begin{tabular}{*{2}{l} | l}
+      D & E & $Pr(\textbf{Q} | \textbf{e})$ \\
+      \hline
+      true & true & 0.448 \\
+      true & false & 0.192 \\
+      false & true & 0.112 \\
+      false & false & 0.248 \\
+    \end{tabular}
+    \quad
+    \quad
+    \begin{tabular}{*{2}{l} | l}
+      D & E & $Pr(\textbf{Q}, \textbf{e})$ \\
+      \hline
+      true & true & 0.21504 \\
+      true & false & 0.09216 \\
+      false & true & 0.05376 \\
+      false & false & 0.11904 \\
+    \end{tabular}
+    \caption*{Tabelas 2 e 3 Posterior marginal e joint marginal respectivamente.}
+  \end{center}
+\end{table}
+\setcounter{table}{3}
+
+\paragraph{
+  A terceira linha da Tabela 3 (joint marginal) diz que:
+}
+
+\begin{equation}
+  Pr(D = false, E = true, A = true, B = false) = 0.05376
+\end{equation}
+
+\paragraph{
+  Ao somarmos todas as probabilidades da joint marginal nesse factor, teremos como resultado 0.48,
+  que é a probabilidade de evidência $\textbf{e}: A = true, B = false$. Se somarmos todas as
+  probabilidades que aparecem na joint marginal, teremos sempre a probabilidade da evidência
+  \textbf{e}. Isso quer dizer que podemos computar a posterior marginal $Pr(\textbf{Q}|\textbf{e})$
+  normalizando a joint marginal $Pr(\textbf{Q}, \textbf{e})$.
+}
+
+\subsubsection{Eliminação de variáveis e posterior marginals}
+
+\paragraph{
+  Podemos usar eliminação de variáveis para computar joint marginals se zerarmos todas as linhas
+  na distribuição de probabilidade conjunta onde há uma inconsistência\cite{report-2} com a
+  evidência \textbf{e}. Mais formalmente dizemos que:
+}
+
+\begin{spn-def} A redução de um factor $f(\textbf{X})$ dado uma evidência \textit{e} é um outro
+  factor sob as variáveis \textbf{X} denotado por $f^{\textbf{e}}$ e definido como:
+  \begin{equation}
+    f^{\textbf{e}}(\textbf{x}) \defeq
+    \begin{cases}
+      f(\textbf{x}), & \text{se $\textbf{x} \sim \textbf{e}$} \\
+      0, & \text{caso contrário.} \\
+    \end{cases}
+  \end{equation}
+\end{spn-def}
+
+\paragraph{
+  Portanto, dado o factor da Tabela 2 e evidência $\textbf{e}: E = true$, teríamos:
+}
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{*{2}{l} | l}
+      D & E & $f^\textbf{e}$ \\
+      \hline
+      true & true & 0.448 \\
+      true & false & 0 \\
+      false & true & 0.112 \\
+      false & false & 0 \\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\newpage
+
+\paragraph{
+  Para facilitar omitimos todas as linhas zeradas:
+}
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{*{2}{l} | l}
+      D & E & $f^\textbf{e}$ \\
+      \hline
+      true & true & 0.448 \\
+      false & true & 0.112 \\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\paragraph{
+  Dado $\textbf{Q} = \{D, E\}$ e $\textbf{e}: A = true, B = false$, a marginal conjunta
+  $Pr(\textbf{Q}, \textbf{e})$ pode ser computada como:
+}
+
+\begin{equation}
+  Pr(\textbf{Q}, \textbf{e}) = \sum_{A, B, C} (\Theta_{E|C} \Theta_{D|BC} \Theta_{C|A} \Theta_{B|A} \Theta_A)^\textbf{e}
+\end{equation}
+
+\paragraph{
+  Como pode-se ver, ainda temos o problema da complexidade, já que precisamos multiplicar todas as
+  CPTs para depois eliminar as variáveis. No entanto, podemos aplicar o seguinte teorema:
+}
+
+\begin{spn-thm} Se $f_1$ e $f_2$ são dois factors e $\textbf{e}$ é uma instância, então:
+  \begin{equation}
+    (f_1f_2)^\textbf{e} = f_1^\textbf{e}f_2^\textbf{e}
+  \end{equation}
+\end{spn-thm}
+
+\paragraph{
+  Portanto podemos reduzir para:
+}
+
+\begin{equation}
+  Pr(\textbf{Q} = \{D, E\}, \textbf{e}) = \sum_{A, B, C} \Theta_{E|C}^\textbf{e} \Theta_{D|BC}^\textbf{e}
+    \Theta_{C|A}^\textbf{e} \Theta_{B|A}^\textbf{e} \Theta_A^\textbf{e}
+\end{equation}
+
+\paragraph{
+  Essa forma mantém a distribuição de probabilidade conjunta em forma fatorada e portanto permite
+  eliminarmos as variáveis nas CPTs reduzidas.
+}
+
+\paragraph{
+  Para calcularmos a posterior marginal $Pr(C|A=true)$, dados:
+}
+
+\begin{equation}
+  \begin{split}
+    Pr(C=true, A=true) = 0.192 \\
+    Pr(C=false, A=true) = 0.408 \\
+    Pr(A=true) = 0.600
+  \end{split}
+\end{equation}
+
+\paragraph{
+  Precisamos normalizar o factor, ou seja:
+}
+
+\begin{table}[h]
+  \begin{center}
+    \begin{tabular}{l | l}
+      C & $Pr(C|A=true)$ \\
+      \hline
+      true & 0.32 \\
+      false & 0.68 \\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\paragraph{
+  Portanto $Pr(C=true|A=true) = 0.32$ e $Pr(C=false|A=true) = 0.68$.
+}
+
+\paragraph{
+  Note que se tentarmos calcular $Pr(\textbf{Q}|\textbf{e})$ com \textbf{Q} vazio, estaremos
+  calculando um factor trivial com valor igual a probabilidade de evidência \textbf{e}.
+}
+
+\subsection{Estrutura e complexidade da rede}
+
+\paragraph{
+  Apesar de termos duas Redes Bayesianas com o mesmo número de variáveis, as ordens de eliminação
+  ótimas de cada uma podem ser diferentes entre si. Isso por causa da \textit{treewidth} das redes.
+  Vamos definir o que é uma treewidth, falar sobre NP-completude e NP-dificuldade e em seguida
+  classificar as várias estruturas que uma rede pode ter.
+}
+
+\subsubsection{Treewidth}
+
+\paragraph{
+  Definimos como treewidth o número que quantifica o quanto uma rede se assemelha à estrutura de
+  uma árvore. Em particular, quanto mais similar a uma árvore, menor o seu treewidth.
+}
+
+\paragraph{
+  Um ponto importante sobre treewidth é que nao há nenhuma ordem de eliminação completa onde sua
+  \textit{width} é menor que a treewidth da rede. Adicionalmente, existe uma ordem de eliminação
+  cuja \textit{width} é igual à treewidth da rede e ela é ótima. No entanto, determinar tal ordem é
+  NP-difícil. Discutiremos mais sobre isso no Apêndice deste relatório.
+}
+
+\paragraph{
+  Vamos descrever algumas características da treewidth:
+}
+
+\begin{itemize}
+  \item O número de nós não tem efeito na treewidth.
+  \item O número de pais por nó tem efeito direto na treewidth. Se um número de pais por nó chega
+    $k$, então o treewidth não é menor que $k$.
+  \item Loops tendem a aumentar a treewidth.
+  \item O número de loops não tem efeito na treewidth. As interações geradas pelo loop tem efeito
+    direto na treewidth.
+\end{itemize}
+
+\paragraph{
+  Vamos agora falar sobre algumas classes de redes com treewidths conhecidas.
+}
+
+\subsubsection{Tree networks, polytrees e multiply connected}
+
+\paragraph{
+  \textit{Polytree networks}, também conhecidas como \textit{singly connected networks} são redes
+  onde há no máximo um caminho (não direcionado) entre qualquer dois nós. A treewidth dessas redes
+  é $k$, onde $k$ é o número máximo de pais que qualquer nó pode ter.
+}
+
+\paragraph{
+  \textit{Tree networks} são polytrees onde cada nó tem no máximo um pai, e portanto sua treewidth
+  é no máximo 1.
+}
+
+\paragraph{
+  \textit{Multiply connected} são aquelas que não são singly connected.
+}
+
+\subsection{Pruning}
+
+\paragraph{
+  Queremos aplicar transformações na estrutura da rede de tal forma que melhoramos como achamos
+  inferência e ao mesmo tempo preservando a joint marginal $Pr(\textbf{Q}, \textbf{e})$ e portanto
+  a prior e posterior marginals.
+}
+
+\paragraph{
+  Uma dessas transformações é chamada de \textit{pruning} (corte). Vamos nos referir à ação de
+  pruning (\textit{to prune}) como \textit{aparar}. Quando nos referimos ao substantivo pruning
+  vamos usar a tradução \textit{corte}.
+}
+
+\subsubsection{Pruning nodes}
+
+\paragraph{
+  Dada uma Rede Bayesiana $\mathcal{N}$ e query $(\textbf{Q}, \textbf{e})$, podemos remover
+  qualquer nó folha $\mathcal{L}$ (junto com sua CPT) desde que $\mathcal{L} \notin (\mathbf{Q}
+  \cup \mathbf{E})$ e não afete a habilidade da rede de computar a query corretamente. Podemos
+  aplicar essa transformação iterativamente, aparando vários nós. Denominamos o resultado de se
+  remover as folhas nós do jeito citado como $pruneNodes(\mathcal{N}, \mathbf{Q} \cup \mathbf{E})$.
+}
+
+\begin{spn-thm} Seja uma Rede Bayesiana $\mathcal{N}$ e uma query $(\mathbf{Q}, \mathbf{e})$. Se
+  $\mathcal{N}' = pruneNodes(\mathcal{N}, \mathbf{Q} \cup \mathbf{E})$, então $Pr(\mathbf{Q},
+  \mathbf{e}) = Pr'(\mathbf{Q}, \mathbf{e})$, onde $Pr$ e $Pr'$ são as distribuições de
+  probabilidade induzidas pelas redes $\mathcal{N}$ e $\mathcal{N}'$ respectivamente.
+\end{spn-thm}
+
+\begin{table}[h]
+  \begin{center}
+    \captionsetup{justification=centering}
+    \begin{tabular}{c c c}
+      \input{trees/t1-content} & \input{trees/t2-content} & \input{trees/t3-content} \\
+      Estrutura da rede & Junção em $B$, $E$ & Junção em $B$ \\
+    \end{tabular}
+    \caption{Aparando nós na rede dados duas queries diferentes.}
+  \end{center}
+\end{table}
+
+\paragraph{
+  A Tabela 4 mostra a rede com dois cortes. No primeiro queremos a marginal sob $B$ e $E$ sem
+  nenhuma evidência. Portanto aparamos a folha $D$. Depois deste corte não podemos aparar nenhuma
+  outra folha nó, já que todas aparecem na query. Na segunda queremos a marginal sob a variável $B$
+  sem evidência. Aparamos $D$ e $E$, mas assim fazemos este corte podemos em seguida aparar o nó
+  $C$, já que ele não aparece na query. Note que a primeira figura da Tabela 4 tem treewidth 2,
+  enquanto que as treewidth da segunda e terceira figuras são 1.
+}
+
+\paragraph{
+  Se as variáveis $\mathbf{Q} \cup \mathbf{E}$ forem próximas das raízes da rede então elas reduzem
+  significantemente a treewidth da rede. No pior dos casos todas as folhas aparecem em $\mathbf{Q}
+  \cup \mathbf{E}$ e portanto nenhum corte é possível. No melhor dos casos as variáveis $\mathbf{Q}
+  \cup \mathbf{E}$ contêm somente nós raízes, permitindo o corte de todos os nós exceto os que
+  pertencem a $\mathbf{Q} \cup \mathbf{E}$.
+}
+
+\subsubsection{Pruning edges}
+
+\paragraph{
+  Dada uma Rede Bayesiana $\mathcal{N}$ e uma query (\textbf{Q}, \textbf{e}), podemos eliminar
+  uma aresta da rede e reduzir algumas CPTs sem alterar a habilidade de computar a joint marginal
+  $Pr(\mathbf{Q}, \mathbf{e})$ corretamente. Em particular, para cada aresta $U \to X$ que origina
+  do nó $U$ em $\mathbf{E}$, podemos:
+}
+
+\begin{enumerate}
+  \item Remover a aresta $U \to X$ da rede.
+  \item Substituir a CPT $\Theta_{X|\mathbf{U}}$ do nó $X$ por uma CPT menor obtida de
+    $\Theta_{X|\mathbf{U}}$ assumindo valor de $u$ do nó pai $U$ dado uma evidência $\mathbf{e}$.
+    Essa nova CPT corresponde a $\sum_U \Theta_{X|\mathbf{U}}^u$.
+\end{enumerate}
+
+\paragraph{
+  Chamamos essa transformação de $pruneEdges(\mathcal{N}, \mathbf{e})$.
+}
+
+\begin{spn-thm} Seja $\mathcal{N}$ uma Rede Bayesiana e $\mathbf{e}$ uma instância. Se $\mathcal{N}
+  = pruneEdges(\mathcal{N}, \mathbf{e})$ , então $Pr(\mathbf{Q}, \mathbf{e}) = Pr'(\mathbf{Q},
+  \mathbf{e})$, onde $Pr$ e $Pr'$ são as distribuições de probabilidade induzidas pelas redes
+  $\mathcal{N}$ e $\mathcal{N}'$ respectivamente.
+\end{spn-thm}
+
+\paragraph{
+  É importante ressaltar que a rede aparada funciona apenas para queries da forma $Pr(\mathbf{q},
+  C = false)$. Se a instância $C = false$ não aparece na query, as respostas serão diferentes da
+  rede original.
+}
+
+\subsubsection{Network pruning}
+
+\paragraph{
+  O resultado de se aparar os nós e as arestas de uma rede será chamada de corte de uma árvore
+  (\textit{network pruning}), e dado uma query $(\mathbf{Q}, \mathbf{e})$, o corte de uma árvore
+  será denominada por $pruneNetwork(\mathcal{N}, \mathbf{Q}, \mathbf{e})$. Pode-se dizer que em
+  geral uma network pruning pode trazer uma redução significativa na treewidth da rede.
+}
+
+\begin{spn-def} A treewidth efetiva (\textit{effective treewidth}) de uma Rede Bayesiana
+  $\mathcal{N}$ dada uma query $(\mathbf{Q}, \mathbf{e})$ é a treewidth de $pruneNetwork(\mathcal{N},
+  \mathbf{Q}, \mathbf{e})$.
+\end{spn-def}
+
+\paragraph{
+  É importante notar que o corte de uma Rede Bayesiana pode ser feita em tempo linear ao tamanho da
+  rede (o tamanho das CPTs dela). Portanto, é geralmente uma boa ideia aparar a Rede Bayesiana antes
+  de respondermos as queries.
+}
+
+\subsection{Apêndice}
+
+\paragraph{
+  O capítulo 6 do livro\cite{bayes-net-darwiche} requer muito conteúdo que não é visto no próprio
+  livro. Exemplos disso são Teoria de Grafos e assuntos relacionados a NP. Para grafos foi decidido
+  que fossem explicadas algumas definições diretamente no tópico onde as mencionamos. Para NP foi
+  decidido que ficasse em uma seção distinta - o apêndice - por ser um assunto mais amplo que
+  abrange todos os tópicos mencionados.
+}
+
+\subsubsection{P e NP}
+
+\paragraph{
+  Vamos a seguir definir o que significa o termo NP e P.
+}
+
+\paragraph{
+  NP significa \textit{nondeterministic polynomial time}. NP é o conjunto de todos os problemas de
+  decisão na qual as instâncias onde as respostas são ``verdadeiro''  tem uma prova eficientemente
+  verificável para o fato que a resposta seja realmente ``verdadeira''. Mais formalmente:
+}
+
+\begin{spn-def} NP é o conjunto de problemas de decisão onde as instâncias verdadeiras são aceitas
+  em tempo polinomial por uma máquina de Turing não-determinística.
+\end{spn-def}
+
+\paragraph{
+  Uma máquina de Turing não-determinística é definida abaixo:
+}
+
+\begin{spn-def} Uma máquina de Turing não-determinística pode ter um conjunto de regras onde há
+  mais de uma ação para uma dada situação, contrastando com uma máquina de Turing determinística que
+  pode ter apenas uma ação para uma dada situação.
+\end{spn-def}
+
+\paragraph{
+  NP é uma classe de complexidade. P está contido em NP. P é uma classe de complexidade onde os
+  problemas computacionais são ``tratáveis'', ou seja, podem ser reduzidos em tempo polinomial.
+}
+
+\subsubsection{NP-hard e NP-complete}
+
+\paragraph{
+  Vamos agora definir NP-dificuldade (\textit{NP-hardness}) e NP-completude
+  (\textit{NP-completeness}).
+}
+
+\paragraph{
+  NP-dificuldade é uma classe de complexidade onde os problemas contidos são "pelo menos tão
+  difíceis quanto os problemas mais difíceis em NP". Mais formalmente:
+}
+
+\begin{spn-def} Um problema $H$ é NP-difícil quando todo problema $L$ em NP pode ser reduzido em
+  tempo polinomial para $H$.
+\end{spn-def}
+
+\paragraph{
+  Vamos entender o que significa reduzir um problema. Mas para isso precisamos entender o que
+  significa fechamento em relação a uma operação:
+}
+
+\begin{spn-def} Seja $A$ um conjunto e uma operação $\circ$. Dizemos que um conjunto é
+  \textit{fechado em relação a} $\circ$ se para todo pair de elementos $a_i$ e $a_j$ pertencentes
+  a $A$, $a_i \circ a_j = a_k$, onde $a_k \in A$. Ou seja, todo elemento resultante de uma operação
+  dada com dois elementos de um conjunto gera um elemento que pertence ao mesmo conjunto.
+\end{spn-def}
+
+\paragraph{
+  Antes de vermos a definição de redução, vamos lembrar o que significa composição de função.
+  Chamamos de composição de função a aplicação de uma função com o resultado de uma outra para
+  produzir uma terceira função. Escrevemos a composição de uma função $f:X \to Y$ e $g:Y \to
+  Z$ como $g(f(x))$ ou $g \circ f$.
+}
+
+\paragraph{
+  Finalmente vamos ver a definição de redução:
+}
+
+\begin{spn-def} Dados dois subconjuntos $A$ e $B$ em \textbf{N}, onde \textbf{N} é fechado em
+  relação a composição, e um conjunto $F$ de $N$ para $N$, $A$ é chamado de redutível em $B$ sob
+  $F$ se
+  \begin{equation}
+    \exists f \in F \quad \forall x \in \mathbb{N} \quad x \in A \iff f(x) \in B
+  \end{equation}
+  Escrevemos
+  \begin{equation}
+    A \leq_{F} B
+  \end{equation}
+  Seja $S$ um subconjunto de \textbf{P}(\textbf{N}) e $\leq$ uma redução, então $S$ é chamado de
+  \textit{fechado} sob $\leq$ se
+  \begin{equation}
+    \forall s \in S \quad \forall A \in P(N) \quad A \leq s \Rightarrow A \in S
+  \end{equation}
+  Um subconjunto $A$ de $\mathbf{N}$ é chamado de \textit{difícil} para $S$ se
+  \begin{equation}
+    \forall s \in S \quad s \leq A
+  \end{equation}
+  Um subconjunto $A$ de $\mathbf{N}$ é chamado de \textit{completo} por $S$ se $A$ é difícil para
+  $S$ e $A$ está em $S$.
+\end{spn-def}
+
+\paragraph{
+  Em outras palavras, um problema A é redutível em B se um algoritmo para solucionar o problem B
+  eficientemente (se ele existe) também pode ser usado como uma subrotina para solucionar o
+  problema A eficientemente. Se isso for verdade, então solucionar A não pode ser mais difícil que
+  solucionar B.
+}
+
+\paragraph{
+  Portanto, podemos dizer que um problema de decisão $H$ é NP-difícil quando para qualquer problema
+  $L$ in NP, existe uma redução para tempo polinomial de $L$ para $H$. Ou seja, existe uma redução
+  para tempo polinomial de um problem NP-completo $G$ para $H$. Para entendermos essa segunda
+  possível definição, vamos definir NP-completude.
+}
+
+\begin{spn-def} Dizemos que um problema é NP-completo quando ele está em NP e NP-difícil. Ou
+  seja, um problema de decisão $C$ é NP-completo se:
+  \begin{enumerate}
+    \item $C$ está em NP e
+    \item Todo problema em NP é redutível para $C$ em tempo polinomial.
+  \end{enumerate}
+\end{spn-def}
+
+\paragraph{
+  Note que um problema que satisfaça o item 2 é NP-difícil, satisfaça ou não o item 1. Problemas
+  NP-completos são, em NP, o conjunto de todos os problemas de decisão cujas soluções podem ser
+  verificadas em tempo polinomial. Um problema $p$ em NP é NP-completo se todo outro problema em NP
+  pode ser transformado (ou reduzido) para $p$ em tempo polinomial.
+}
+
+\newpage
+
+\printbibliography
+
+\end{document}

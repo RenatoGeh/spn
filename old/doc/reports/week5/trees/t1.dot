@@ -1,0 +1,12 @@
+digraph{
+  mindist=0.2 
+  node[shape=plaintext, pin=true]
+  E
+  D
+  C
+  B
+  A
+  A -> B -> D
+  A -> C -> E
+  C -> D
+}

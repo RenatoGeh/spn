@@ -1,0 +1,5 @@
+graph s3 {
+  mindist=0.5;
+  node [shape=plaintext]
+  D -- A -- E -- D;
+}

@@ -1,0 +1,235 @@
+%Poster do trabalho de conclusao de curso de Jefferson Serafim Ascaneo
+
+\documentclass[final]{beamer}
+\mode<presentation>{\usetheme{azul}}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{subfigure}
+\graphicspath{{../figuras/}}                     % path das figuras (recomendável)
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{ragged2e} 
+
+
+\usepackage{amsmath,amsthm, amssymb, latexsym}
+\usepackage[orientation=portrait,size=a2,scale=1.4]{beamerposter}
+\usepackage[ruled]{algorithm2e}
+
+\usepackage{snapshot} % will write a .dep file with all dependencies, allows for easy bundling
+
+\DeclareMathSizes{17.42}{15}{14}{10}  % Math text size
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  MACROS %%%%%%%%%%%%%%%%%%%%%
+\usepackage{xspace}
+\newcommand{\pixel}{\emph{pixel}\xspace}
+\newcommand{\pixels}{\emph{pixels}\xspace}
+\newcommand{\voxel}{\emph{voxel}\xspace}
+\newcommand{\voxels}{\emph{voxels}\xspace}
+
+
+\listfiles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\huge Segmentação de Imagens com Passeios Aleatórios em Grafos}
+
+\author{Jefferson Serafim Ascaneo, Orientador: Prof. Dr. Paulo A. V. de Miranda}
+\institute[Universidade de São Paulo] % (optional, but mostly needed)
+{
+  Instituto de Matemática e Estatística, Universidade de São Paulo - Trabalho
+  de Conclusão de Curso
+}
+
+\date[Novembro 2012]{Novembro, 2012}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\columnheight}
+\setlength{\columnheight}{65cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{frame}
+  \begin{columns}
+    % ---------------------------------------------------------%
+    % Set up a column 
+    \begin{column}{.5\textwidth}
+      \begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
+        \begin{minipage}[T]{.95\textwidth} % tweaks the width, makes a new \textwidth
+          \parbox[t][\columnheight]{\textwidth}{ % must be some better way to set the the height, width and textwidth simultaneously
+            % Since all columns are the same length, it is all nice and tidy.  You have to get the height empirically
+            % ---------------------------------------------------------%
+            % fill each column with content            
+\vspace*{0.2cm} 
+            \begin{block}{Introdução}
+            \justifying
+                Segmentação de imagens consiste em dividir uma imagem digital em múltiplos segmentos,
+                que possuam características em comum, permitindo assim analisá-los separadamente.
+
+\vspace*{0.1cm}
+
+                No final de 2006, foi proposto o método de Passeios Aleatórios (\emph{Random Walks}) \cite{Grady:2006},
+                que possui diversas características desejáveis em um algoritmo de segmentação. Assim como
+                outros algoritmos, utiliza sementes para realizar a segmentação, que consistem em
+                conjuntos de \pixels previamente marcados, e que devem pertencer ao mesmo segmento. 
+                Sua solução é única, e todos os
+                \pixels de um segmento estão conectados a sementes do mesmo segmento, não ocorrendo regiões
+                isoladas. Devido a estas e outras características, como a capacidade de detectar bordas
+                fracas ou ruidosas, este método foi utilizado em artigos recentes que tratam de segmentação
+                de imagens. Também foram verificadas diversas relações teóricas com outros métodos de
+                segmentação \cite{Sinop:2007}. 
+
+            \vspace*{0.2cm}
+            \end{block}
+            \vspace*{0.2cm}
+
+            \begin{block}{Objetivos}
+            \justifying 
+                Este trabalho tem como objetivo implementar o método de Passeios Aleatórios, além de
+                integrá-lo aos programas CAOS (Computer-Aided Object Segmentation) e BIA (Brain Image Analyzer).
+                O primeiro realiza a segmentação de imagens em 2D, enquanto que o último trabalha com volumes 3D.
+                Além disso, tem como objetivo realizar comparações com outros métodos da literatura, também baseados
+                em grafos.
+
+\vspace*{0.2cm} 
+            \end{block}
+\vspace*{0.2cm} 
+            \begin{block}{O método de Passeios Aleatórios}
+                \justifying 
+                \begin{figure}[h]
+                \centering    
+                  \subfigure[Marcadores]
+                  {
+                      \includegraphics[trim=2px 1px 0px 1px,clip=true,width=0.25\textwidth]{196027_markers}
+                  }
+                  \subfigure[Segmentação]
+                  {
+                      \includegraphics[trim=1px 2px 0px 2px,clip=true,width=0.25\textwidth]{196027_seg_power14}
+                  }
+                  \subfigure[Probabilidades]
+                  {
+                      \includegraphics[trim=0px 5px 0px 27px,clip=true,width=0.25\textwidth]{196027_prob_label_1}
+                  }
+                  \caption{Segmentação de um pássaro com marcadores de objeto e fundo}
+                \end{figure}
+                O método consiste em determinar, para cada \pixel, a probabilidade
+                de que um passeio aleatório com início nele termine em uma das sementes
+                que foram marcadas e associadas a um certo rótulo. Este passeio
+                leva em consideração os pesos das arestas, calculados a partir da
+                imagem original. O \pixel é atribuído ao rótulo para o qual existe
+                a maior probabilidade de ser o término de um passeio aleatório iniciado
+                neste \pixel.
+
+                Para um grafo com pesos $w$ elevados a uma constante $p$, e sementes de objeto $F$ e de fundo $B$,
+                o método realiza a segmentação $s$ calculando $x$ de forma que:
+                \begin{align*}
+                \min_x{\sum\limits_{e_{ij} \in E} (w_{ij}^p(x_i - x_j)^2)};
+                       \qquad & \text{ } \textstyle x_F = 1,\text{ }x_B = 0,\text{ }p \ge 2, \\
+                    & \text{ } s_i = 1 \text{ se } x_i \ge {\displaystyle \frac{1}{2}},\text{ }0 \text { se } x_i < {\displaystyle \frac{1}{2}}.
+                \end{align*}
+                \begin{figure}[htp]
+                  \centering
+                  \setlength\fboxsep{0pt}
+                  \setlength\fboxrule{0.5pt}
+                    \fbox{\includegraphics[width=0.6\textwidth]{bia_main3.png}}
+                  \caption{Resultado de uma segmentação 3D de uma ressonância magnética sintética
+                  (do \emph{BrainWeb - Simulated Brain Database}) no programa BIA}
+                \end{figure}
+            \end{block}
+          }
+        \end{minipage}
+      \end{beamercolorbox}
+    \end{column}
+    % ---------------------------------------------------------%
+    % end the column
+
+    % ---------------------------------------------------------%
+    % Set up a column 
+    \begin{column}{.5\textwidth}
+      \begin{beamercolorbox}[center,wd=\textwidth]{postercolumn}
+        \begin{minipage}[T]{.95\textwidth} % tweaks the width, makes a new \textwidth
+          \parbox[t][\columnheight]{\textwidth}{ % must be some better way to set the the height, width and textwidth simultaneously
+            % Since all columns are the same length, it is all nice and tidy.  You have to get the height empirically
+            % ---------------------------------------------------------%
+            % fill each column with content
+            
+\vspace*{0.2cm} 
+            \begin{block}{Comparações com outros métodos}
+                \begin{figure}
+                \centering
+                \subfigure[Segmentação 2D de fatias do osso calcâneo]
+                {
+                    \includegraphics[width=0.45\textwidth]{mean_dice_calcaneus}
+                }
+                \subfigure[Segmentação 2D de fatias do osso tálus]
+                {
+                    \includegraphics[width=0.45\textwidth]{mean_dice_talus}
+                }
+                \caption{\justifying Curva de acur\'{a}cia m\'{e}dia pelo coeficiente de Dice, utilizando como sementes
+                uma erosão do gabarito, em imagens de ressonância magnética.
+                Nestas imagens o algoritmo de Passeios Aleatórios (RW) foi superior
+                aos algoritmos Relative Fuzzy Connectedness (RFC) + Graph Cut (GC) e
+                Iterative Relative Fuzzy Connectedness (IRFC).}
+                \end{figure}
+                
+                \begin{figure}
+                \centering
+                \subfigure[Acur\'{a}cia m\'{e}dia pelo coeficiente de Dice]
+                {
+                    \includegraphics[width=0.45\textwidth]{mean_dice_spine}
+                }
+                \subfigure[Tempo m\'{e}dio de execu\c{c}\~{a}o]
+                {
+                    \includegraphics[width=0.45\textwidth]{mean_time_spine}
+                }
+                \caption{\justifying Segmentação 2D de fatias da coluna vertebral,
+                em imagens de tomografia computadorizada. Além de ter um desempenho inferior
+                neste conjunto de imagens, o algoritmo de Passeios Aleatórios (RW) possui
+                tempo de execução bem acima dos outros algoritmos.}
+                \end{figure}
+\vspace*{0.2cm} 
+            \end{block}
+\vspace*{0.2cm} 
+            \begin{block}{Conclusão}
+                \justifying 
+                O algoritmo de Passeios Aleatórios apresenta resultados superiores em alguns conjuntos
+                de imagens, demonstrando a sua viabilidade. Porém, este método possui grande sensibilidade
+                a certos parâmetros. Os pesos das arestas do grafo foram elevados a uma potência \emph{p}, e os
+                resultados obtidos variaram bastante de acordo com este valor. Nas comparações com outros métodos,
+                utilizamos o valor $p = 20$, que resultou em uma melhor acurácia para os conjuntos de imagens
+                de ossos. Além disso, também possui sensibilidade à localização das sementes, algo que não ocorre
+                com outros métodos. Testes com raios de erosão diferentes para objeto e fundo mostram que, em 
+                algumas imagens, o desempenho é significativamente reduzido quando as sementes não estão equidistantes
+                da borda correta.
+                
+                \begin{figure}[htp]
+                  \centering
+                  \setlength\fboxsep{0pt}
+                  \setlength\fboxrule{0.5pt}
+                    \fbox{\includegraphics[width=0.7\textwidth]{caos_1.png}}
+                  \caption{Resultado de uma segmentação 2D no programa CAOS}
+                \end{figure}
+            \end{block}
+\vspace*{0.2cm} 
+            \begin{block}{Referências}
+            \small
+            \bibliographystyle{alpha} 
+            \bibliography{ref}
+\vspace*{0.2cm} 
+            \end{block}
+            \vfill
+          }
+        \end{minipage}
+      \end{beamercolorbox}
+    \end{column}
+    % ---------------------------------------------------------%
+    % end the column
+
+
+  \end{columns}
+\end{frame}
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% End:

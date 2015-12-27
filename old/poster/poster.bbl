@@ -1,0 +1,35 @@
+\begin{thebibliography}{LWZ14}
+
+\bibitem[DP]{website:poon-domingos-code}
+Pedro Domingos and Hoifung Poon.
+\newblock Sum-product networks: A new deep architecture (code).
+\newblock URL: \url{http://spn.cs.washington.edu/spn/}.
+
+\bibitem[DV12]{clustering}
+Aaron Dennis and Dan Ventura.
+\newblock Learning the architecture of sum-product networks using clustering on
+  variables.
+\newblock {\em Advances in Neural Information Processing Systems}, 25, 2012.
+
+\bibitem[DV15]{greedy-search}
+Aaron Dennis and Dan Ventura.
+\newblock Greedy structure search for sum-product networks.
+\newblock {\em International Joint Conference on Artificial Intelligence}, 24,
+  2015.
+
+\bibitem[GD13]{gens-domingos}
+Robert Gens and Pedro Domingos.
+\newblock Learning the structure of sum-product networks.
+\newblock {\em International Conference on Machine Learning}, 30, 2013.
+
+\bibitem[LWZ14]{non-parametric-bayesian}
+Sang-Woo Lee, Christopher Watkins, and Byoung-Tak Zhang.
+\newblock Non-parametric bayesian sum-product networks.
+\newblock {\em Workshop on Learning Tractable Probabilistic Models}, 2014.
+
+\bibitem[PD11]{poon-domingos}
+Hoifung Poon and Pedro Domingos.
+\newblock Sum-product networks: A new deep architecture.
+\newblock {\em Uncertainty in Artificial Intelligence}, 27, 2011.
+
+\end{thebibliography}

@@ -1,0 +1,25 @@
+[0] Config.pm:318> INFO - This is Biber 1.8
+[0] Config.pm:321> INFO - Logfile is 'relatorio.blg'
+[46] biber:275> INFO - === Sat Oct 24, 2015, 18:50:49
+[46] Biber.pm:333> INFO - Reading 'relatorio.bcf'
+[91] Biber.pm:630> INFO - Found 4 citekeys in bib section 0
+[107] Biber.pm:3053> INFO - Processing section 0
+[118] Biber.pm:3190> INFO - Looking for bibtex format file '../common/references.bib' for section 0
+[119] bibtex.pm:933> INFO - Decoding LaTeX character macros into UTF-8
+[120] bibtex.pm:808> INFO - Found BibTeX data source '../common/references.bib'
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 9, warning: 1 characters of junk seen at toplevel
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 17, warning: 1 characters of junk seen at toplevel
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 25, warning: 1 characters of junk seen at toplevel
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 33, warning: 1 characters of junk seen at toplevel
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 40, warning: 1 characters of junk seen at toplevel
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 46, warning: 1 characters of junk seen at toplevel
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 54, warning: 1 characters of junk seen at toplevel
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 61, warning: 1 characters of junk seen at toplevel
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 69, warning: 1 characters of junk seen at toplevel
+[129] Utils.pm:169> WARN - BibTeX subsystem: /tmp/CwsFWVdxn2/references.bib_6997.utf8, line 77, warning: 1 characters of junk seen at toplevel
+[148] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'variable = shifted' with 'variable = non-ignorable'
+[148] Biber.pm:2945> INFO - Sorting 'entry' list 'nty' keys
+[148] Biber.pm:2949> INFO - No sort tailoring available for locale 'en_US.UTF-8'
+[158] bbl.pm:482> INFO - Writing 'relatorio.bbl' with encoding 'UTF-8'
+[159] bbl.pm:555> INFO - Output to relatorio.bbl
+[159] Biber.pm:105> INFO - WARNINGS: 10

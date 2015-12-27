@@ -1,0 +1,6 @@
+graph s2 {
+  mindist=0.5;
+  node [shape=plaintext];
+  A -- C -- D --A;
+  C -- E;
+}

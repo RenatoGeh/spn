@@ -1,0 +1,405 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[top=1.0in,bottom=1.0in]{geometry}
+\usepackage{hyperref}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage[backend=biber,url=true,doi=true,eprint=false]{biblatex}
+
+\addbibresource{../common/references.bib}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+\titleformat{\section}
+  {\normalfont\scshape\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\scshape\bfseries}{\thesubsection}{1em}{}
+\titleformat{\paragraph}
+  {\normalfont}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}
+  {\normalfont}{\thesubparagraph}{1em}{}
+
+\captionsetup[table]{labelsep=space}
+
+\theoremstyle{plain}
+
+\newtheorem*{spn-def}{Definição}
+\newtheorem*{spn-thm}{Teorema}
+
+\title{\textbf{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.1-6.5}}
+
+\begin{document}
+\date{}
+\author{}
+\vspace*{-40pt}
+{\let\newpage\relax\maketitle}
+
+Relatório semana 2 - MAC0215 (Atividade Curricular em Pesquisa)
+
+Aluno: Renato Lui Geh (Bacharelado em Ciência da Computação)
+
+Orientador: Denis Deratani Mauá
+
+\section{Atividades realizadas na semana}
+
+\paragraph{
+  Durante a semana foram lidos os seguintes tópicos do livro \textit{Modeling and Reasoning with
+Bayesian Networks}\cite{bayes-net-darwiche}:
+}
+
+\begin{description}
+  \item[6] - Inference by Variable Elimination
+  \begin{description}
+    \item[6.1] - Introduction
+    \item[6.2] - The Process of Elimination
+    \item[6.3] - Factors
+    \item[6.4] - Elimination as a Basis for Inference
+    \item[6.5] - Computing Prior Marginals
+  \end{description}
+\end{description}
+
+\section{Definição das atividades}
+
+\paragraph{
+  Foi estudado o processo de eliminação de uma variável em uma Rede Bayesiana, simplificando a rede
+para computarmos inferência. Como tópicos importantes temos a definição de fatores 
+(\textit{factors}), as operações de soma (\textit{summing out}) e multiplicação de factors e como
+chegarmos em inferência e \textit{prior marginals} a partir de eliminação de variáveis.
+}
+
+\paragraph{
+  Esta seção será dividida em subseções para cada tópico que citamos no parágrafo anterior com a
+inclusão de um tópico de introdução para assuntos que foram pesquisados fora dos subcapítulos lidos
+e que não estão presentes nos outros relatórios. Abaixo está a lista de tópicos deste relatório.
+}
+\begin{enumerate}
+  \item Introdução
+  \item Factors
+  \item Summing out factors
+  \item Multiplying factors
+  \item Eliminação e propriedades
+  \item Ordem de eliminação
+\end{enumerate}
+
+\subsection{Introdução}
+
+\paragraph{
+  O processo de eliminação de uma variável é feita da seguinte forma. Dado um conjunto de variáveis
+de uma Rede Bayesiana $Q$, escolhe-se um subconjunto $Y$ que queremos eliminar. O subconjunto 
+resultante $X = Q \setminus Y$ tem suas variáveis somadas, resultando num conjunto onde 
+desconsideramos os
+resultados de $X$. Em seguida, multiplicamos as variáveis resultantes, criando um conjunto união 
+que acarreta na eliminação das variáveis $X$. Para fazer essas operações precisamos introduzir o
+conceito de fatores (\textit{factors}), que veremos na subseção seguinte.
+}
+
+\subsection{Factors}
+
+\paragraph{
+  Um factor é uma função que retorna números não-negativos sobre um conjunto de variáveis, mapeando 
+cada instância da variável a um número não-negativo. As tabelas 1 e 2 mostram os factors 1 e 2 e 
+os valores de suas instâncias. Na tabela 1, o factor 1 representa a distribuição condicional de
+$D$ dado $B$ e $C$, enquanto que o factor 2 na tabela 2 mostra a probabilidade das variáveis $D$ e
+$E$.
+}
+
+\begin{table}[h]
+\begin{center}
+\captionsetup{justification=centering}
+\begin{tabular}{*{3}{c} | l}
+  B & C & D & $f_1$ \\
+  \hline
+  true & true & true & 0.95 \\
+  true & true & false & 0.01 \\
+  true & false & true & 0.9 \\
+  true & false & false & 0.1 \\
+  false & true & true & 0.8 \\
+  false & true & false & 0.2 \\
+  false & false & true & 0 \\
+  false & false & false & 1 \\
+\end{tabular}
+\quad
+\quad
+\begin{tabular}{*{2}{c} | c}
+  D & E & $f_2$ \\
+  \hline
+  true & true & 0.448 \\
+  true & false & 0.192 \\
+  false & true & 0.112 \\
+  false & false & 0.248 \\
+\end{tabular}
+\caption*{Tabelas 1 e 2: $f_1(b, c, d) = Pr(d | b, c)$ e $f_2(d, e) = Pr(d, e)$.}
+\end{center}
+\end{table}
+\setcounter{table}{2}
+
+\paragraph{
+ Vamos definir um factor formalmente: 
+}
+
+\begin{spn-def} Um \textit{factor} f sob variáveis $\textbf{X}$ é uma função que mapeia cada 
+  instância $x$ das variáveis $\textbf{X}$ em um número não-negativo $f(x)$. Um factor também é
+  chamado de potencial (\textit{potential}).
+\end{spn-def}
+
+\paragraph{
+  Vamos chamar de $vars(f)$ para denotar as variáveis em $f$. Chamaremos de $f(X_1,...,X_n)$ para
+indicar que $X_1,...,X_n$ são as variáveis definidas em $f$. Definimos um factor com conjunto
+de variáveis vazio como um factor trivial, denotado por $\top$.
+}
+
+\paragraph{
+  Duas operações são comuns em factors: \textit{summing out} e \textit{multiplying}. Vamos definir
+na próxima subseção o que são essas duas operações.
+}
+
+\subsection{Summing out factors}
+
+\paragraph{
+  Vamos definir o que é somar variáveis (\textit{summing out}).
+}
+
+\begin{spn-def} Seja $f$ um factor sobre as variáveis $\textbf{X}$ e seja $X$ uma variável em
+  $\textbf{X}$. O resultado de \textit{summing out} a variável $X$ de $f$ é um factor sob as
+  variáveis $\textbf{Y} = \textbf{X} \setminus \{X\}$, que é denotado por $\sum_x f$ e definido
+  como:
+  \begin{equation}
+    \left(\sum_x f \right)(y) \defeq \sum_x f(x, \textbf{y})
+  \end{equation}
+\end{spn-def}
+
+\newpage
+
+\paragraph{
+  Podemos dizer que somar uma variável é somar todas as probabilidades das instâncias de um factor 
+em que todos os valores das variáveis são equivalentes entre si, descartando os valores da variável
+que queremos somar. Na tabela abaixo somamos a variável $D$ do factor $f_1$ da Tabela 1.
+}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{c c | c}
+  B & C & $\sum_D f_1$ \\
+  \hline
+  true & true & 1 \\
+  true & false & 1 \\
+  false & true & 1 \\
+  false & false & 1 \\
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{
+  Se somarmos todas as variáveis de um factor teremos um factor trivial, ou seja, que possui um
+conjunto de variáveis vazio. Por exemplo, na Tabela 4 somamos todas as variáveis ($B$ e $C$) da
+tabela anterior. Como resultado temos um factor trivial de valor 4.
+}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{c | l}
+  & $\sum_B \sum_C \sum_D f_1$ \\
+  \hline
+  $\top$ & 4 \\
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{
+  Summing out é uma operação comutativa, portanto a ordem de somas de variáveis não importa. Somar
+variáveis $\textbf{X}$ é chamado de marginalizar (\textit{marginalizing}) as variáveis $\textbf{X}$
+do fator $f$. Se $\textbf{Y}$ são as outras variáveis de $f$, então $\sum_{\textbf{X}} f$ é chamado
+de o resultado da projeção (\textit{projecting}) de $f$ nas variáveis $\textbf{Y}$.
+}
+
+\paragraph{
+  É importante notar que o Algoritmo 1 da seção 6.3 do livro tem complexidade $O($exp$(w))$ em 
+tempo e espaço, onde $w$ é o número de variáveis do factor a ser somado.
+}
+
+\subsection{Multiplying factors}
+
+\paragraph{
+  A segunda operações com factors é multiplicar (\textit{multiplying}) factors. Definimos 
+formalmente a seguir.
+}
+
+\begin{spn-def} A multiplicação de factors $f_1(\textbf{X})$ e $f_2(\textbf{T})$ é um factor sob
+  as variáveis $\textbf{Z} = \textbf{X} \cup \textbf{Y}$ denotado como $f_1f_2$ e definido como:
+  \begin{equation}
+    (f_1f_2)(\textbf{z}) \defeq f_1(\textbf{x})f_2(\textbf{y}),
+  \end{equation}
+  onde $\textbf{x}$ e $\textbf{y}$ são compatíveis\cite{report-1} com $\textbf{z}$, ou seja, 
+  $\textbf{x} \sim  \textbf{z}$ e $\textbf{y} \sim \textbf{z}$.
+\end{spn-def}
+
+\paragraph{
+  Multiplicar dois factors é criar uma união dos dois factors multiplicando cada probabilidade de
+um factor com o do outro factor, descartando as linhas inválidas (aquelas em que há uma contradição
+de variáveis; por exemplo se $D=true$ e $D=false$ ao mesmo tempo). Na tabela a seguir tempos o
+resultado da multiplicação entre factors $f_1$ e $f_2$ que vimos nas Tabelas 1 e 2.
+}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{*{4}{c}|{l}}
+  B & C & D & E & $f_1(B, C, D)f_2(D, E)$ \\
+  \hline 
+  true & true & true & true & $0.4256 = (0.95)(0.448)$ \\
+  true & true & true & false & $0.1824 = (0.95)(0.192)$ \\
+  true & true & false & true & $0.0056 = (0.05)(0.112)$ \\
+  $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
+  false & false & false & false & 0.2480 = $(1)(0.248)$ \\
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{
+  Pode-se ver que cada instância $b$, $c$, $d$, $e$ é compatível com exatamente uma instância em
+$f_1$ e exatamente uma instância em $f_2$. Multiplicação é uma operação comutativa e associativa.
+Portanto, a ordem das multiplicações não altera seu factor resultante.
+}
+
+\paragraph{
+  A implementação em pseudo-código do livro denotado como Algoritmo 2 na seção 6.3 tem complexidade
+$O(m$ exp$(w))$ em tempo e espaço, onde $w$ é o número de variáveis no factor resultante e $m$ é o
+número de factors multiplicados.
+}
+
+\subsection{Eliminação e propriedades}
+
+\paragraph{
+  Já vimos que somar e multiplicar são ambos comutativos e multiplicar é associativa. A partir 
+disso vamos elaborar algumas propriedades da eliminação de variáveis (somar e multiplicar). Antes
+disso vamos definir o que é a regra da cadeia (\textit{chain rule}) de uma Rede Bayesiana.
+}
+
+\begin{spn-def} Seja $\textbf{z}$ uma instanciação do conjunto de variáveis $\textbf{Z}$. A 
+  probabilidade de uma rede dada uma instância $\textbf{z}$ é o produto de todos os parâmetros da
+  rede que sejam compatíveis com $\textbf{z}$, ou seja:
+  
+  \begin{equation}
+    Pr(\textbf{z}) \defeq \prod_{\theta_{x|\textbf{u}} \sim \textbf{z}} \theta_{x|\textbf{u}}
+  \end{equation}
+
+  Por exemplo:
+
+  \begin{equation}
+    Pr(a, b, \overline{c}, d, \overline{e}) = \theta_a \theta_{b|a} \theta_{\overline{c}|a} 
+      \theta_{d|b,\overline{c}} \theta_{\overline{e}|\overline{c}}
+  \end{equation}
+\end{spn-def}
+
+\paragraph{
+  A partir da regra da cadeia podemos representar a probabilidade de cada instância como um
+produto de parâmetros da rede:
+}
+
+\begin{equation}
+  Pr(a, b, c, d, e) = \theta_{e|c} \theta_{d|bc} \theta_{c|a} \theta_{b|a} \theta_a
+\end{equation}
+
+\paragraph{
+  Podemos multiplicar as CPTs\cite{report-1} alternativamente, usando CPTs como se fossem factors.
+Desse jeito podemos expressar a distribuição conjunta de probabilidade como um produto das CPTs da
+Rede Bayesiana.
+}
+
+\begin{equation}
+  \Theta_{E|C} \Theta_{D|BC} \Theta_{C|A} \Theta_{B|A} \Theta_A
+\end{equation}
+
+\paragraph{
+  Portanto, para calcular a distribuição marginal sob as variáveis $D$ e $E$ podemos somar as
+variáveis $A$, $B$ e $C$. A marginal corresponde ao factor:
+}
+
+\begin{equation}
+  Pr(D, E) = \sum_{A, B, C} \Theta_{E|C} \Theta_{D|BC} \Theta_{C|A} \Theta_{B|A} \Theta_A
+\end{equation}
+
+\paragraph{
+  Pode-se ver que o factor acima tem complexidade exponencial, já que a soma e multiplicação de
+factors são ambos exponenciais. Para melhorarmos a complexidade podemos usar o seguinte teorema:
+}
+
+\begin{spn-thm} Sejam $f_1$ e $f_2$ factors. Se existe um $X$ tal que $X \in vars(f_2)$ mas $X 
+  \notin vars(f_1)$, então:
+  
+  \begin{equation}
+    \sum_X f_1 f_2 = f_1 \sum_X f_2
+  \end{equation}
+\end{spn-thm}
+
+\paragraph{
+  Portanto somamos apenas os factors que possuem variáveis em comum e em seguida multiplicamos os
+outros factors. Por exemplo, sejam $f_1,...,f_n$ factors e queremos somar a variável $X$, e sabemos
+que $X$ aparece apenas nos factors $f_k$ e $f_p$, então podemos agrupar $f_k$ e $f_p$ e 
+multiplicarmos e somarmos antes de multiplicar o resto.
+}
+
+\begin{equation}
+  \sum_X f_1 ... f_n = f_1 ... f_{k-1} f_{k+1} ... f_{p-1} f_{p+1} ... f_n \sum_X f_k f_p
+\end{equation}
+
+\paragraph{
+  Ou seja, para somar uma variável $X$ no produto $f_1...f_n$, multiplicamos os factors $f_k$ que
+incluem $X$ e então somamos a variável $X$ do factor resultante $\prod_k f_k$.
+}
+
+\paragraph{
+  Um exemplo da marginalização encontra-se na página 133 do livro\cite{bayes-net-darwiche} na
+subseção 6.4.
+}
+
+\subsection{Ordem de eliminação}
+
+\paragraph{
+  Vamos usar a notação $\pi(i)$ para representar a i-ésima variável na ordem de eliminação. Quando
+dizemos que vamos \textit{eliminar a variável} $\pi(i)$ estamos nos referindo a multiplicação de 
+factors $f_k$ onde $\pi(i)$ aparece, seguido a soma da variável $\pi(i)$.
+}
+
+\paragraph{
+  Como vimos na subseção anterior, a ordem da eliminação pode alterar a complexidade do algoritmo.
+Podemos definir se uma ordem é pior que outra se o factor é maior que o outro, ou seja, se há mais
+variáveis no factor a serem somadas.
+}
+
+\begin{spn-thm} Se o maior factor construído na soma de uma variável $\pi(i)$ tem $w$ variáveis, 
+  então a complexidade de se multiplicar e somar os factors que possuem $\pi(i)$ é $O(n  
+  \textnormal{ exp}(w))$, onde $n$ é o número de variáveis na Rede Bayesiana.
+\end{spn-thm}
+
+\paragraph{
+  Chamamos $w$ de a largura (\textit{width}) da ordem usada $\pi$ e é usada para medir a qualidade
+da ordem. Queremos achar uma ordem que tem menor largura possível.
+}
+
+\section{Conclusão}
+
+\paragraph{
+  Factors são essenciais para podermos fazer operações de soma e multiplicação, e portanto 
+eliminação de variáveis. Eliminação de variável é um método para poder-se computar inferência. No
+entanto, como vimos, métodos para se multiplicar e somar variáveis são intratáveis e exponenciais.
+Um outro ponto muito importante é podermos representar CPTs como factors.
+}
+
+\newpage
+
+\printbibliography
+
+\end{document}

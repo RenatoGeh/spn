@@ -1,0 +1,5 @@
+graph s5 {
+  mindist=0.5;
+  node [shape=plaintext]
+  E;
+}

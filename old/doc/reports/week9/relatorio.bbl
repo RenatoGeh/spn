@@ -1,0 +1,132 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{entry}{nty}
+    \entry{project-def}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Aprendizado Automático de Sum-Product Networks (SPN)}
+      \field{title}{Aprendizado Automático de Sum-Product Networks (SPN)}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/project/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{report-1}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Modeling and Reasoning with Bayesian Networks: Compiling Bayesian Networks}
+      \field{number}{1}
+      \field{title}{Modeling and Reasoning with Bayesian Networks: Compiling Bayesian Networks}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/reports/week1/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{report-2}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.1-6.5}
+      \field{number}{2}
+      \field{title}{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.1-6.5}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/reports/week2/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{report-5}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.6-6.9}
+      \field{number}{3}
+      \field{title}{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.6-6.9}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/reports/week5/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{gens-domingos}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=4fc309fef4479f47de9b57555988b13c}{Gens}{G\bibinitperiod}{Robert}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=926269a097c38456f5b32d7efb1d1a80}{Domingos}{D\bibinitperiod}{Pedro}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=4fc309fef4479f47de9b57555988b13c}{Gens}{G\bibinitperiod}{Robert}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=926269a097c38456f5b32d7efb1d1a80}{Domingos}{D\bibinitperiod}{Pedro}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{19d242db70456313e59033460d239df5}
+      \strng{fullhash}{19d242db70456313e59033460d239df5}
+      \field{sortinit}{G}
+      \field{labeltitle}{Learning the Structure of Sum-Product Networks}
+      \field{journaltitle}{International Conference on Machine Learning}
+      \field{title}{Learning the Structure of Sum-Product Networks}
+      \field{volume}{30}
+      \field{year}{2013}
+    \endentry
+    \entry{poon-domingos}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=3e2b0bc20e35ee839c381d54ed997131}{Poon}{P\bibinitperiod}{Hoifung}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=926269a097c38456f5b32d7efb1d1a80}{Domingos}{D\bibinitperiod}{Pedro}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=3e2b0bc20e35ee839c381d54ed997131}{Poon}{P\bibinitperiod}{Hoifung}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=926269a097c38456f5b32d7efb1d1a80}{Domingos}{D\bibinitperiod}{Pedro}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{07a1ea8459f4375c0ed4dd4be9d1b695}
+      \strng{fullhash}{07a1ea8459f4375c0ed4dd4be9d1b695}
+      \field{sortinit}{P}
+      \field{labeltitle}{Sum-Product Networks: A New Deep Architecture}
+      \field{journaltitle}{Uncertainty in Artificial Intelligence}
+      \field{title}{Sum-Product Networks: A New Deep Architecture}
+      \field{volume}{27}
+      \field{year}{2011}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

@@ -1,0 +1,40 @@
+graph name {
+  splines=false;
+  node [shape=circle]
+  a [label="+", group=m];
+  b0 [label="*", group=y0];
+  b1 [label="*", group=m];
+  b2 [label="*", group=y3];
+  c0 [label="+", group=y0];
+  c1 [label="+", group=y1];
+  c2 [label="+", group=y2];
+  c3 [label="+", group=y3];
+  d0 [label=<<I>X<SUB>1</SUB></I>>, group=y0, shape=plaintext];
+  d1 [label=<<I>X<SUB>1</SUB></I>>, group=y1, shape=plaintext];
+  d2 [label=<<I>X<SUB>2</SUB></I>>, group=y2, shape=plaintext];
+  d3 [label=<<I>X<SUB>2</SUB></I>>, group=y3, shape=plaintext];
+
+  a -- b0 [label=" 0.5"];
+  a -- b1 [label=" 0.2"];
+  a -- b2 [label=" 0.3"];
+  b0 -- c0;
+  b0 -- c2;
+  b1 -- c0;
+  b1 -- c3;
+  b2 -- c1;
+  b2 -- c3;
+
+  c0 -- d0 [label=" 0.6"];
+  c0 -- d1 [label=" 0.4"];
+  c1 -- d0 [label=" 0.9"];
+  c1 -- d1 [label=" 0.1"];
+  c2 -- d2 [label=" 0.3"];
+  c2 -- d3 [label=" 0.7"];
+  c3 -- d2 [label=" 0.2"];
+  c3 -- d3 [label=" 0.8"];
+
+  {rank=same; a}
+  {rank=same; b0 b1 b2}
+  {rank=same; c0 c1 c2 c3}
+  {rank=same; d0 d1 d2 d3}
+}

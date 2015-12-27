@@ -1,0 +1,14 @@
+graph s1 {
+  d2tdocpreamble="
+    \usetikzlibrary{positioning}
+    \tikzstyle{state}=[rectangle, rounded corners]
+  ";
+
+  mindist=0.5;
+  node [texmode="math", shape=circle, style=solid];
+  B -- A -- C -- D --B;
+  B -- C;
+  C -- E;
+  A [shape=circle]
+  rankdir=LR;
+}

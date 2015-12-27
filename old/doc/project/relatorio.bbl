@@ -1,0 +1,132 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{entry}{nty}
+    \entry{greedy-search}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=9cd2db21a4bcc71a858a9bed294d43be}{Dennis}{D\bibinitperiod}{Aaron}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=b2da14aea97364c3ffe95f801a0f6a7d}{Ventura}{V\bibinitperiod}{Dan}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=9cd2db21a4bcc71a858a9bed294d43be}{Dennis}{D\bibinitperiod}{Aaron}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=b2da14aea97364c3ffe95f801a0f6a7d}{Ventura}{V\bibinitperiod}{Dan}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{e7976c4a6ce958eae649366d358acd8b}
+      \strng{fullhash}{e7976c4a6ce958eae649366d358acd8b}
+      \field{sortinit}{D}
+      \field{labeltitle}{Greedy Structure Search for Sum-Product Networks}
+      \field{journaltitle}{International Joint Conference on Artificial Intelligence}
+      \field{title}{Greedy Structure Search for Sum-Product Networks}
+      \field{volume}{24}
+      \field{year}{2015}
+    \endentry
+    \entry{clustering}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=9cd2db21a4bcc71a858a9bed294d43be}{Dennis}{D\bibinitperiod}{Aaron}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=b2da14aea97364c3ffe95f801a0f6a7d}{Ventura}{V\bibinitperiod}{Dan}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=9cd2db21a4bcc71a858a9bed294d43be}{Dennis}{D\bibinitperiod}{Aaron}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=b2da14aea97364c3ffe95f801a0f6a7d}{Ventura}{V\bibinitperiod}{Dan}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{e7976c4a6ce958eae649366d358acd8b}
+      \strng{fullhash}{e7976c4a6ce958eae649366d358acd8b}
+      \field{sortinit}{D}
+      \field{labeltitle}{Learning the Architecture of Sum-Product Networks Using Clustering on Variables}
+      \field{journaltitle}{Advances in Neural Information Processing Systems}
+      \field{title}{Learning the Architecture of Sum-Product Networks Using Clustering on Variables}
+      \field{volume}{25}
+      \field{year}{2012}
+    \endentry
+    \entry{website:spn-uwashington}{misc}{}
+      \name{labelname}{1}{}{%
+        {{hash=97915a8dc04b648c27a85c1a98459ee9}{Department\bibnamedelimb of\bibnamedelimb Computer\bibnamedelima Science}{D\bibinitperiod\bibinitdelim o\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim S\bibinitperiod}{University\bibnamedelimb of\bibnamedelima Washington}{U\bibinitperiod\bibinitdelim o\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=97915a8dc04b648c27a85c1a98459ee9}{Department\bibnamedelimb of\bibnamedelimb Computer\bibnamedelima Science}{D\bibinitperiod\bibinitdelim o\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim S\bibinitperiod}{University\bibnamedelimb of\bibnamedelima Washington}{U\bibinitperiod\bibinitdelim o\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{97915a8dc04b648c27a85c1a98459ee9}
+      \strng{fullhash}{97915a8dc04b648c27a85c1a98459ee9}
+      \field{sortinit}{D}
+      \field{labeltitle}{Sum-Product Networks}
+      \field{title}{Sum-Product Networks}
+      \verb{url}
+      \verb http://spn.cs.washington.edu/index.shtml
+      \endverb
+    \endentry
+    \entry{gens-domingos}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=4fc309fef4479f47de9b57555988b13c}{Gens}{G\bibinitperiod}{Robert}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=926269a097c38456f5b32d7efb1d1a80}{Domingos}{D\bibinitperiod}{Pedro}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=4fc309fef4479f47de9b57555988b13c}{Gens}{G\bibinitperiod}{Robert}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=926269a097c38456f5b32d7efb1d1a80}{Domingos}{D\bibinitperiod}{Pedro}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{19d242db70456313e59033460d239df5}
+      \strng{fullhash}{19d242db70456313e59033460d239df5}
+      \field{sortinit}{G}
+      \field{labeltitle}{Learning the Structure of Sum-Product Networks}
+      \field{journaltitle}{International Conference on Machine Learning}
+      \field{title}{Learning the Structure of Sum-Product Networks}
+      \field{volume}{30}
+      \field{year}{2013}
+    \endentry
+    \entry{non-parametric-bayesian}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=6c3efc19bd307002596b985d75f7c825}{Lee}{L\bibinitperiod}{Sang-Woo}{S\bibinithyphendelim W\bibinitperiod}{}{}{}{}}%
+        {{hash=4be5a785fe12afeb6203c5bac4c2a4cb}{Watkins}{W\bibinitperiod}{Christopher}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=5efeb1ddd2f7fb21193d63aeb77502df}{Zhang}{Z\bibinitperiod}{Byoung-Tak}{B\bibinithyphendelim T\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=6c3efc19bd307002596b985d75f7c825}{Lee}{L\bibinitperiod}{Sang-Woo}{S\bibinithyphendelim W\bibinitperiod}{}{}{}{}}%
+        {{hash=4be5a785fe12afeb6203c5bac4c2a4cb}{Watkins}{W\bibinitperiod}{Christopher}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=5efeb1ddd2f7fb21193d63aeb77502df}{Zhang}{Z\bibinitperiod}{Byoung-Tak}{B\bibinithyphendelim T\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{81b4e03ea83c6bac3bbba9ed7ee3f7ce}
+      \strng{fullhash}{81b4e03ea83c6bac3bbba9ed7ee3f7ce}
+      \field{sortinit}{L}
+      \field{labeltitle}{Non-Parametric Bayesian Sum-Product Networks}
+      \field{journaltitle}{Workshop on Learning Tractable Probabilistic Models}
+      \field{title}{Non-Parametric Bayesian Sum-Product Networks}
+      \field{year}{2014}
+    \endentry
+    \entry{poon-domingos}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=3e2b0bc20e35ee839c381d54ed997131}{Poon}{P\bibinitperiod}{Hoifung}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=926269a097c38456f5b32d7efb1d1a80}{Domingos}{D\bibinitperiod}{Pedro}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=3e2b0bc20e35ee839c381d54ed997131}{Poon}{P\bibinitperiod}{Hoifung}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=926269a097c38456f5b32d7efb1d1a80}{Domingos}{D\bibinitperiod}{Pedro}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{07a1ea8459f4375c0ed4dd4be9d1b695}
+      \strng{fullhash}{07a1ea8459f4375c0ed4dd4be9d1b695}
+      \field{sortinit}{P}
+      \field{labeltitle}{Sum-Product Networks: A New Deep Architecture}
+      \field{journaltitle}{Uncertainty in Artificial Intelligence}
+      \field{title}{Sum-Product Networks: A New Deep Architecture}
+      \field{volume}{27}
+      \field{year}{2011}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
