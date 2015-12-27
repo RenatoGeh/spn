@@ -1,0 +1,152 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{entry}{nty}
+    \entry{project-def}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Aprendizado Automático de Sum-Product Networks (SPN)}
+      \field{title}{Aprendizado Automático de Sum-Product Networks (SPN)}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/project/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{report-1}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Modeling and Reasoning with Bayesian Networks: Compiling Bayesian Networks}
+      \field{number}{1}
+      \field{title}{Modeling and Reasoning with Bayesian Networks: Compiling Bayesian Networks}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/reports/week1/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{report-2}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.1-6.5}
+      \field{number}{2}
+      \field{title}{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.1-6.5}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/reports/week2/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{report-5}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.6-6.9}
+      \field{number}{3}
+      \field{title}{Modeling and Reasoning with Bayesian Networks: Inference by Variable Elimination 6.6-6.9}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/reports/week5/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{report-8}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Modeling and Reasoning with Bayesian Networks: Inference with Local Structure 13.1-13.3}
+      \field{number}{4}
+      \field{title}{Modeling and Reasoning with Bayesian Networks: Inference with Local Structure 13.1-13.3}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/reports/week8/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{report-9}{report}{}
+      \name{labelname}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \strng{fullhash}{2536fd0a8f59a70ee713d4ba00d232ff}
+      \field{sortinit}{G}
+      \field{labeltitle}{Uma Introdução a Sum-Product Networks}
+      \field{number}{5}
+      \field{title}{Uma Introdução a Sum-Product Networks}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ime.usp.br/~renatolg/mac0215/doc/reports/week9/relatorio.pdf
+      \endverb
+    \endentry
+    \entry{aima}{book}{}
+      \name{labelname}{2}{}{%
+        {{hash=f509695d30d2b0f8253a466b85d0f8ec}{Russel}{R\bibinitperiod}{Stuart}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=5de798d5fa3c0236c0478134cd23f52a}{Norvig}{N\bibinitperiod}{Peter}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=f509695d30d2b0f8253a466b85d0f8ec}{Russel}{R\bibinitperiod}{Stuart}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=5de798d5fa3c0236c0478134cd23f52a}{Norvig}{N\bibinitperiod}{Peter}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Prentice Hall}%
+      }
+      \strng{namehash}{810132ce92139d505672ff8b44fdf0f1}
+      \strng{fullhash}{810132ce92139d505672ff8b44fdf0f1}
+      \field{sortinit}{R}
+      \field{labeltitle}{Artificial Intelligence: A Modern Approach}
+      \field{edition}{3rd edition}
+      \field{title}{Artificial Intelligence: A Modern Approach}
+      \field{year}{2010}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
