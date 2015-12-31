@@ -123,10 +123,33 @@ Any conditional probability can be computed by summing the factors from the full
 distribution. That is, $\mathbf{P}(X|\mathbf{e})$ can be computed by summing all the possible
 events of the hidden variables of the joint distribution.
 
-\begin{equation*}
+\begin{equation}
   \mathbf{P}(X|\mathbf{e}) = \alpha \mathbf{P}(X, \mathbf{E}) = \alpha \sum_\mathbf{y} \mathbf{P}(
   X, \mathbf{e}, \mathbf{y})
-\end{equation*}
+\end{equation}
+
+Thus, we can use a Bayesian network to represent the full joint distribution. Furthermore, since:
+
+\begin{equation}
+  P(x_1,...,x_n) = \prod_{i=1}^n P(x_i|Parents(X_i))
+\end{equation}
+
+Then we can write $P(x,\mathbf{e},\mathbf{y})$ as products of the conditional probabilities of the
+Bayesian network. Because of that, we can compute a query via the sums of products of the
+conditional probabilities of the network. Report \cite{report-1} shows how to represent a Bayesian
+network with sums and products.
+
+After we have the resulting expression given by equations 1 and 2, we can use factor properties
+\cite{report-2} to simplify the expression and avoid repeated calculations \cite{report-5}.
+
+Since exact inference with Bayesian networks is, in the general case, intractable, it makes these
+methods in the real world unrealistic. Section 14.5 from \cite{aima} describes some methods for
+approximate inference. Darwiche (2009)\cite{bayes-net-darwiche} is also a great source for Bayes
+nets.
+
+\section{Bayesian learning}
+
+
 
 \newpage
 

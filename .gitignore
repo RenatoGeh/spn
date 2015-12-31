@@ -1,3 +1,10 @@
+# LaTeX compilation files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+
 # Compiled Object files
 *.slo
 *.lo

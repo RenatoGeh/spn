@@ -19,6 +19,24 @@
 
 \refsection{0}
   \sortlist{entry}{nty}
+    \entry{bayes-net-darwiche}{book}{}
+      \name{labelname}{1}{}{%
+        {{hash=9c3c93fa904c46230878dfcdd5bb2a70}{Darwiche}{D\bibinitperiod}{Adnan}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=9c3c93fa904c46230878dfcdd5bb2a70}{Darwiche}{D\bibinitperiod}{Adnan}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{9c3c93fa904c46230878dfcdd5bb2a70}
+      \strng{fullhash}{9c3c93fa904c46230878dfcdd5bb2a70}
+      \field{sortinit}{D}
+      \field{labeltitle}{Modeling and Reasoning with Bayesian Networks}
+      \field{edition}{1st Edition}
+      \field{title}{Modeling and Reasoning with Bayesian Networks}
+      \field{year}{2009}
+    \endentry
     \entry{project-def}{report}{}
       \name{labelname}{1}{}{%
         {{hash=2536fd0a8f59a70ee713d4ba00d232ff}{Geh}{G\bibinitperiod}{Renato\bibnamedelima Lui}{R\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%

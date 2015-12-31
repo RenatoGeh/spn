@@ -1972,6 +1972,11 @@
     <bcf:citekey order="3">report-5</bcf:citekey>
     <bcf:citekey order="3">report-8</bcf:citekey>
     <bcf:citekey order="3">report-9</bcf:citekey>
+    <bcf:citekey order="4">report-1</bcf:citekey>
+    <bcf:citekey order="5">report-2</bcf:citekey>
+    <bcf:citekey order="6">report-5</bcf:citekey>
+    <bcf:citekey order="7">aima</bcf:citekey>
+    <bcf:citekey order="8">bayes-net-darwiche</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nty">
   <bcf:sorting>
