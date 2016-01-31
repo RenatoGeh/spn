@@ -1,0 +1,120 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[top=1.0in,bottom=1.0in]{geometry}
+\usepackage{hyperref}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage[backend=biber,url=true,doi=true,eprint=false]{biblatex}
+\usepackage{enumitem}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{tikz}
+\usepackage[justification=centering]{caption}
+\usepackage{indentfirst}
+\usetikzlibrary{snakes,arrows,shapes}
+
+\addbibresource{../reports/common/references.bib}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+\titleformat{\section}
+  {\normalfont\scshape\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\scshape\bfseries}{\thesubsection}{1em}{}
+\titleformat{\paragraph}
+  {\normalfont}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}
+  {\normalfont}{\thesubparagraph}{1em}{}
+
+\captionsetup[table]{labelsep=space}
+
+\theoremstyle{plain}
+
+\newtheorem*{spn-def}{Definição}
+\newtheorem*{spn-thm}{Teorema}
+
+\setlength{\parskip}{1em}
+
+\title{\textbf{Aprendizado Automático de Sum-Product Networks (SPNs)}}
+
+\begin{document}
+\date{}
+\author{}
+\vspace*{-40pt}
+{\let\newpage\relax\maketitle}
+
+Aluno: Renato Lui Geh (Bacharelado em Ciência da Computação)
+
+Supervisor: Denis Deratani Mauá
+
+\section{Introdução}
+
+O objetivo deste projeto de Iniciação Científica é utilizar Aprendizado de Máquina para aprender
+automaticamente a estrutura de um modelo probabilístico denominado Sum-Product Network (SPN).
+
+Modelos probabilísticos baseados em grafos têm como objetivo representar distribuições de
+probabilidade de forma compacta.
+
+Para extraír conhecimento de um modelo probabilístico, computa-se inferência. Inferência na
+maioria dos modelos gráficos é intratável, já que o número de termos na distribuição é exponencial.
+
+Existem modelos gráficos que possuem inferência tratável, porém a maioria não consegue representar
+de forma compacta e geral uma distribuição. A maioria dos PGMs solucionam o problema da
+intractabilidade computando a inferência aproximada.
+
+Sum-Product Networks são PGMs que, quando completas e consistentes, computam a inferência exata e
+em tempo tratável. Adicionalmente, SPNs se mostraram mais gerais que outros modelos que computam
+inferência em tempo tratável.\cite{poon-domingos}
+
+Como aprendizado de uma SPN depende da inferência, a intractabilidade do aprendizado depende da
+intractabilidade da inferência.
+
+\section{Objetivos}
+
+Neste projeto de Iniciação Científica, o aluno irá estudar os seguintes tópicos:
+
+\begin{itemize}
+  \item Propriedades e estrutura de uma Sum-Product Network.
+  \item Inferência em SPNs.
+  \item Aprendizado:
+  \begin{itemize}
+    \item Dos pesos de uma SPN.\cite{poon-domingos}
+    \item Da estrutura de uma SPN.\cite{gens-domingos}
+    \item Por busca gulosa.\cite{greedy-search}
+    \item Por clustering de variáveis.\cite{clustering}
+    \item Por SPNs bayesianas não-paramétricas.\cite{non-parametric-bayesian}
+  \end{itemize}
+\end{itemize}
+
+\section{Cronograma}
+
+O aluno deverá reservar 10 horas por semana para estudos relacionados à IC. Além disso, o aluno
+irá escrever relatórios semanais do que foi estudado na semana. Os relatórios estarão disponíveis
+em:
+
+\subparagraph{\url{http://www.ime.usp.br/~renatolg/spn/doc/reports/}}
+
+Tanto os relatórios quanto as implementações estarão disponíveis pelo repositório do projeto:
+
+\subparagraph{\url{https://github.com/RenatoGeh/spn/}}
+
+\newpage
+
+\printbibliography
+
+\end{document}
