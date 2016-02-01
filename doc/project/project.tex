@@ -60,7 +60,7 @@
 
 Aluno: Renato Lui Geh (Bacharelado em Ciência da Computação)
 
-Supervisor: Denis Deratani Mauá
+Orientador: Denis Deratani Mauá (IME-USP)
 
 \section{Introdução}
 
@@ -95,16 +95,16 @@ Um modelo probabilístico tem como objetivo representar uma distribuição de pr
 compacta. PGMs são utilizadas em \textit{data mining}, previsão de eventos, classificação, entre
 outros.
 
-Para fazer previsões, deduzir eventos ou extrair novo conhecimento da base de conhecimento
-existente, faz-se inferência na distribuição de probabilidade. Inferência pode ser vista como uma
-probabilidade de um certo evento ocorrer dados os eventos observados:
+Para fazer previsões, deduzir eventos ou extrair novo conhecimento, faz-se inferência na
+distribuição de probabilidade. Inferência pode ser vista como uma probabilidade de um certo evento
+ocorrer dados os eventos observados:
 
 \begin{equation*}
-  P(X=x_1,...,x_n|\mathbf{e}=e_1,...,e_q)
+  P(X=x_1,\ldots,x_n|\mathbf{e}=e_1,\ldots,e_q)
 \end{equation*}
 
-O conjunto $X=\{x_1,...,x_n\}$ representa a \textit{query}, ou seja, o evento que deve ser
-inferido. O conjunto $\mathbf{e}=\{e_1,...,e_q\}$ é dito a evidência, as variáveis que já são
+O conjunto $X=\{x_1,\ldots,x_n\}$ representa a \textit{query}, ou seja, o evento que deve ser
+inferido. O conjunto $\mathbf{e}=\{e_1,\ldots,e_q\}$ é dito a evidência, as variáveis que já são
 conhecidas. Probabilidades do tipo $P(a|b)$ são chamadas de probabilidades posteriores.
 
 Para representar uma distribuição de probabilidade, é preciso tomar as probabilidades de cada
@@ -157,7 +157,10 @@ chega-se à distribuição de probabilidade das variáveis $A$ e $B$:
 inferência em tempo tratável.
 
 Redes Bayesianas conseguem representar distribuições de probabilidade, porém inferência no caso
-geral é intratável, e portanto recorrem a inferência aproximada.
+geral é intratável, e portanto recorrem a inferência aproximada. Outros modelos, como mixture
+models e árvores thin junction possuem inferência tratável, porém são limitadas a certas
+distribuições. Portanto, um modelo cuja inferência seja tratável e que possa representar uma grande
+variedade de distribuições é desejável.
 
 \subsection{Sum-Product Networks}
 
@@ -182,8 +185,8 @@ Onde $\lambda_{a}$ é o indicador da variável $A$ e toma valores consistentes �
 
 \begin{figure}[h]
   \centering\includegraphics[scale=0.7]{imgs/domingos_poon.jpg}
-  \caption{Uma SPN com variáveis Booleanas, onde $x_1,...,x_d$ e $\overline{x}_1,...,\overline{x}_d
-  $ são folhas e o resto dos nós são somas ou produtos.\cite{poon-domingos}}
+  \caption{Uma SPN com variáveis Booleanas, onde $x_1,\ldots,x_d$ e $\overline{x}_1,\ldots,
+    \overline{x}_d$ são folhas e o resto dos nós são somas ou produtos.\cite{poon-domingos}}
 \end{figure}
 
 Uma SPN é representada por um dígrafo acíclico onde as folhas são distribuições monovariáveis, ou
@@ -193,6 +196,12 @@ produto. Toda aresta que parte de um nó qualquer para um nó soma possue um pes
 O valor de uma SPN é o valor do nó raíz. O valor de um nó variável é a distribuição da própria
 variável. O valor de um nó soma é a soma ponderada dos nós filhos dela. O valor de um nó produto
 é o produto dos filhos.
+
+Estudos em aprendizado de SPNs mostraram grande potencial. Em~\cite{poon-domingos}, Poon e Domingos
+mostraram, por meio de experimentos, que SPNs tiveram melhor desempenho que outros modelos. Nesse
+trabalho, o aprendizado foi realizado com uma estrutura já existente (e portanto menos flexível),
+apenas aprendendo os pesos. Em~\cite{gens-domingos}, Gens e Domingos mostraram que, por meio do
+aprendizado da estrutura e dos pesos, é possível gerar uma SPN ainda mais geral.
 
 \section{Aplicações}
 
@@ -227,9 +236,9 @@ Neste projeto de Iniciação Científica, o aluno irá estudar os seguintes tóp
 
 \section{Cronograma}
 
-O aluno deverá reservar 10 horas por semana para estudos relacionados à IC. Além disso, o aluno
-irá escrever relatórios semanais do que foi estudado na semana. Os relatórios estarão disponíveis
-em:
+O aluno deverá reservar 10 horas por semana para estudos relacionados ao projeto. Além disso, o
+aluno irá escrever relatórios semanais do que foi estudado na semana. Os relatórios estarão 
+disponíveis em:
 
 \subparagraph{\url{http://www.ime.usp.br/~renatolg/spn/doc/reports/}}
 
