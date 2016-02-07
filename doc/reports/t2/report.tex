@@ -1,0 +1,122 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[top=1.0in,bottom=1.0in]{geometry}
+\usepackage{hyperref}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage[backend=biber,url=true,doi=true,eprint=false]{biblatex}
+\usepackage{enumitem}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{tikz}
+\usepackage[justification=centering]{caption}
+\usepackage{indentfirst}
+\usepackage{abstract}
+\usepackage[titletoc]{appendix}
+
+\usetikzlibrary{snakes,arrows,shapes}
+
+\addbibresource{../common/references.bib}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+\renewcommand{\abstractnamefont}{\normalfont\Large\bfseries}
+
+\titleformat{\section}
+  {\normalfont\scshape\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\scshape\bfseries}{\thesubsection}{1em}{}
+\titleformat{\paragraph}
+  {\normalfont}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}
+  {\normalfont}{\thesubparagraph}{1em}{}
+
+\captionsetup[table]{labelsep=space}
+
+\theoremstyle{plain}
+
+\newtheorem*{spn-def}{Definition}
+\newtheorem*{spn-thm}{Theorem}
+
+\setlength{\parskip}{1em}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+    \LARGE
+    \textbf{An Introduction to Sum-Product Networks}
+
+    \vspace{1.7cm}
+    \Large
+    A collection of studies on properties, structure, inference and learning on Sum-Product
+    Networks
+
+    \vspace{1.7cm}
+    \large
+    Student: Renato Lui Geh
+
+    Supervisor: Denis Deratani Mauá (DCC IME-USP)
+    \vfill
+    \large
+    University of São Paulo / Universidade de São Paulo (USP)
+
+    Institute of Mathematics and Statistics / Instituto de Matemática e Estatística (IME)
+    \vspace{1.5cm}
+  \end{center}
+\end{titlepage}
+
+\newpage
+\null\vspace{\fill}
+\begin{abstract}
+  \large
+  This work is a collection of ongoing studies I am working on for my undergraduate research
+  project on automatic learning of Sum-Product Networks. The main objective of this work is logging
+  my study notes on this subject in an instructive and uncomplicated way. Most scientific papers
+  are cluttered with intricate names and require extensive background on the subject in order for
+  the reader to understand what is going on. In this paper we seek to provide an easy reference and
+  introductory reading material to those who intend to work with Sum-Product Networks.
+
+  This study is divided into five main sections. We start with an introductory section regarding
+  probabilistic graphical models and why Sum-Product Networks are so interesting. Next we talk
+  about the structure of the model. Thirdly, we analyse some properties and theorems. Fourthly, we
+  look on how to perform exact tractable inference. And finally we take a look at how to perform
+  learning.
+\end{abstract}
+\vspace{\fill}
+\newpage
+\large
+\tableofcontents
+\normalsize
+\newpage
+
+\section{Introduction}
+
+We assume the notation~\ref{app:not} and mathematical background~\ref{app:bak} defined in the
+Appendix.
+
+\newpage
+\begin{appendices}
+  \section{Notation}\label{app:not}
+  Notation bwa
+  \section{Mathematical background}\label{app:bak}
+\end{appendices}
+
+\printbibliography{}
+
+\end{document}
