@@ -4,6 +4,8 @@
 *.bcf
 *.blg
 *.log
+*.run.xml
+*.toc
 
 # Compiled Object files
 *.slo
