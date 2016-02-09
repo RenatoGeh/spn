@@ -1,6 +1,8 @@
 all:
 	make clean; \
-	pdflatex report.tex; pdflatex report.tex; biber report; pdflatex report.tex && \
+	pdflatex report.tex; pdflatex report.tex; \
+ 	biber report; \
+ 	pdflatex report.tex; pdflatex report.tex && \
  	okular report.pdf
 
 .PHONY: clean

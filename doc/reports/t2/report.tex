@@ -10,7 +10,7 @@
 \usepackage[top=1.0in,bottom=1.0in]{geometry}
 \usepackage{hyperref}
 \usepackage[singlelinecheck=false]{caption}
-\usepackage[backend=biber,url=true,doi=true,eprint=false]{biblatex}
+\usepackage[backend=biber,url=true,doi=true,eprint=false,style=alphabetic]{biblatex}
 \usepackage{enumitem}
 \usepackage[x11names, rgb]{xcolor}
 \usepackage{tikz}
@@ -18,6 +18,7 @@
 \usepackage{indentfirst}
 \usepackage{abstract}
 \usepackage[titletoc]{appendix}
+\usepackage{bookmark}
 
 \usetikzlibrary{snakes,arrows,shapes}
 
@@ -107,16 +108,192 @@
 
 \section{Introduction}
 
-We assume the notation~\ref{app:not} and mathematical background~\ref{app:bak} defined in the
-Appendix.
+We assume the reader has already read the notation~\ref{app:not} and has the mathematical
+background required~\ref{app:bak} defined in the Appendix.
+
+In this section we show what the usual problems with probabilistic graphical models are and what
+led to the creation of Sum-Product Networks. Additionally, we show some results from experiments
+Poon and Domingos performed on the inaugural Sum-Product Network article \textit{Sum-Product
+Networks: A New Deep Architecture}~\cite{poon-domingos}.
+
+\subsection{Motivation}
+
+Probabilistic Graphical Models (PGMs) perform inference through posterior probabilities on the
+query and evidence. Thus, inference would look roughly like this:
+
+\begin{equation*}
+  P(X | \mathbf{e}=e_1,\ldots,e_q)
+\end{equation*}
+
+Where $X$ is called the variable query and $\mathbf{e}$ the evidence, that is, the observed
+instances of the variables.
+
+Using the definition of conditional probability,
+
+\begin{equation*}
+  P(X|\mathbf{e})=\frac{P(X,\mathbf{e})}{P(\mathbf{e})}
+\end{equation*}
+
+We get the following equation:
+
+\begin{equation}
+  P(X|\mathbf{e})=\frac{P(X,\mathbf{e})}{P(\mathbf{e})}=\alpha P(X,\mathbf{e})=\alpha
+  \sum_{\mathbf{y}} P(X,\mathbf{e},\mathbf{y})
+\end{equation}
+
+Where $\mathbf{y}$ is a hidden variable. That is, let $\mathbf{X}$ be the complete set of
+variables. Then $\mathbf{X}=\{X\} \cup \mathbf{E} \cup \mathbf{Y}$, where $X$ is the query,
+$\mathbf{E}$ is the set of evidence variables and $\mathbf{Y}$ is a set of non-query non-evidence
+variables. Thus $\mathbf{y}$ is an instance of $\mathbf{Y}$.
+
+We can see that $P(X,\mathbf{e},\mathbf{y})$ is actually a subset of the full joint distribution.
+Since we are summing out the hidden variables, we are actually discarding all the possible values
+of $\mathbf{y}$ and taking into account all the possibilities where the query given the evidence
+occur.
+
+Now consider a Bayesian network as the PGM of our choice. We know that Bayesian networks have the
+property of representing the full joint distribution as a product of conditional probabilities:
+
+\begin{equation}
+  P(x_1,\ldots,x_n) = \prod_{i=1}^n P(x_i|Par(X_i))
+\end{equation}
+
+Where $Par(X_i)$ are the values of the parents of $X_i$. From this property we know that we can
+now compute inference by applying Equation (2) on Equation (1). By doing that we get inference by
+computing the sum of products of conditional probabilities from the network. This is fundamental
+to Adnan Darwiche's \textit{network polynomial}~\cite{diff-approach-darwiche,bayes-net-darwiche},
+a concept that is the core of Sum-Product Networks.
+
+We know that we can compute inference by summing out the hidden variables and then multiplying the
+remaining factors, but this process relies on adding and then multiplying an exponential number of
+probabilities. In fact, if we don't take the order of the terms in the summation into account, the
+complexity reaches $O(np^n)$, where $p$ is the number of possible values a variable may take. If we
+move the independent terms from the summation the complexity is then $O(p^n)$. This is obviously
+intractable, and a reason why approximate inference is often the best solution.
+
+Bayesian networks are not the only model that have intractable exact inference. Most PGMs suffer
+from intractability of inference, and hence intractability of learning. However Domingos and Poon
+argument that ``classes of graphical models where inference is tractable exist [\ldots], but are
+quite limited in the distributions they can represent compactly.''~\cite{poon-domingos}.
+
+Sum-Product Networks provide a graphical model where inference is both tractable and exact whilst
+still being more general than existing tractable models.
+
+\subsection{Background}
+
+In Adnan Darwiche's \textit{A Differential Approach to Inference in Bayesian Networks}
+\cite{diff-approach-darwiche} and \textit{Modeling and Reasoning with Bayesian Networks}
+\cite{bayes-net-darwiche}, Darwiche presents a new way of representing full joint distributions
+through a \textit{network polynomial}. In this subsection we will show what a network polynomial
+is.
+
+Consider the following Bayesian network:
+
+\begin{figure}[h]
+  \centering{\includegraphics[scale=0.5]{imgs/bayes_net.png}
+    \caption{A Bayesian network $A \to B$, that is, the variable $B$ depends on $A$.}
+  }
+\end{figure}
+
+\begin{table}[h]
+  \begin{center}
+    \captionsetup{justification=centering}
+    \begin{tabular}{c | c}
+      A & $\Theta_A$ \\
+      \hline
+      $a$ & $\theta_a = 0.3$ \\
+      $\overline{a}$ & $\theta_{\overline{a}} = 0.7$ \\
+    \end{tabular}
+    \quad
+    \quad
+    \begin{tabular}{c c | c}
+      A & B & $\Theta_{B|A}$ \\
+      \hline
+      $a$ & $b$ & $\theta_{b|a}=0.1$ \\
+      $a$ & $\overline{b}$ & $\theta_{\overline{b}|a}=0.9$ \\
+      $\overline{a}$ & $b$ & $\theta_{b|\overline{a}}=0.8$ \\
+      $\overline{a}$ & $\overline{b}$ & $\theta_{\overline{b}|\overline{a}}=0.2$ \\
+    \end{tabular}
+    \caption*{Tables 1 and 2}
+  \end{center}
+\end{table}
+\setcounter{table}{2}
+
+The two tables above describe the Bayesian network in Figure 1. From these tables we can construct
+the full joint distribution table by applying the definition of conditional probability we saw in
+the previous subsection.
+
+\begin{table}[h]
+  \begin{center}
+    \captionsetup{justification=centering}
+    \begin{tabular}{c c | c}
+      A & B & $P(A,B)$ \\
+      \hline
+      $a$ & $b$ & $\Theta_a\Theta_{b|a}$ \\
+      $a$ & $\overline{b}$ & $\Theta_a\Theta_{\overline{b}|a}$ \\
+      $\overline{a}$ & $b$ & $\Theta_{\overline{a}}\Theta_{b|\overline{a}}$ \\
+      $\overline{a}$ & $\overline{b}$ & $\Theta_{\overline{a}}\Theta_{\overline{b}|\overline{a}}$\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+
+\subsection{Experiments}
 
 \newpage
 \begin{appendices}
-  \section{Notation}\label{app:not}
-  Notation bwa
-  \section{Mathematical background}\label{app:bak}
+\section{Notation}\label{app:not}
+
+In this section we show the notations we use throughout this paper.
+
+\subsection{Letters}
+
+We use an uppercase letter to denote a variable. A lowercase letter denotes an instance of a
+variable. A bold fonted letter is a set. A bold fonted uppercase letter is a set of variables. For
+instance:
+
+\begin{equation*}
+  \mathbf{X}=\{X_1=x_1,\ldots,X_n=x_n\}
+\end{equation*}
+
+\subsection{Events and evidence}
+
+The letter `e', regardless of case, is reserved for events and evidence. An uppercase `$E$' is an
+evidence variable. An uppercase bold fonted `$\mathbf{E}$' is the set of evidence variables. A
+lowercase `$e$' is a particular observed event variable. A bold fonted lowercase `$\mathbf{e}$' is
+the set of variables of a particular observed event.
+
+\subsection{Probabilities}
+
+All functions of the form $P(\cdot)$ are probability functions. Joint probability distributions
+have the variables separated by commas $P(X,Y)$ instead of $P(X \wedge Y)$. We call prior
+probabilities the probability functions of the form $P(X)$. Posterior probabilities are of the form
+$P(\mathbf{X}|\mathbf{Y})$.
+
+\subsection{Arrows}
+
+An arrow pointing to the right may have two possible meanings:
+
+\begin{itemize}
+  \item Dependency
+    \begin{itemize}
+      \item $A \to B$ is read as \textit{B depends on A}.
+    \end{itemize}
+  \item Directed edge connectivity
+    \begin{itemize}
+      \item $A \to B$ is read as \textit{there exists an edge from node A to node B}.
+    \end{itemize}
+\end{itemize}
+
+Meanings will be clear from context.
+
+\section{Mathematical background}\label{app:bak}
+
 \end{appendices}
 
-\printbibliography{}
+\newpage
+
+\printbibliography[heading=bibintoc]
 
 \end{document}
