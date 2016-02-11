@@ -108,8 +108,8 @@
 
 \section{Introduction}
 
-We assume the reader has already read the notation~\ref{app:not} and has the mathematical
-background required~\ref{app:bak} defined in the Appendix.
+We assume the reader has already read the notation [Appendix~\ref{app:not}] and has the
+mathematical background required [Appendix~\ref{app:bak}] defined in the Appendix.
 
 In this section we show what the usual problems with probabilistic graphical models are and what
 led to the creation of Sum-Product Networks. Additionally, we show some results from experiments
@@ -229,17 +229,161 @@ the previous subsection.
     \begin{tabular}{c c | c}
       A & B & $P(A,B)$ \\
       \hline
-      $a$ & $b$ & $\Theta_a\Theta_{b|a}$ \\
-      $a$ & $\overline{b}$ & $\Theta_a\Theta_{\overline{b}|a}$ \\
-      $\overline{a}$ & $b$ & $\Theta_{\overline{a}}\Theta_{b|\overline{a}}$ \\
-      $\overline{a}$ & $\overline{b}$ & $\Theta_{\overline{a}}\Theta_{\overline{b}|\overline{a}}$\\
+      $a$ & $b$ & $\theta_a\theta_{b|a}$ \\
+      $a$ & $\overline{b}$ & $\theta_a\theta_{\overline{b}|a}$ \\
+      $\overline{a}$ & $b$ & $\theta_{\overline{a}}\theta_{b|\overline{a}}$ \\
+      $\overline{a}$ & $\overline{b}$ & $\theta_{\overline{a}}\theta_{\overline{b}|\overline{a}}$\\
     \end{tabular}
+    \caption{The full joint distribution of the Bayesian network in Figure 1.}
   \end{center}
 \end{table}
 
+Before we proceed we need to understand the concept of variable indicators and their consistency
+with their respective variables. We will take Boolean variables for simplicity as example. An
+indicator of a variable, usually written as $[\cdot]$ has a value of $1$ if the variable is true
+and value $0$ otherwise. Since $[X_i]$ is quite cumbersome, we abbreviate $[X_i]$ as $x_i$
+and $[\overline{X}_i]$ as $\overline{x}_i$. See [Appendix~\ref{app:not}] with regards to
+conflicting notations. Let us now define the notation of indicators more formally.
 
+\begin{spn-def}
+  Let $\mathbf{X}=\{X_1,\ldots,X_n\}$ be the set of all variables in Bayesian network
+  $\mathcal{N}$, with each variable $X_i$ having $p$ possible values. Then the indicators of
+  an arbitrary variable $X_i$ are denoted by $x_{i_j}$, $1\leq j \leq p$ where $j$ is the $j$-th
+  possible value of the variable. All indicators follow the consistency rule.
+\end{spn-def}
+
+For $p=2$, we can abbreviate $x_{i_1}$ and $x_{i_2}$ to $x_i$ and $\overline{x}_i$ and consider
+Boolean values. Let us now define consistency. We will define consistency for Boolean values. The
+extension to multi-valued variables is not discussed here.
+
+\begin{spn-def}
+  Let $\mathbf{x}=\{x_1,\ldots,x_n,\overline{x}_1,\ldots,\overline{x}_n\}$ be the set of indicators
+  of all variables in the set $\mathbf{X}=\{X_1,\ldots,X_n\}$, where variable $X_i$ may have values
+  $1$ or $0$, with $x_i$ representing $1$ and $\overline{x}_i$ otherwise. Let $\mathbf{e}=\{e_p,
+  \ldots,e_q\}$ be the set of an observed event as evidence where $e_j$ represents an observed
+  value for variable $X_j$ in set $\overline{X}$. Then the set $\mathbf{X}$ is consistent with
+  $\mathbf{e}$ iff:
+
+  \begin{itemize}
+    \item For each variable $X_i$ in set $\mathbf{X}$:
+      \begin{itemize}
+        \item If there exists an observed value $e_i$ in $\mathbf{e}$, then:
+        \begin{itemize}
+          \item If $e_i=1$, then $x_i=1$ and $\overline{x}_i=0$.
+          \item If $e_i=0$, then $x_i=0$ and $\overline{x}_i=1$.
+        \end{itemize}
+        \item If there is no observed value $e_i$ for $X_i$, then:
+        \begin{itemize}
+          \item $x_i=1$ and $\overline{x}_i=1$.
+        \end{itemize}
+      \end{itemize}
+  \end{itemize}
+\end{spn-def}
+
+We now introduce Darwiche's network polynomial. Darwiche, in his article and book
+\cite{diff-approach-darwiche,bayes-net-darwiche}, uses indicators as $\lambda_i$ and
+$\lambda_{\overline{i}}$ instead of $x_i$ and $\overline{x}_i$. However, they are exactly the same
+as we have defined here. Since we named our variables $A$ and $B$ earlier, we will use Darwiche's
+notation for just this example, since it's more readable. For other examples we will use our own
+notation.
+
+Table 3 is the full joint distribution that represents the Bayesian network in Figure 1. Darwiche
+proposes a compact way to represent such distribution by taking the each term in the joint
+distribution, multiplying the relevant indicators to each term, and then summing all terms into
+a polynomial function. This function is named the network polynomial of the Bayesian network.
+
+\begin{equation}
+  f = \lambda_a\lambda_b\theta_a\theta_{b|a} +
+      \lambda_a\lambda_{\overline{b}}\theta_a\theta_{\overline{b}|a} +
+      \lambda_{\overline{a}}\lambda_b\theta_{\overline{a}}\theta_{b|\overline{a}} +
+      \lambda_{\overline{a}}\lambda_{\overline{b}}\theta_{\overline{a}}\theta_{\overline{b}|\overline{a}}
+\end{equation}
+
+To compute the probability of any evidence $\mathbf{e}$, we compute $f(\mathbf{e})$ such that all
+indicators are consistent with $\mathbf{e}$. If we assume that the indicators will always be
+consistent with the evidence, then $f(\mathbf{e})$ becomes the partition function when
+$\mathbf{e}=\emptyset$. This is true because, if $\mathbf{e}=\emptyset$, then all indicators must
+be set to $1$. Therefore, the value of $f(\mathbf{e})$ must be the highest possible value the
+function may take. The partition function normalizes an unnormalized distribution.
+
+Now that we know what a network polynomial is, we may start our study on Sum-Product Networks.
+The next subsection focuses on some experiments and achievements Poon and Domingos performed on
+\cite{poon-domingos}. The next section introduces Sum-Product Networks.
 
 \subsection{Experiments}
+
+In this subsection we take a brief look at some of the results Poon and Domingos worked on on their
+article \textit{Sum-Product Networks: A New Deep Architecure}~\cite{poon-domingos}.
+
+Conducting experiments on two sets of image, Caltech-101 and the Olivetti face dataset, Poon and
+Domingos achieved astounding results. With the lowest mean squared error compared to Deep Boltzmann
+(DBMs), Deep Belief Networks (DBN), Principal Component Analysis (PCA) and Nearest Neighbour (NN),
+Sum-Product Networks (SPNs) outperformed all the other models.
+
+Learning Caltech faces took 6 minutes with 20 CPUs, learning for DBMs/DBNs ranged from 30 hours to
+over a week.\cite{poon-domingos}
+
+``For inference, SPNs took less than a second to find the MPE completion of an image, to compute
+the likelihood of such a completion, or to compute the marginal probability of a variable [\ldots].
+In contrast, estimating likelihood is a very challenging problem; estimating marginals requires
+many Gibbs sampling steps that may take minutes of even hours, and the results are approximate
+without guarantee on the quality.''~\cite{poon-domingos}
+
+\begin{figure}[h]
+  \centering{\captionsetup{justification=centering}
+    \includegraphics[scale=0.25]{imgs/plane0.png}
+    \includegraphics[scale=0.25]{imgs/face0.png} \\
+    \includegraphics[scale=0.25]{imgs/stop0.png}
+    \includegraphics[scale=0.25]{imgs/dollar0.png}
+    \caption{Image completion output from SPNs.}
+  }
+\end{figure}
+
+Poon and Domingos also conducted preliminary experiments on object recognition. They ran
+classification on three classes (one vs. the other two) against convolutional DBNs (CDBNs). SPNs
+showed almost flawless results.
+
+\begin{table}[h]
+  \centering{\captionsetup{justification=centering}
+    \begin{tabular}{l | r | r | r}
+      Architecture & Faces & Motorbikes & Cars \\
+      \hline
+      SPN & 99\% & 99\% & 98\% \\
+      CDBN & 95\% & 81\% & 87\% \\
+    \end{tabular}
+    \caption{Comparison between CDBN and SPN on object recognition.}
+  }
+\end{table}
+
+More information can be found on Poon and Domingos \textit{Sum-Product Networks: A New Deep
+Architecture}~\cite{poon-domingos} and \textit{Learning the Structure of Sum-Product Networks}
+\cite{gens-domingos}.
+
+\newpage
+
+\section{Structure of Sum-Product Networks}
+
+\subsection{Network polynomial}
+
+\subsection{Graph}
+
+\section{Properties of Sum-Product Networks}
+
+\subsection{Validity}
+
+\subsection{Completeness and consistency}
+
+\section{Inference on Sum-Product Networks}
+
+\subsection{Marginals}
+
+\subsection{Most probable explanation (MEP)}
+
+\section{Learning Sum-Product Networks}
+
+\subsection{Learning the weights}
+
+\subsection{Learning the structure}
 
 \newpage
 \begin{appendices}
@@ -257,6 +401,11 @@ instance:
   \mathbf{X}=\{X_1=x_1,\ldots,X_n=x_n\}
 \end{equation*}
 
+When dealing with indicator variables, the indicator function will be abbreviated as a lowercase
+letter. That is, $[X_i]$ will be abbreviated to $x_i$. Similarly, $[\overline{X}_i]$ will be
+written as $\overline{x}_i$. This clearly contradicts our first notation rule, however the two
+meanings will be clear from context and therefore conflicts will never occur.
+
 \subsection{Events and evidence}
 
 The letter `e', regardless of case, is reserved for events and evidence. An uppercase `$E$' is an
@@ -270,6 +419,15 @@ All functions of the form $P(\cdot)$ are probability functions. Joint probabilit
 have the variables separated by commas $P(X,Y)$ instead of $P(X \wedge Y)$. We call prior
 probabilities the probability functions of the form $P(X)$. Posterior probabilities are of the form
 $P(\mathbf{X}|\mathbf{Y})$.
+
+When enumerating a set of instances we may omit commas, brackets or set name. For instance:
+
+\begin{align*}
+  &P(\mathbf{X}=a\overline{b}c) \text{~is equivalent to} \\
+  &P(\mathbf{X}=\{a, \overline{b}, c\}) \text{~is equivalent to} \\
+  &P(a\overline{b}c) \text{~is equivalent to} \\
+  &P(a=true,b=false,c=true)
+\end{align*}
 
 \subsection{Arrows}
 
