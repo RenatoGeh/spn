@@ -416,7 +416,9 @@ Now we define a sum-product network formally.
   \centering{\includegraphics[scale=0.35]{imgs/spn_1.png}
     \includegraphics[scale=0.35]{imgs/spn_2.png}
     \caption{Two sum-product networks. The one on the left implements a naive Bayes mixture model
-      and the other implements a junction tree.}
+      and the other implements a junction tree. Note that the graph is shown as undirected, but it
+      is in fact directed. All edges go from top to bottom. This is a choice of notation and may
+      vary.}
   }
 \end{figure}
 
@@ -439,9 +441,93 @@ which in turn is exponential in the number of variables. However, it is possible
 sum-product network, to represent and evaluate the probability of evidence in space and time
 polynomial.
 
+SPNs are defined recursively, since the subnetwork at an arbitrary node $n$ in an SPN is an SPN\@.
+We will denote an SPN rooted at node $n$ as $S_n(\cdot)$. Let $\mathbf{X}$ be the set of variables
+in an SPN $S$, then for all $x\in \mathbf{X}$ the values of $S(x)$ define an unnormalized
+probability distribution over $\mathbf{X}$. The unnormalized probability of evidence $e$ of an SPN
+$S$ is given by $\Phi_S(e)=\sum_{x\in e}S(x)$, where the sum is over states consistent with $e$.
+The $Z$ partition function of a distribution defined by $S(x)$ is $Z_S=\sum_{x\in \mathbf{X}}S(x)$.
+The scope of an SPN $S$ is the set of variables that appear in $S$. A variable $X_i$ is negated in
+$S$ if $\overline{x}_i$ is a leaf and non-negated if $x_i$ is a leaf.
+
+The normalized probability distribution of an SPN $S_n$ is given by $P(x)=S_n(x)/Z_n$. If all
+weights in the SPN $S$ are values $[0,1]$, then $Z_n=1$ and $S_n(x)$ is the probability
+distribution.
+
+Taking the left SPN in Figure 1 as an example, we have the value of the SPN as:
+
+\begin{align*}
+  S(x_1,x_2,\overline{x}_1,\overline{x}_2)=&\phantom{{} +{}}0.5(0.6x_1+0.4\overline{x}_1)(0.3x_2+0.7\overline{x}_2)+\\
+                                           &+0.2(0.6x_1+0.4\overline{x}_1)(0.2x_2+0.8\overline{x}_2)+\\
+                                           &+0.3(0.9x_1+0.1\overline{x}_1)(0.2x_2+0.8\overline{x}_2)
+\end{align*}
+
+The network polynomial is then:
+
+\begin{equation*}
+  \Phi = (0.5\times0.6\times0.3+0.2\times0.6\times0.2+0.3\times0.9\times0.2)x_1x_2+\ldots
+\end{equation*}
+
+If we have a complete state $x$ as $X_1=1,X_2=0$ then $S(x)=S(1,0,0,1)$, with indicators replaced
+with their respective value. If the evidence $e$ is $X_1=1$, then, following the consistency rule,
+we have that $S(e)=S(1,1,0,1)$. And as we have seen before, $S(*)=S(1,1,1,1)$.
+
 \section{Properties of Sum-Product Networks}
 
+We will now discuss a few properties described in Poon and Domingos' \textit{Sum-Product Networks:
+A New Deep Architecture}~\cite{poon-domingos} and Gens and Domingos' \textit{Learning the Structure
+of Sum-Product Networks}~\cite{gens-domingos}.
+
+We first introduce two properties: completeness and consistency. Then we define validity, a
+property that guarantees exact inference in time linear to the size of the SPN's edges. After that
+we discuss tractability of the partition function, decomposability and we show that the partition
+function, the probability of evidence and the MAP fo the SPN can be computed in time linear to the
+size of the SPN if it is valid.
+
 \subsection{Completeness and consistency}
+
+Let us define the two properties:
+
+\begin{spn-def}
+  A sum-product network is complete iff all children of the same sum node have the same scope.
+\end{spn-def}
+
+What this definition says is that, the children of a sum node must all be from the same variable.
+The trivial case is when all the children of the sum node $i$ are leaves. If $S_i$ is complete,
+then all leaves are indicators of a same variable. This is easily extended to the general case,
+since if, given a sum node $j$, all $Ch(j)$ are complete then all $S_k\in Ch(j)$ are complete and
+thus $S_j$ is complete. If there exists an $S_k\in Ch(j)$ that is incomplete, then $S_j$ is
+incomplete.
+
+\begin{figure}[h]
+  \centering{\includegraphics[scale=0.5]{imgs/complete.png}
+    \includegraphics[scale=0.5]{imgs/incomplete.png}
+    \captionsetup{justification=centering}
+    \caption{On the left a complete SPN\@. On the right an incomplete SPN\@.}
+  }
+\end{figure}
+
+\begin{spn-def}
+  A sum-product network is consistent iff no variable appears negated in one child of a product
+  node and non-negated in another.
+\end{spn-def}
+
+This means that product nodes take different variables and multiply them together. A variable $X_i$
+is negated if there exists a leaf $\overline{x}_i$ on the SPN\@. It is non-negated if there exists
+a leaf $x_i$. Therefore, if an SPN $S_k$ has a variable $X_i$ and is consistent, then for all
+leaves of $S_k$, the presence of $x_i$ and $\overline{x}_i$ is mutually exclusive. That leads to
+the fact that if an SPN $S_p$ has an inconsistent sub-SPN $S_q$, then $S_p$ is inconsistent.
+
+\begin{figure}[h]
+  \centering{\includegraphics[scale=0.5]{imgs/consistent.png}
+    \includegraphics[scale=0.5]{imgs/inconsistent.png}
+    \captionsetup{justification=centering}
+    \caption{On the left a consistent SPN\@. On the right an inconsistent SPN\@.}
+  }
+\end{figure}
+
+If an SPN is consistent but incomplete, it does not include monomials that should be present in the
+network polynomial. This is
 
 \subsection{Validity}
 

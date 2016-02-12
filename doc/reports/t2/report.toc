@@ -18,32 +18,32 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3}Properties of Sum-Product Networks}{8}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Completeness and consistency}{8}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1}Completeness and consistency}{9}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Validity}{8}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.2}Validity}{10}{subsection.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Inference on Sum-Product Networks}{8}{section.4}
+\contentsline {section}{\numberline {4}Inference on Sum-Product Networks}{10}{section.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Marginals}{8}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.1}Marginals}{10}{subsection.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Most probable explanation (MEP)}{8}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.2}Most probable explanation (MEP)}{10}{subsection.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Learning Sum-Product Networks}{8}{section.5}
+\contentsline {section}{\numberline {5}Learning Sum-Product Networks}{10}{section.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Learning the weights}{8}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.1}Learning the weights}{10}{subsection.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}Learning the structure}{8}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.2}Learning the structure}{10}{subsection.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Appendix \numberline {A}Notation}{9}{Appendix.1.A}
+\contentsline {section}{Appendix \numberline {A}Notation}{11}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.1}Letters}{9}{subsection.1.A.1}
+\contentsline {subsection}{\numberline {A.1}Letters}{11}{subsection.1.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}Events and evidence}{9}{subsection.1.A.2}
+\contentsline {subsection}{\numberline {A.2}Events and evidence}{11}{subsection.1.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.3}Probabilities}{9}{subsection.1.A.3}
+\contentsline {subsection}{\numberline {A.3}Probabilities}{11}{subsection.1.A.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.4}Arrows}{9}{subsection.1.A.4}
+\contentsline {subsection}{\numberline {A.4}Arrows}{11}{subsection.1.A.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Appendix \numberline {B}Mathematical background}{10}{Appendix.1.B}
+\contentsline {section}{Appendix \numberline {B}Mathematical background}{12}{Appendix.1.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{References}{11}{Appendix.1.B}
+\contentsline {section}{References}{13}{Appendix.1.B}

@@ -1,0 +1,12 @@
+graph{
+  {
+    node [shape=circle]
+  }
+
+  a [shape=circle, label="+"]
+  b [shape=circle, label=<<I>x<SUB>1</SUB></I>>]
+  c [shape=circle, label=<<I>x<SUB>2</SUB></I>>]
+
+  a -- b
+  a -- c
+}
