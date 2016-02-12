@@ -290,20 +290,20 @@ notation.
 Table 3 is the full joint distribution that represents the Bayesian network in Figure 1. Darwiche
 proposes a compact way to represent such distribution by taking each term in the joint
 distribution, multiplying the relevant indicators, and then summing all terms into a polynomial
-function. This function is named the network polynomial of the Bayesian network.
+function. This function is named the network polynomial (Equation 3) of the Bayesian network.
 
 \begin{equation}
-  f = \lambda_a\lambda_b\theta_a\theta_{b|a} +
+  \Phi = \lambda_a\lambda_b\theta_a\theta_{b|a} +
       \lambda_a\lambda_{\overline{b}}\theta_a\theta_{\overline{b}|a} +
       \lambda_{\overline{a}}\lambda_b\theta_{\overline{a}}\theta_{b|\overline{a}} +
       \lambda_{\overline{a}}\lambda_{\overline{b}}\theta_{\overline{a}}\theta_{\overline{b}|\overline{a}}
 \end{equation}
 
-To compute the probability of any evidence $\mathbf{e}$, we compute $f(\mathbf{e})$ such that all
-indicators are consistent with $\mathbf{e}$. If we assume that the indicators will always be
-consistent with the evidence, then $f(\mathbf{e})$ becomes the partition function when
+To compute the probability of any evidence $\mathbf{e}$, we compute $\Phi(\mathbf{e})$ such that
+all indicators are consistent with $\mathbf{e}$. If we assume that the indicators will always be
+consistent with the evidence, then $\Phi(\mathbf{e})$ becomes the partition function when
 $\mathbf{e}=\emptyset$. This is true because, if $\mathbf{e}=\emptyset$, then all indicators must
-be set to $1$. Therefore, the value of $f(\mathbf{e})$ must be the highest possible value the
+be set to $1$. Therefore, the value of $\Phi(\mathbf{e})$ must be the highest possible value the
 function may take. The partition function normalizes an unnormalized distribution.
 
 Now that we know what a network polynomial is, we may start our study on Sum-Product Networks.
@@ -340,7 +340,7 @@ without guarantee on the quality.''~\cite{poon-domingos}
 \end{figure}
 
 Poon and Domingos also conducted preliminary experiments on object recognition. They ran
-classification on three classes (one vs. the other two) against convolutional DBNs (CDBNs). SPNs
+classification on three classes (one vs\. the other two) against convolutional DBNs (CDBNs). SPNs
 showed almost flawless results.
 
 \begin{table}[h]
@@ -363,15 +363,87 @@ Architecture}~\cite{poon-domingos} and \textit{Learning the Structure of Sum-Pro
 
 \section{Structure of Sum-Product Networks}
 
-\subsection{Network polynomial}
+In this section we work on the ideas presented in the previous sections. We will base this section
+on the works of Poon and Domingos on their article \textit{Sum-Product Networks: A New Deep
+Architecture}~\cite{poon-domingos} and also on Gens and Domingos' \textit{Learning the Structure of
+Sum-Product Networks}~\cite{gens-domingos}.
 
-\subsection{Graph}
+\subsection{Partition function}
+
+Probabilistic graphical models represent distributions compactly through a normalized product of
+factors.
+
+\begin{equation*}
+  P(X=x) = \frac{1}{Z}\prod_k \phi_k (x_{\{k\}})
+\end{equation*}
+
+This equation states that the probability of $X$ taking value $x$ is the product of all factors,
+with each factor taking a subset of the variables, divided by a partition function. The partition
+function is the result of all the product of factors summed out.
+
+\begin{equation*}
+  Z = \sum_{x\in \mathcal{X}} \prod_k \phi_k(x_{\{k\}})
+\end{equation*}
+
+However, this form cannot represent all distributions. Additionally, inference is exponential in
+scope size in the worst-case and learning takes sample size and time exponential. This is because
+the partition function $Z$ is the sum of an exponential number of terms, and since all marginals
+are sums of these terms, if $Z$ is tractable, then marginals are also tractable.
+
+In Domingos and Poon~\cite{poon-domingos}, they claim that, since ``$Z$ is computed using only two
+types of operations sums and products'', then ``it can be computed efficiently if $\sum_{x\in
+\mathcal{X}} \prod_k \phi_k (k_{\{k\}})$ can be reorganized using the distributive law into a
+computation involving only a polynomial number of sums and products.'' From this idea, they
+elaborate on Darwiche's network polynomial and introduce Sum-Product Networks, a representation
+that seeks to admit an efficient form for $Z$ whilst still being general.
+
+\subsection{Definition}
+
+Now we define a sum-product network formally.
+
+\begin{spn-def}
+  A sum-product network (SPN) is an acyclic digraph. An SPN $S$ over variables $X_1,\ldots,X_n$ has
+  leaves as indicators $x_1,\ldots,x_n,\overline{x}_1,\ldots,\overline{x}_n$ and internal nodes as
+  sums and nodes in alternating layers. For each edge $(i,j)$ that emanates from a sum node $i$,
+  there exists a non-zero weight $w_{ij}$. The value of a sum node $i$ is $\sum_{j\in Ch(i)}
+  w_{ij}v_j$, where $Ch(i)$ is the set of children of $i$ and $v_j$ is the value of the node $j$.
+  The value of a product node $i$ is $\prod_{j\in Ch(i)} v_j$. The value of an SPN is the value of
+  its root.
+\end{spn-def}
+
+\begin{figure}[h]
+  \captionsetup{justification=centering}
+  \centering{\includegraphics[scale=0.35]{imgs/spn_1.png}
+    \includegraphics[scale=0.35]{imgs/spn_2.png}
+    \caption{Two sum-product networks. The one on the left implements a naive Bayes mixture model
+      and the other implements a junction tree.}
+  }
+\end{figure}
+
+An SPN $S$ as a function of the indicator variables $x_1,\ldots,x_n,\overline{x}_1,\ldots,
+\overline{x}_n$ will be denoted by $S(x_1,\ldots,x_n,\overline{x}_1,\ldots,x_n)$. A complete state
+$x$ means that, for each variable $X_i$, there are two possible outcomes for the indicators: either
+$x_i=1,\overline{x}_i=0$ or $x_i=0,\overline{x}_i=1$. When an SPN $S$ has a complete state $x$,
+instead of enumerating each indicator, we simply abbreviate to $S(x)$. $S(e)$ will be used to
+denote when the indicators are specified according to the evidence $e$.
+
+A sum-product network is an elaboration on Darwiche's network polynomial. We can look at an SPN as
+a way to graphically represent the network polynomial of the distribution.
+
+The partition function is the value of the network polynomial when all indicators are set to 1.
+That is, $Z=\Phi(\mathbf{e})$ when $\mathbf{e}=\emptyset$. If an SPN $S$ has all indicators set to
+1, we refer to it as $S(*)$. As we will see later, if an SPN $S$ is valid, then $S(*)=Z_S$.
+
+The probability of evidence, $P(e)=\Phi(e)/Z$, is linear in the size of the network polynomial,
+which in turn is exponential in the number of variables. However, it is possible, with a
+sum-product network, to represent and evaluate the probability of evidence in space and time
+polynomial.
 
 \section{Properties of Sum-Product Networks}
 
-\subsection{Validity}
-
 \subsection{Completeness and consistency}
+
+\subsection{Validity}
 
 \section{Inference on Sum-Product Networks}
 
