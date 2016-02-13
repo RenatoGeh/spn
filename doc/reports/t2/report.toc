@@ -2,48 +2,54 @@
 \defcounter {refsection}{0}\relax 
 \select@language {english}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1}Motivation}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.1}Motivation}{4}{subsection.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2}Background}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.2}Background}{5}{subsection.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.3}Experiments}{5}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.3}Experiments}{6}{subsection.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Structure of Sum-Product Networks}{7}{section.2}
+\contentsline {section}{\numberline {2}Structure of Sum-Product Networks}{8}{section.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1}Partition function}{7}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.1}Partition function}{8}{subsection.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2}Definition}{7}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}Definition}{8}{subsection.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Properties of Sum-Product Networks}{8}{section.3}
+\contentsline {section}{\numberline {3}Properties of Sum-Product Networks}{10}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Completeness and consistency}{9}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1}Completeness and consistency}{10}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Validity}{10}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.2}Validity}{11}{subsection.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Inference on Sum-Product Networks}{10}{section.4}
+\contentsline {subsection}{\numberline {3.3}Other properties}{11}{subsection.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Marginals}{10}{subsection.4.1}
+\contentsline {subsection}{\numberline {3.4}Multi-valued discrete variables}{12}{subsection.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Most probable explanation (MEP)}{10}{subsection.4.2}
+\contentsline {subsection}{\numberline {3.5}Continuous variables}{12}{subsection.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Learning Sum-Product Networks}{10}{section.5}
+\contentsline {section}{\numberline {4}Inference on Sum-Product Networks}{12}{section.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Learning the weights}{10}{subsection.5.1}
+\contentsline {subsection}{\numberline {4.1}Marginals}{12}{subsection.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}Learning the structure}{10}{subsection.5.2}
+\contentsline {subsection}{\numberline {4.2}Most probable explanation (MEP)}{12}{subsection.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Appendix \numberline {A}Notation}{11}{Appendix.1.A}
+\contentsline {section}{\numberline {5}Learning Sum-Product Networks}{12}{section.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.1}Letters}{11}{subsection.1.A.1}
+\contentsline {subsection}{\numberline {5.1}Learning the weights}{12}{subsection.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.2}Events and evidence}{11}{subsection.1.A.2}
+\contentsline {subsection}{\numberline {5.2}Learning the structure}{12}{subsection.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.3}Probabilities}{11}{subsection.1.A.3}
+\contentsline {section}{Appendix \numberline {A}Notation}{13}{Appendix.1.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.4}Arrows}{11}{subsection.1.A.4}
+\contentsline {subsection}{\numberline {A.1}Letters}{13}{subsection.1.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Appendix \numberline {B}Mathematical background}{12}{Appendix.1.B}
+\contentsline {subsection}{\numberline {A.2}Events and evidence}{13}{subsection.1.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{References}{13}{Appendix.1.B}
+\contentsline {subsection}{\numberline {A.3}Probabilities}{13}{subsection.1.A.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.4}Arrows}{13}{subsection.1.A.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Appendix \numberline {B}Mathematical background}{14}{Appendix.1.B}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{References}{15}{Appendix.1.B}

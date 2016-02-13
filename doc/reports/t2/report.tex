@@ -248,11 +248,11 @@ conflicting notations. Let us now define the notation of indicators more formall
 \begin{spn-def}
   Let $\mathbf{X}=\{X_1,\ldots,X_n\}$ be the set of all variables in Bayesian network
   $\mathcal{N}$, with each variable $X_i$ having $p$ possible values. Then the indicators of
-  an arbitrary variable $X_i$ are denoted by $x_{i_j}$, $1\leq j \leq p$ where $j$ is the $j$-th
+  an arbitrary variable $X_i$ are denoted by $x_i^j$, $1\leq j \leq p$ where $j$ is the $j$-th
   possible value of the variable. All indicators follow the consistency rule.
 \end{spn-def}
 
-For $p=2$, we can abbreviate $x_{i_1}$ and $x_{i_2}$ to $x_i$ and $\overline{x}_i$ and consider
+For $p=2$, we can abbreviate $x_i^1$ and $x_i^2$ to $x_i$ and $\overline{x}_i$ and consider
 Boolean values. Let us now define consistency. We will define consistency for Boolean values. The
 extension to multi-valued variables is not discussed here.
 
@@ -450,9 +450,7 @@ The $Z$ partition function of a distribution defined by $S(x)$ is $Z_S=\sum_{x\i
 The scope of an SPN $S$ is the set of variables that appear in $S$. A variable $X_i$ is negated in
 $S$ if $\overline{x}_i$ is a leaf and non-negated if $x_i$ is a leaf.
 
-The normalized probability distribution of an SPN $S_n$ is given by $P(x)=S_n(x)/Z_n$. If all
-weights in the SPN $S$ are values $[0,1]$, then $Z_n=1$ and $S_n(x)$ is the probability
-distribution.
+The normalized probability distribution of an SPN $S_n$ is given by $P(x)=S_n(x)/Z_n$.
 
 Taking the left SPN in Figure 1 as an example, we have the value of the SPN as:
 
@@ -472,6 +470,8 @@ If we have a complete state $x$ as $X_1=1,X_2=0$ then $S(x)=S(1,0,0,1)$, with in
 with their respective value. If the evidence $e$ is $X_1=1$, then, following the consistency rule,
 we have that $S(e)=S(1,1,0,1)$. And as we have seen before, $S(*)=S(1,1,1,1)$.
 
+\newpage
+
 \section{Properties of Sum-Product Networks}
 
 We will now discuss a few properties described in Poon and Domingos' \textit{Sum-Product Networks:
@@ -480,9 +480,7 @@ of Sum-Product Networks}~\cite{gens-domingos}.
 
 We first introduce two properties: completeness and consistency. Then we define validity, a
 property that guarantees exact inference in time linear to the size of the SPN's edges. After that
-we discuss tractability of the partition function, decomposability and we show that the partition
-function, the probability of evidence and the MAP fo the SPN can be computed in time linear to the
-size of the SPN if it is valid.
+we discuss tractability of the partition function, decomposability and a few other properties.
 
 \subsection{Completeness and consistency}
 
@@ -527,9 +525,94 @@ the fact that if an SPN $S_p$ has an inconsistent sub-SPN $S_q$, then $S_p$ is i
 \end{figure}
 
 If an SPN is consistent but incomplete, it does not include monomials that should be present in the
-network polynomial. This is
+network polynomial and $S(e) \leq \Phi_S(e)$. If the SPN is complete but inconsistent, the
+expansion will include more monomials than present in the network polynomial and thus $S(e)\geq
+\Phi_S(e)$. As we will see later, this means that if the SPN is inconsistent and/or incomplete
+inference will be approximate.
 
 \subsection{Validity}
+
+Validity is an important characteristic of SPNs. Not all SPNs are valid, but validity guarantees
+that inference will be exact and tractable.
+
+\begin{spn-def}
+  A sum-product network $S$ is valid iff $S(e)=\Phi_S(e)$ for all evidence $e$.
+\end{spn-def}
+
+This means that an SPN computes the probability of evidence correctly only if it is valid. Another
+important aspect of validity is that, if an SPN $S$ is valid then $S(*)=Z_S$. Validity guarantees
+that the probability of evidence will be computed in time linear to the SPN's size.
+
+We will now cite the first theorem for SPNs as written in Poon and Domingos' \textit{Sum-Product
+Networks: A New Deep Architecture}~\cite{poon-domingos}. See the original article for the proof.
+
+\begin{spn-thm}
+  A sum-product network is valid if it is complete and consistent.
+\end{spn-thm}
+
+Note that completeness and consistency are not necessary for the SPN to be valid. There are SPNs
+that satisfy $\Phi_S(e)=\sum_{x\in e}S(x)$ for all evidence $e$, but if an SPN $S$ is both complete
+and consistent, then all sub-SPNs of $S$ are valid.
+
+As we have seen on the previous subsection invalid SPNs can be used to compute approximate
+inference.
+
+\subsection{Other properties}
+
+\begin{spn-def}
+  An unnormalized probability distribution $\Phi(x)$ is representable by a sum-product network $S$
+  iff $\Phi(x)=S(x)$ for all states $x$ and $S$ is valid.
+\end{spn-def}
+
+This states that in all possible states an SPN $S$ will compute the probability correctly,
+including the partition function.
+
+\begin{spn-thm}
+  The partition function of a Markow network $\Phi(x)$, where $x$ is an $n$-dimensional vector, can
+  be computed in time polynomial in $n$ if $\Phi(x)$ is representable by a sum-product network with
+  a number of edges polynomial in $n$.
+\end{spn-thm}
+
+\begin{proof}
+  Follows immediately from the definitions of SPN and representability.
+\end{proof}
+
+\begin{spn-def}
+  A sum-product network is decomposable iff no variable appears in more than one child of a product
+  node.
+\end{spn-def}
+
+What this definition means is that SPNs are more general than other representations since it does
+not require the distribution to be decomposable, unlike arithmetic circuits, mixture models,
+junction trees and others.
+
+If for every sum node $i$ in the SPN $S$, $\sum_{j\in Ch(i)}w_{ij}=1$, then $Z_S=1$ and $P(x)=
+S_n(x)$. In this case, for each sum node $i$, we can view $i$ as summing out an implicit hidden
+variable $Y_i$ whose values correspond to $Ch(i)$, since summing out a variable means setting all
+the indicators concerning the variable to 1, and children of product nodes with values 1 can be
+omitted. If $i$ has no parents, then the children's weights are the prior distribution $w_{ij}=
+P(Y_i=j)$. If $i$ has parents, then $w_{ij}=P(Y_i=j|\pi_i)$, where $\pi_i$ is the condition that
+``on at least one path from $Y_i$ to the root, all of $Y_i$'s ancestors have the values that lead
+to $Y_i$ (the ancestors being the hidden variables corresponding to the sum nodes on the path.''
+\cite{poon-domingos} If the SPN is also decomposable then the sub-SPN rooted at the $j$-th child
+represents the distribution of the variables in it conditioned on $Y_i=j$. See~\cite{poon-domingos}
+for more information.
+
+
+\subsection{Multi-valued discrete variables}
+
+For multi-valued variables, we can simply replace the Boolean indicators $[X_i=1]$,$[X_i=0]$ with
+indicators for the possible values the variable may take $x_i^j$: $[X_i=x_i^1],\ldots,[X_i=x_i^m]$.
+As an abbreviation we may also indicate the indicators as $x_i^1,\ldots,x_i^m$. The multinomial
+distribution over $X_i$ would then be written as $\sum_{j=1}^m p_i^j x_i^j$, with $p_i^j=
+P(X_i=x_i^j)$.
+
+\subsection{Continuous variables}
+
+We can construct SPNs with continuous variables by assuming variables have an infinite number of
+values. The sum of the indicators $\sum_{j=1}^m p_i^j x_i^j$ can be viewed as an integration of the
+densities $\int p(x)dx$ with $p(x)$ as the probability density function of $X$. We will not go into
+details on this subject in this paper. For more information see~\cite{poon-domingos}.
 
 \section{Inference on Sum-Product Networks}
 
@@ -605,6 +688,51 @@ An arrow pointing to the right may have two possible meanings:
 Meanings will be clear from context.
 
 \section{Mathematical background}\label{app:bak}
+
+We shall now enumerate what the reader should already know before reading this paper. On certain
+topics we will also give some reference/bibliography on where to start. They may not be the best
+sources, but they are what I started with and I found them to be quite useful.
+
+\begin{itemize}
+  \item \textbf{Basic probability}
+  \item \textbf{Basic notion of algorithms applied to Artificial Intelligence}
+    \begin{description}
+      \item[Description:] gradient descent, expectation maximization, basic notion of algorithms in
+        general, data structures
+      \item[Bibliographical notes:]\ \
+        \begin{description}
+          \item[Gradient descent:] Artificial Intelligence: A Modern Approach~\cite{aima} | Section
+            18 Learning from Examples --- 18.6 Regression and classification with linear models.
+          \item[Expectation maximization:] Artificial Intelligence: A Modern Approach~\cite{aima} |
+            Section 20 Learning Probabilistic Models --- 20.3 Learning with Hidden Variables: The
+            EM Algorithm.
+            \begin{itemize}
+              \item AIMA is not the most detailed and didactic book on EM\@. I recommend searching
+                for other more detailed probabilistic oriented books.
+            \end{itemize}
+          \item[Algorithms and data structure:] Introduction to Algorithms~\cite{algorithms}.
+        \end{description}
+    \end{description}
+  \item \textbf{Uncertainty and Probabilistic Reasoning}
+    \begin{description}
+      \item[Description:] inference, Baye's rule, Bayesian networks, inference on Bayesian networks
+      \item[Bibliographical notes:]\ \
+        \begin{description}
+          \item[All:] Artificial Intelligence: A Modern Approach~\cite{aima} | Section 13:
+            Quantifying Uncertainty and Section 14: Probabilistic Reasoning.
+          \item[Bayesian networks:] Modeling and Reasoning with Bayesian Networks~\cite{bayes-net-darwiche}.
+        \end{description}
+    \end{description}
+  \item \textbf{Learning Probabilistic Models}
+    \begin{description}
+      \item[Description:] a basic notion on how to perform learning on probabilistic models
+      \item[Bibliographical notes:]\ \
+        \begin{description}
+          \item[All:] Artificial Intelligence: A Modern Approach~\cite{aima} | Section 20 Learning
+            Probabilistic Models.
+        \end{description}
+    \end{description}
+\end{itemize}
 
 \end{appendices}
 
