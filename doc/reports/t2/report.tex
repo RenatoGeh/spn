@@ -335,7 +335,7 @@ without guarantee on the quality.''~\cite{poon-domingos}
     \includegraphics[scale=0.25]{imgs/face0.png} \\
     \includegraphics[scale=0.25]{imgs/stop0.png}
     \includegraphics[scale=0.25]{imgs/dollar0.png}
-    \caption{Image completion output from SPNs.}
+    \caption{Image completion output from SPNs. Source: \url{http://spn.cs.washington.edu/spn/}.}
   }
 \end{figure}
 
@@ -418,7 +418,7 @@ Now we define a sum-product network formally.
     \caption{Two sum-product networks. The one on the left implements a naive Bayes mixture model
       and the other implements a junction tree. Note that the graph is shown as undirected, but it
       is in fact directed. All edges go from top to bottom. This is a choice of notation and may
-      vary.}
+      vary. Source:~\cite{poon-domingos}.}
   }
 \end{figure}
 
@@ -513,8 +513,9 @@ incomplete.
 This means that product nodes take different variables and multiply them together. A variable $X_i$
 is negated if there exists a leaf $\overline{x}_i$ on the SPN\@. It is non-negated if there exists
 a leaf $x_i$. Therefore, if an SPN $S_k$ has a variable $X_i$ and is consistent, then for all
-leaves of $S_k$, the presence of $x_i$ and $\overline{x}_i$ is mutually exclusive. That leads to
-the fact that if an SPN $S_p$ has an inconsistent sub-SPN $S_q$, then $S_p$ is inconsistent.
+children of $S_k$, the presence of $x_i$ and $\overline{x}_i$ in more than one children of $S_k$ is
+mutually exclusive. That leads to the fact that if an SPN $S_p$ has an inconsistent sub-SPN $S_q$,
+then $S_p$ is inconsistent.
 
 \begin{figure}[h]
   \centering{\includegraphics[scale=0.5]{imgs/consistent.png}
@@ -612,13 +613,108 @@ P(X_i=x_i^j)$.
 We can construct SPNs with continuous variables by assuming variables have an infinite number of
 values. The sum of the indicators $\sum_{j=1}^m p_i^j x_i^j$ can be viewed as an integration of the
 densities $\int p(x)dx$ with $p(x)$ as the probability density function of $X$. We will not go into
-details on this subject in this paper. For more information see~\cite{poon-domingos}.
+details on this subject in this paper\footnote{I plan on elaborating more on this later as my
+study on SPNs progresses.}. For more information see~\cite{poon-domingos}.
+
+\newpage
 
 \section{Inference on Sum-Product Networks}
 
+As we have seen, inference on SPNs is tractable. In fact, we can compute marginals and the MAP in
+time linear to the SPN's edges. In this section we will first take a look on how to compute the
+marginals of an SPN\@. Next we show that computing the MAP is possible my maximizing the nodes. We
+assume that we only work with valid SPNs\@.
+
+\subsection{Probability of a complete state}
+
+Computing the probability of a complete state $\mathbf{X}$ is simple. First we set all indicators
+to be consistent with the state. For instance, let $\mathbf{X}=\{X_1=1,X_2=0\}$. Then the
+indicators are $(x_1,x_2,\overline{x}_1,\overline{x}_2)=(1, 0, 0, 1)$. Computing the probability of
+$\mathbf{X}$ is then $P(\mathbf{X}=\{X_1=1,X_2=0\})=S(\mathbf{X})/Z$. Assuming our SPN $S$ is valid
+and therefore $S(*)=Z_S$, and since for each sum node $i$: $\sum_{j\in Ch(i)}w_{ij}=1=Z_S$, our
+probability is then $P(\mathbf{X})=S(\mathbf{X})$ and thus computing the value of the SPN is
+sufficient.
+
+To compute the value of the SPN we do a bottom-up pass. A bottom-up pass consists of computing all
+nodes starting from the bottom and then going up. The trivial case are the leaves. The values of
+the leaves are the values of the indicators. In our example, the values of the leaves are
+$(x_1,x_2,\overline{x}_1,\overline{x}_2)=(1,0,0,1)$. Taking the SPN on Figure 4, the next nodes to
+be computed are the sum nodes. The values of the sum nodes are, for each node $i$: $\sum_{j\in
+Ch(i)}v_j w_{ij}$. After that we go up a layer again, which in our case means computing the product
+nodes: $\prod_{j\in Ch(i)}v_j$, where $i$ is the product node. Finally, once we have the values for
+our product nodes we may compute the value of the root node, which is a sum node. The resulting
+root node is then the probability of the complete state $\mathbf{X}$ we wanted to find.
+
+\begin{figure}[h]
+  \centering{\includegraphics[scale=0.3]{imgs/cstate.png}
+    \captionsetup{justification=centering}
+    \caption{The value of the probability is  $P(X_1=1, X_2=0)=S(1, 0, 0, 1)=0.51$. Source:
+    \url{http://spn.cs.washington.edu/talks/spn11.pdf}.}
+  }
+\end{figure}
+
 \subsection{Marginals}
 
-\subsection{Most probable explanation (MEP)}
+Finding the marginals is similar to computing the probability of a complete state. However, for
+marginals we have unobserved variables. In this case we need to apply the consistency rule and, for
+each unobserved variable, have all its indicators set to 1.
+
+Take the evidence $\mathbf{e}={X_1=1}$ as example. Applying the consistency rule to the indicators
+on our SPN on Figure 5, we have the indicators as $(x_1,x_2,\overline{x}_1,\overline{x}_2)=
+(1,1,0,1)$. Then, similarly as computing the complete state, we do a bottom-up pass on our SPN,
+computing the value of each node. Since we assume the SPN is valid and $Z_S=1$, the resulting
+marginal is $P(\mathbf{e}=\{X_1=1\})=S(\mathbf{e})/Z=S(\mathbf{e})=0.69$.
+
+\begin{figure}[h]
+  \centering{\includegraphics[scale=0.3]{imgs/marginals.png}
+    \captionsetup{justification=centering}
+    \caption{The value of the marginal is $P(X_1=1)=S(1,1,0,1)=0.69$. Source:
+    \url{http://spn.cs.washington.edu/talks/spn11.pdf}.}
+  }
+\end{figure}
+
+\subsection{Most probable explanation (MPE)}
+
+Computing the MPE of the SPN is similar to computing the MPE on Darwiche's Arithmetic Circuits
+\cite{diff-approach-darwiche}: replace all sum nodes with max nodes, whose value is defined by
+$\max_{j\in Ch(i)}w_{ij}v_j$, where $i$ is the max node; do a bottom-up pass to compute all values
+of each node and finally do a top-down pass to find the children with max values.
+
+Let us take the evidence $\mathbf{e}=\{X_1=1\}$ as an example and compute the MPE state
+$\argmax_X P(X|\mathbf{e})$ of the SPN on Figure 6. The indicators given the evidence $\mathbf{e}$
+are $(x_1,x_2,\overline{x}_1,\overline{x}_2)=(1,1,0,1)$. Again, we assume that the SPN is valid and
+that $Z_S=1$.
+
+First we replace all sum nodes with max nodes. From there we do a bottom-up pass to find all values
+of each node. Now, instead of computing the weighted sum on each sum node, we output the max value
+weighted on each edge amongst all children on each max node. Since the root of the SPN is a sum
+node, the value of the SPN will be the maximum value of all children.
+
+\begin{figure}[h]
+  \centering{\includegraphics[scale=0.28]{imgs/map_botup.png}
+    \captionsetup{justification=centering}
+    \caption{A bottom-up pass computes the maximum value a child of the root node may take
+    according to the arguments, that is, this pass computes $\max P(X|\mathbf{e})$. Source:
+    \url{http://spn.cs.washington.edu/talks/spn11.pdf}.}
+  }
+\end{figure}
+
+Now we need to get the max variable. We do this by doing a top-down pass and picking the child with
+the highest value for each node. Once we reach the leaves we have the $\argmax_X P(X|\mathbf{e})$.
+
+\begin{figure}[h]
+  \centering{\includegraphics[scale=0.25]{imgs/map_topdown.png}
+    \captionsetup{justification=centering}
+    \caption{A top-down pass selects the child with the highest value for each node, result on
+      $\argmax_X P(X|\mathbf{e})$. Source:
+      \url{http://spn.cs.washington.edu/talks/spn11.pdf}.}
+  }
+\end{figure}
+
+By extension of Darwiche's findings on~\cite{diff-approach-darwiche} this procedure will find the
+MPE state successfully if the SPN is decomposable or consistent.
+
+\newpage
 
 \section{Learning Sum-Product Networks}
 
@@ -715,12 +811,13 @@ sources, but they are what I started with and I found them to be quite useful.
     \end{description}
   \item \textbf{Uncertainty and Probabilistic Reasoning}
     \begin{description}
-      \item[Description:] inference, Baye's rule, Bayesian networks, inference on Bayesian networks
+      \item[Description:] inference, Baye's rule, Bayesian networks, inference on Bayesian
+        networks, MEP, MAP
       \item[Bibliographical notes:]\ \
         \begin{description}
           \item[All:] Artificial Intelligence: A Modern Approach~\cite{aima} | Section 13:
             Quantifying Uncertainty and Section 14: Probabilistic Reasoning.
-          \item[Bayesian networks:] Modeling and Reasoning with Bayesian Networks~\cite{bayes-net-darwiche}.
+          \item[All:] Modeling and Reasoning with Bayesian Networks~\cite{bayes-net-darwiche}.
         \end{description}
     \end{description}
   \item \textbf{Learning Probabilistic Models}
