@@ -718,9 +718,26 @@ MPE state successfully if the SPN is decomposable or consistent.
 
 \section{Learning Sum-Product Networks}
 
+In this section we are going to show some algorithms on learning Sum-Product Networks.
+
+Take note that this is an ongoing work, since this paper tries to show my progress throughout my
+undergraduate research project. That said, some subsections may not be complete or thoroughly
+detailed.
+
 \subsection{Learning the weights}
 
+This method for learning an SPN was proposed by Poon and Domings on their article
+\textit{Sum-Product Networks: A New Deep Architecture}~\cite{poon-domingos}.
+
+The idea for this learning algorithm is simple: take a valid, dense, generic and empty SPN, run
+inference on it and update weights until convergence and then prune edges that have weight zero and
+remove non-root nodes that have no parents. Note that we do not learn the structure of the SPN, but
+learn the weights.
+
 \subsection{Learning the structure}
+
+This subsection is based on the article by Gens and Domingos \textit{Learning the Structure of
+Sum-Product Networks}~\cite{gens-domingos}.
 
 \newpage
 \begin{appendices}
@@ -806,7 +823,8 @@ sources, but they are what I started with and I found them to be quite useful.
               \item AIMA is not the most detailed and didactic book on EM\@. I recommend searching
                 for other more detailed probabilistic oriented books.
             \end{itemize}
-          \item[Algorithms and data structure:] Introduction to Algorithms~\cite{algorithms}.
+          \item[Algorithms, data structure, graph theory:] Introduction to Algorithms
+            \cite{algorithms}.
         \end{description}
     \end{description}
   \item \textbf{Uncertainty and Probabilistic Reasoning}
