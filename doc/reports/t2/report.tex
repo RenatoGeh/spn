@@ -144,7 +144,7 @@ We get the following equation:
 Where $\mathbf{y}$ is a hidden variable. That is, let $\mathbf{X}$ be the complete set of
 variables. Then $\mathbf{X}=\{X\} \cup \mathbf{E} \cup \mathbf{Y}$, where $X$ is the query,
 $\mathbf{E}$ is the set of evidence variables and $\mathbf{Y}$ is a set of non-query non-evidence
-variables. Thus $\mathbf{y}$ is an instance of $\mathbf{Y}$.
+variables. Then $\mathbf{y}$ is an instance of $\mathbf{Y}$.
 
 We can see that $P(X,\mathbf{e},\mathbf{y})$ is actually a subset of the full joint distribution.
 Since we are summing out the hidden variables, we are actually discarding all the possible values
@@ -261,7 +261,7 @@ extension to multi-valued variables is not discussed here.
   of all variables in the set $\mathbf{X}=\{X_1,\ldots,X_n\}$, where variable $X_i$ may have values
   $1$ or $0$, with $x_i$ representing $1$ and $\overline{x}_i$ otherwise. Let $\mathbf{e}=\{e_p,
   \ldots,e_q\}$ be the set of an observed event as evidence where $e_j$ represents an observed
-  value for variable $X_j$ in set $\overline{X}$. Then the set $\mathbf{X}$ is consistent with
+  value for variable $X_j$ in set $\mathbf{X}$. Then the set $\mathbf{X}$ is consistent with
   $\mathbf{e}$ iff:
 
   \begin{itemize}
@@ -320,14 +320,14 @@ Domingos achieved astounding results. With the lowest mean squared error compare
 (DBMs), Deep Belief Networks (DBN), Principal Component Analysis (PCA) and Nearest Neighbour (NN),
 Sum-Product Networks (SPNs) outperformed all the other models.
 
-Learning Caltech faces took 6 minutes with 20 CPUs, learning for DBMs/DBNs ranged from 30 hours to
-over a week.\cite{poon-domingos}
+Learning Caltech faces with an SPN took 6 minutes with 20 CPUs, learning for DBMs/DBNs ranged from
+30 hours to over a week.\cite{poon-domingos}
 
 ``For inference, SPNs took less than a second to find the MPE completion of an image, to compute
-the likelihood of such a completion, or to compute the marginal probability of a variable [\ldots].
-In contrast, estimating likelihood is a very challenging problem; estimating marginals requires
-many Gibbs sampling steps that may take minutes of even hours, and the results are approximate
-without guarantee on the quality.''~\cite{poon-domingos}
+the likelihood of such a completion, or to compute the marginal probability of a variable
+[\ldots].'' When it comes to the other models: ``estimating likelihood is a very challenging
+problem; estimating marginals requires many Gibbs sampling steps that may take minutes of even
+hours, and the results are approximate without guarantee on the quality.''~\cite{poon-domingos}
 
 \begin{figure}[h]
   \centering{\captionsetup{justification=centering}
@@ -340,7 +340,7 @@ without guarantee on the quality.''~\cite{poon-domingos}
 \end{figure}
 
 Poon and Domingos also conducted preliminary experiments on object recognition. They ran
-classification on three classes (one vs\. the other two) against convolutional DBNs (CDBNs). SPNs
+classification on three classes (one vs the other two) against convolutional DBNs (CDBNs). SPNs
 showed almost flawless results.
 
 \begin{table}[h]
@@ -355,9 +355,9 @@ showed almost flawless results.
   }
 \end{table}
 
-More information can be found on Poon and Domingos \textit{Sum-Product Networks: A New Deep
-Architecture}~\cite{poon-domingos} and \textit{Learning the Structure of Sum-Product Networks}
-\cite{gens-domingos}.
+More information can be found on Poon and Domingos' \textit{Sum-Product Networks: A New Deep
+Architecture}~\cite{poon-domingos} and Gens and Domingos' \textit{Learning the Structure of
+Sum-Product Networks}~\cite{gens-domingos}.
 
 \newpage
 
@@ -466,8 +466,8 @@ The network polynomial is then:
   \Phi = (0.5\times0.6\times0.3+0.2\times0.6\times0.2+0.3\times0.9\times0.2)x_1x_2+\ldots
 \end{equation*}
 
-If we have a complete state $x$ as $X_1=1,X_2=0$ then $S(x)=S(1,0,0,1)$, with indicators replaced
-with their respective value. If the evidence $e$ is $X_1=1$, then, following the consistency rule,
+If we have a complete state $x$ as $X_1=1,X_2=0$ then $S(x)=S(x_1,x_2,\overline{x}_1,
+\overline{x}_2)=S(1,0,0,1)$. If the evidence $e$ is $X_1=1$, then, following the consistency rule,
 we have that $S(e)=S(1,1,0,1)$. And as we have seen before, $S(*)=S(1,1,1,1)$.
 
 \newpage
@@ -514,8 +514,8 @@ This means that product nodes take different variables and multiply them togethe
 is negated if there exists a leaf $\overline{x}_i$ on the SPN\@. It is non-negated if there exists
 a leaf $x_i$. Therefore, if an SPN $S_k$ has a variable $X_i$ and is consistent, then for all
 children of $S_k$, the presence of $x_i$ and $\overline{x}_i$ in more than one children of $S_k$ is
-mutually exclusive. That leads to the fact that if an SPN $S_p$ has an inconsistent sub-SPN $S_q$,
-then $S_p$ is inconsistent.
+forbidden. That leads to the fact that if an SPN $S_p$ has an inconsistent sub-SPN $S_q$, then
+$S_p$ is inconsistent.
 
 \begin{figure}[h]
   \centering{\includegraphics[scale=0.5]{imgs/consistent.png}
@@ -594,7 +594,7 @@ the indicators concerning the variable to 1, and children of product nodes with 
 omitted. If $i$ has no parents, then the children's weights are the prior distribution $w_{ij}=
 P(Y_i=j)$. If $i$ has parents, then $w_{ij}=P(Y_i=j|\pi_i)$, where $\pi_i$ is the condition that
 ``on at least one path from $Y_i$ to the root, all of $Y_i$'s ancestors have the values that lead
-to $Y_i$ (the ancestors being the hidden variables corresponding to the sum nodes on the path.''
+to $Y_i$ (the ancestors being the hidden variables corresponding to the sum nodes on the path).''
 \cite{poon-domingos} If the SPN is also decomposable then the sub-SPN rooted at the $j$-th child
 represents the distribution of the variables in it conditioned on $Y_i=j$. See~\cite{poon-domingos}
 for more information.
@@ -622,24 +622,24 @@ study on SPNs progresses.}. For more information see~\cite{poon-domingos}.
 
 As we have seen, inference on SPNs is tractable. In fact, we can compute marginals and the MAP in
 time linear to the SPN's edges. In this section we will first take a look on how to compute the
-marginals of an SPN\@. Next we show that computing the MAP is possible my maximizing the nodes. We
-assume that we only work with valid SPNs\@.
+probability of a complete state, then we see how to find the marginals of an SPN\@. And finally
+we show that computing the MPE is possible my maximizing the nodes. We assume that we only work.
 
 \subsection{Probability of a complete state}
 
 Computing the probability of a complete state $\mathbf{X}$ is simple. First we set all indicators
-to be consistent with the state. For instance, let $\mathbf{X}=\{X_1=1,X_2=0\}$. Then the
-indicators are $(x_1,x_2,\overline{x}_1,\overline{x}_2)=(1, 0, 0, 1)$. Computing the probability of
-$\mathbf{X}$ is then $P(\mathbf{X}=\{X_1=1,X_2=0\})=S(\mathbf{X})/Z$. Assuming our SPN $S$ is valid
-and therefore $S(*)=Z_S$, and since for each sum node $i$: $\sum_{j\in Ch(i)}w_{ij}=1=Z_S$, our
-probability is then $P(\mathbf{X})=S(\mathbf{X})$ and thus computing the value of the SPN is
-sufficient.
+to be consistent with the state. For instance, let $\mathbf{X}=\{X_1=1,X_2=0\}$ be the complete
+state. Then the indicators are $(x_1,x_2,\overline{x}_1,\overline{x}_2)=(1, 0, 0, 1)$. Computing
+the probability of $\mathbf{X}$ is then $P(\mathbf{X}=\{X_1=1,X_2=0\})=S(\mathbf{X})/Z$. Assuming
+our SPN $S$ is valid and therefore $S(*)=Z_S$, and since for each sum node $i$: $\sum_{j\in Ch(i)}
+w_{ij}=1=Z_S$, our probability is then $P(\mathbf{X})=S(\mathbf{X})$ and thus computing the value
+of the SPN is sufficient.
 
 To compute the value of the SPN we do a bottom-up pass. A bottom-up pass consists of computing all
 nodes starting from the bottom and then going up. The trivial case are the leaves. The values of
 the leaves are the values of the indicators. In our example, the values of the leaves are
-$(x_1,x_2,\overline{x}_1,\overline{x}_2)=(1,0,0,1)$. Taking the SPN on Figure 4, the next nodes to
-be computed are the sum nodes. The values of the sum nodes are, for each node $i$: $\sum_{j\in
+$(x_1,x_2,\overline{x}_1,\overline{x}_2)=(1,0,0,1)$. Consider the SPN on Figure 6. The next nodes
+to be computed are the sum nodes. The values of the sum nodes are, for each node $i$: $\sum_{j\in
 Ch(i)}v_j w_{ij}$. After that we go up a layer again, which in our case means computing the product
 nodes: $\prod_{j\in Ch(i)}v_j$, where $i$ is the product node. Finally, once we have the values for
 our product nodes we may compute the value of the root node, which is a sum node. The resulting
@@ -659,9 +659,9 @@ Finding the marginals is similar to computing the probability of a complete stat
 marginals we have unobserved variables. In this case we need to apply the consistency rule and, for
 each unobserved variable, have all its indicators set to 1.
 
-Take the evidence $\mathbf{e}={X_1=1}$ as example. Applying the consistency rule to the indicators
-on our SPN on Figure 5, we have the indicators as $(x_1,x_2,\overline{x}_1,\overline{x}_2)=
-(1,1,0,1)$. Then, similarly as computing the complete state, we do a bottom-up pass on our SPN,
+Take the evidence $\mathbf{e}=\{X_1=1\}$ as example. Applying the consistency rule to the indicators
+on our SPN on Figure 7, we have the indicators as $(x_1,x_2,\overline{x}_1,\overline{x}_2)=
+(1,1,0,1)$. Then, similar to computing the complete state, we do a bottom-up pass on our SPN,
 computing the value of each node. Since we assume the SPN is valid and $Z_S=1$, the resulting
 marginal is $P(\mathbf{e}=\{X_1=1\})=S(\mathbf{e})/Z=S(\mathbf{e})=0.69$.
 
@@ -681,13 +681,13 @@ $\max_{j\in Ch(i)}w_{ij}v_j$, where $i$ is the max node; do a bottom-up pass to 
 of each node and finally do a top-down pass to find the children with max values.
 
 Let us take the evidence $\mathbf{e}=\{X_1=1\}$ as an example and compute the MPE state
-$\argmax_X P(X|\mathbf{e})$ of the SPN on Figure 6. The indicators given the evidence $\mathbf{e}$
+$\argmax_X P(X|\mathbf{e})$ of the SPN on Figure 8. The indicators given the evidence $\mathbf{e}$
 are $(x_1,x_2,\overline{x}_1,\overline{x}_2)=(1,1,0,1)$. Again, we assume that the SPN is valid and
 that $Z_S=1$.
 
 First we replace all sum nodes with max nodes. From there we do a bottom-up pass to find all values
 of each node. Now, instead of computing the weighted sum on each sum node, we output the max value
-weighted on each edge amongst all children on each max node. Since the root of the SPN is a sum
+weighted on each edge amongst all children on each max node. Since the root of the SPN is now a max
 node, the value of the SPN will be the maximum value of all children.
 
 \begin{figure}[h]
@@ -705,7 +705,7 @@ the highest value for each node. Once we reach the leaves we have the $\argmax_X
 \begin{figure}[h]
   \centering{\includegraphics[scale=0.25]{imgs/map_topdown.png}
     \captionsetup{justification=centering}
-    \caption{A top-down pass selects the child with the highest value for each node, result on
+    \caption{A top-down pass selects the child with the highest value for each node, resulting on
       $\argmax_X P(X|\mathbf{e})$. Source:
       \url{http://spn.cs.washington.edu/talks/spn11.pdf}.}
   }
