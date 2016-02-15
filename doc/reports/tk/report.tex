@@ -1,0 +1,158 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage[top=1.0in,bottom=1.0in]{geometry}
+\usepackage{hyperref}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage[backend=biber,url=true,doi=true,eprint=false]{biblatex}
+\usepackage{enumitem}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{tikz}
+\usepackage[justification=centering]{caption}
+\usepackage{indentfirst}
+\usetikzlibrary{snakes,arrows,shapes}
+
+\addbibresource{../common/references.bib}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+\titleformat{\section}
+  {\normalfont\scshape\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\scshape\bfseries}{\thesubsection}{1em}{}
+\titleformat{\paragraph}
+  {\normalfont}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}
+  {\normalfont}{\thesubparagraph}{1em}{}
+
+\captionsetup[table]{labelsep=space}
+
+\theoremstyle{plain}
+
+\newtheorem*{spn-def}{Definition}
+\newtheorem*{spn-thm}{Theorem}
+
+\setlength{\parskip}{1em}
+
+\title{\textbf{Learning Probabilistic Models}}
+
+\begin{document}
+\date{}
+\author{
+Renato Lui Geh \\
+Supervisor: Denis Deratani Mauá
+}
+\vspace*{-40pt}
+{\let\newpage\relax\maketitle}
+
+\section{Introduction}
+
+In this report we cite a few probabilistic models and how to perform learning on them. This report
+will be divided into five sections:
+
+\begin{enumerate}
+  \item Inference on Bayesian networks
+  \item Bayesian learning
+  \item Maximum-likelihood parameter learning
+  \item Naive Bayes
+  \item Bayesian parameter learning
+\end{enumerate}
+
+On (1) we will cover the definition of inference on Bayesian networks and how to perform simple
+queries. We will cover exact inference (which is in most cases intractable) and cite sources for
+approximate inference.
+
+Next, on (2) we will take a look at the most simple of learning -- Bayesian learning. We will show
+how to perform a simple query using the candy example presented on \textit{Artificial Intelligence:
+A Modern Approach}\cite{aima} by Russel and Norvig. We will use this example throughout most of
+these learning methods.
+
+We will then present Maximum-likelihood parameter learning (3), a better form of learning that is
+widely used in many applications. However this method performs poorly on small training sets.
+
+Fourthly we will present Naive Bayes, a well known model that uses a simple Bayesian network
+composed of a single parent node and $n$ children nodes that are d-separated (i.e. independent) of
+each other given their parent.
+
+Finally, we will show how to perform Bayesian parameter learning. In this method we learn the
+parameters of a compiled arithmetic circuit that represents a Bayesian network.
+
+This report is heavily influenced by the works of Russel and Norvig on AIMA\cite{aima}. It is based
+on the readings of chapter 14 (Probabilistic Reasoning) and 20 (Learning Probabilistic Models) of
+the 3rd edition.
+
+We consider the reader has some knowledge of basic probability and a basic understanding of
+Bayesian networks. More specifically we consider the reader has read the following previous
+reports: \cite{project-def, report-1, report-2, report-5, report-8, report-9}.
+
+\subsection{Notation}
+
+For this and all following reports we will use the notations described in this subsection.
+
+Any function that is of the form $P(\cdot)$ is a probability function. $\mathbf{X}$ denotes a set
+of variables with instances $X_1,...,X_k$. $X$ denotes a random variable. $\mathbf{E}$ is the set
+of evidence variables and $\mathbf{e}$ is an observed event. A prior probability is a probability
+function of the form $P(\mathbf{X})$. A posterior probability is of the form $P(\mathbf{X}|\mathbf{
+Y})$. A probability function $\mathbf{P}(\cdot)$ returns a distribution of probability.
+
+\section{Inference on Bayesian networks}
+
+Inference in any probabilistic model is to compute a posterior probability distribution of a query
+of variables given an observed evidence. Let $\mathbf{Y}$ be a set of nonevidence nonquery
+variables $Y_1,...,Y_l$ that we call hidden variables, the complete set of variables is $\mathbf{X}
+= \{X\} \cup \mathbf{E} \cup \mathbf{Y}$, where $X$ is the query variable. Then the inference query
+of $X$ is $\mathbf{P}(X|\mathbf{e})$.
+
+Any conditional probability can be computed by summing the factors from the full joint
+distribution. That is, $\mathbf{P}(X|\mathbf{e})$ can be computed by summing all the possible
+events of the hidden variables of the joint distribution.
+
+\begin{equation}
+  \mathbf{P}(X|\mathbf{e}) = \alpha \mathbf{P}(X, \mathbf{E}) = \alpha \sum_\mathbf{y} \mathbf{P}(
+  X, \mathbf{e}, \mathbf{y})
+\end{equation}
+
+Thus, we can use a Bayesian network to represent the full joint distribution. Furthermore, since:
+
+\begin{equation}
+  P(x_1,...,x_n) = \prod_{i=1}^n P(x_i|Parents(X_i))
+\end{equation}
+
+Then we can write $P(x,\mathbf{e},\mathbf{y})$ as products of the conditional probabilities of the
+Bayesian network. Because of that, we can compute a query via the sums of products of the
+conditional probabilities of the network. Report \cite{report-1} shows how to represent a Bayesian
+network with sums and products.
+
+After we have the resulting expression given by equations 1 and 2, we can use factor properties
+\cite{report-2} to simplify the expression and avoid repeated calculations \cite{report-5}.
+
+Since exact inference with Bayesian networks is, in the general case, intractable, it makes these
+methods in the real world unrealistic. Section 14.5 from \cite{aima} describes some methods for
+approximate inference. Darwiche (2009)\cite{bayes-net-darwiche} is also a great source for Bayes
+nets.
+
+\section{Bayesian learning}
+
+
+
+\newpage
+
+\printbibliography
+
+\end{document}

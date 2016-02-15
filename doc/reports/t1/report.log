@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.8)  28 JAN 2016 20:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.8)  14 FEB 2016 22:31
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **report.tex
 (./report.tex
@@ -26,16 +26,17 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 (/usr/share/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2015/08/03 3.9m The Babel package
 
-(/usr/share/texmf-dist/tex/generic/babel-portuges/portuges.ldf
-Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
+(/usr/share/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2012/08/20 v3.3p English support from the babel system
 
 (/usr/share/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2015/08/03 3.9m Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
 )
-\l@brazilian = a dialect from \language\l@portuges 
-Package babel Info: Making " an active character on input line 145.
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
 ))
 (/usr/share/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
@@ -660,6 +661,8 @@ Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
 (/usr/share/texmf-dist/tex/latex/biblatex/blx-dm.def)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'alphabetic.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@afterword=\count162
@@ -753,11 +756,11 @@ File: biblatex.def
 \c@biburllcpenalty=\count299
 \c@smartand=\count300
 )
-Package biblatex Info: Trying to load bibliography style 'numeric'...
-Package biblatex Info: ... file 'numeric.bbx' found.
+Package biblatex Info: Trying to load bibliography style 'alphabetic'...
+Package biblatex Info: ... file 'alphabetic.bbx' found.
 
-(/usr/share/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
-File: numeric.bbx 2015/10/21 v3.1 biblatex bibliography style (PK/JW/AB)
+(/usr/share/texmf-dist/tex/latex/biblatex/bbx/alphabetic.bbx
+File: alphabetic.bbx 2015/10/21 v3.1 biblatex bibliography style (PK/JW/AB)
 Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
 
@@ -766,17 +769,16 @@ File: standard.bbx 2015/10/21 v3.1 biblatex bibliography style (PK/JW/AB)
 \c@bbx:relatedcount=\count301
 \c@bbx:relatedtotal=\count302
 ))
-Package biblatex Info: Trying to load citation style 'numeric'...
-Package biblatex Info: ... file 'numeric.cbx' found.
+Package biblatex Info: Trying to load citation style 'alphabetic'...
+Package biblatex Info: ... file 'alphabetic.cbx' found.
 
-(/usr/share/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
-File: numeric.cbx 2015/10/21 v3.1 biblatex citation style (PK/JW/AB)
+(/usr/share/texmf-dist/tex/latex/biblatex/cbx/alphabetic.cbx
+File: alphabetic.cbx 2015/10/21 v3.1 biblatex citation style (PK/JW/AB)
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
 Package biblatex Info: Redefining '\footcitetext'.
 Package biblatex Info: Redefining '\smartcite'.
-Package biblatex Info: Redefining '\supercite'.
 Package biblatex Info: Redefining '\textcite'.
 Package biblatex Info: Redefining '\textcites'.
 Package biblatex Info: Redefining '\cites'.
@@ -1054,6 +1056,132 @@ File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
 ))) (/usr/share/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
+(/usr/share/texmf-dist/tex/latex/abstract/abstract.sty
+Package: abstract 2009/06/08 v1.2a configurable abstracts
+\abstitleskip=\skip71
+\absleftindent=\skip72
+\absrightindent=\skip73
+\absparindent=\skip74
+\absparsep=\skip75
+)
+(/usr/share/texmf-dist/tex/latex/appendix/appendix.sty
+Package: appendix 2009/09/02 v1.2b extra appendix facilities
+\c@@pps=\count323
+\c@@ppsavesec=\count324
+\c@@ppsaveapp=\count325
+)
+(/usr/share/texmf-dist/tex/latex/oberdiek/bookmark.sty
+Package: bookmark 2011/12/02 v1.24 PDF bookmarks (HO)
+
+(/usr/share/texmf-dist/tex/latex/oberdiek/bkm-pdftex.def
+File: bkm-pdftex.def 2011/12/02 v1.24 bookmark driver for pdfTeX (HO)
+\BKM@id=\count326
+))
+(/usr/share/texmf-dist/tex/latex/minted/minted.sty
+Package: minted 2015/09/09 v2.1 Yet another Pygments shim for LaTeX
+
+(/usr/share/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count327
+\FV@InFile=\read3
+\FV@TabBox=\box41
+\c@FancyVerbLine=\count328
+\FV@StepNumber=\count329
+\FV@OutFile=\write5
+) (/usr/share/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count330
+\float@exts=\toks43
+\float@box=\box42
+\@float@everytoks=\toks44
+\@floatcapt=\box43
+)
+(/usr/share/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+Package: ifplatform 2010/10/22 v0.4 Testing for the operating system
+
+(/usr/share/texmf-dist/tex/generic/oberdiek/catchfile.sty
+Package: catchfile 2011/03/01 v1.6 Catch the contents of a file (HO)
+)
+runsystem(uname -s > "report.w18")...executed.
+
+ (./report.w18)
+runsystem(rm -- "report.w18")...executed.
+
+)
+(/usr/share/texmf-dist/tex/generic/xstring/xstring.sty
+(/usr/share/texmf-dist/tex/generic/xstring/xstring.tex
+\@xs@message=\write6
+\integerpart=\count331
+\decimalpart=\count332
+)
+Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
+)
+(/usr/share/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count333
+\output=\toks45
+\linenoprevgraf=\count334
+\linenumbersep=\dimen195
+\linenumberwidth=\dimen196
+\c@linenumber=\count335
+\c@pagewiselinenumber=\count336
+\c@LN@truepage=\count337
+\c@internallinenumber=\count338
+\c@internallinenumbers=\count339
+\quotelinenumbersep=\dimen197
+\bframerule=\dimen198
+\bframesep=\dimen199
+\bframebox=\box44
+LaTeX Info: Redefining \\ on input line 3056.
+)
+\minted@appexistsfile=\read4
+\FV@BreakIndent=\dimen256
+\FV@BreakSymbolSepLeft=\dimen257
+\FV@BreakSymbolSepRight=\dimen258
+\FV@BreakSymbolIndentLeft=\dimen259
+\FV@BreakSymbolIndentRight=\dimen260
+\c@FancyVerbLineBreakLast=\count340
+\FV@LineBox=\box45
+\FV@LineIndentBox=\box46
+\minted@bgbox=\box47
+\minted@code=\write7
+\c@minted@FancyVerbLineTemp=\count341
+\@float@every@listing=\toks46
+\c@listing=\count342
+)
+runsystem(mkdir -p "_minted-report")...executed.
+
+
+(./_minted-report/default.pygstyle)
+(/usr/share/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+\@float@every@algorithm=\toks47
+\c@algorithm=\count343
+)
+(/usr/share/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(/usr/share/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count344
+\c@ALG@rem=\count345
+\c@ALG@nested=\count346
+\ALG@tlm=\skip76
+\ALG@thistlm=\skip77
+\c@ALG@Lnr=\count347
+\c@ALG@blocknr=\count348
+\c@ALG@storecount=\count349
+\c@ALG@tmpcounter=\count350
+\ALG@tmplength=\skip78
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+)
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 snakes.code.tex
 File: tikzlibrarysnakes.code.tex 2013/07/15 v3.0.1a (rcs-revision 1.7)
@@ -1068,16 +1196,16 @@ decorations.pathmorphing.code.tex
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 decorations.code.tex
 (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
-\pgfdecoratedcompleteddistance=\dimen195
-\pgfdecoratedremainingdistance=\dimen196
-\pgfdecoratedinputsegmentcompleteddistance=\dimen197
-\pgfdecoratedinputsegmentremainingdistance=\dimen198
-\pgf@decorate@distancetomove=\dimen199
-\pgf@decorate@repeatstate=\count323
-\pgfdecorationsegmentamplitude=\dimen256
-\pgfdecorationsegmentlength=\dimen257
+\pgfdecoratedcompleteddistance=\dimen261
+\pgfdecoratedremainingdistance=\dimen262
+\pgfdecoratedinputsegmentcompleteddistance=\dimen263
+\pgfdecoratedinputsegmentremainingdistance=\dimen264
+\pgf@decorate@distancetomove=\dimen265
+\pgf@decorate@repeatstate=\count351
+\pgfdecorationsegmentamplitude=\dimen266
+\pgfdecorationsegmentlength=\dimen267
 )
-\tikz@lib@dec@box=\box41
+\tikz@lib@dec@box=\box48
 )
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorati
 ons.pathmorphing.code.tex))
@@ -1095,7 +1223,7 @@ File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
 
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2013/09/23 v3.0.1a (rcs-revision 1.16)
-\arrowsize=\dimen258
+\arrowsize=\dimen268
 ))
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 shapes.code.tex
@@ -1148,68 +1276,72 @@ File: tikzlibraryshapes.multipart.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1
 art.code.tex
 File: pgflibraryshapes.multipart.code.tex 2010/01/07 v3.0.1a (rcs-revision 1.2)
 
-\pgfnodepartlowerbox=\box42
-\pgfnodeparttwobox=\box43
-\pgfnodepartthreebox=\box44
-\pgfnodepartfourbox=\box45
-\pgfnodeparttwentybox=\box46
-\pgfnodepartnineteenbox=\box47
-\pgfnodeparteighteenbox=\box48
-\pgfnodepartseventeenbox=\box49
-\pgfnodepartsixteenbox=\box50
-\pgfnodepartfifteenbox=\box51
-\pgfnodepartfourteenbox=\box52
-\pgfnodepartthirteenbox=\box53
-\pgfnodeparttwelvebox=\box54
-\pgfnodepartelevenbox=\box55
-\pgfnodeparttenbox=\box56
-\pgfnodepartninebox=\box57
-\pgfnodeparteightbox=\box58
-\pgfnodepartsevenbox=\box59
-\pgfnodepartsixbox=\box60
-\pgfnodepartfivebox=\box61
+\pgfnodepartlowerbox=\box49
+\pgfnodeparttwobox=\box50
+\pgfnodepartthreebox=\box51
+\pgfnodepartfourbox=\box52
+\pgfnodeparttwentybox=\box53
+\pgfnodepartnineteenbox=\box54
+\pgfnodeparteighteenbox=\box55
+\pgfnodepartseventeenbox=\box56
+\pgfnodepartsixteenbox=\box57
+\pgfnodepartfifteenbox=\box58
+\pgfnodepartfourteenbox=\box59
+\pgfnodepartthirteenbox=\box60
+\pgfnodeparttwelvebox=\box61
+\pgfnodepartelevenbox=\box62
+\pgfnodeparttenbox=\box63
+\pgfnodepartninebox=\box64
+\pgfnodeparteightbox=\box65
+\pgfnodepartsevenbox=\box66
+\pgfnodepartsixbox=\box67
+\pgfnodepartfivebox=\box68
 )))
-Package biblatex Info: Trying to load language 'brazilian'...
-Package biblatex Info: ... file 'brazilian.lbx' found.
- (/usr/share/texmf-dist/tex/latex/biblatex/lbx/brazilian.lbx
-File: brazilian.lbx 2015/10/21 v3.1 biblatex localization (PK/JW/AB)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+ (/usr/share/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2015/10/21 v3.1 biblatex localization (PK/JW/AB)
 )
 
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
 
-\@quotelevel=\count324
-\@quotereset=\count325
+\@quotelevel=\count352
+\@quotereset=\count353
+runsystem(which "pygmentize" && touch "report.aex")...executed.
+
+runsystem(rm "report.aex")...executed.
+
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
  (/usr/share/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count326
-\scratchdimen=\dimen259
-\scratchbox=\box62
-\nofMPsegments=\count327
-\nofMParguments=\count328
-\everyMPshowfont=\toks43
-\MPscratchCnt=\count329
-\MPscratchDim=\dimen260
-\MPnumerator=\count330
-\makeMPintoPDFobject=\count331
-\everyMPtoPDFconversion=\toks44
+\scratchcounter=\count354
+\scratchdimen=\dimen269
+\scratchbox=\box69
+\nofMPsegments=\count355
+\nofMParguments=\count356
+\everyMPshowfont=\toks48
+\MPscratchCnt=\count357
+\MPscratchDim=\dimen270
+\MPnumerator=\count358
+\makeMPintoPDFobject=\count359
+\everyMPtoPDFconversion=\toks49
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -1259,24 +1391,21 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box63
-Package hyperref Info: Link coloring OFF on input line 55.
+\AtBeginShipoutBox=\box70
+Package hyperref Info: Link coloring OFF on input line 65.
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count332
+\c@section@level=\count360
 )
-LaTeX Info: Redefining \ref on input line 55.
-LaTeX Info: Redefining \pageref on input line 55.
-LaTeX Info: Redefining \nameref on input line 55.
- (./report.out) (./report.out)
-\@outlinefile=\write5
-\openout5 = `report.out'.
-
+LaTeX Info: Redefining \ref on input line 65.
+LaTeX Info: Redefining \pageref on input line 65.
+LaTeX Info: Redefining \nameref on input line 65.
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
@@ -1286,59 +1415,185 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'report.bbl' found.
  (./report.bbl)
-Package biblatex Info: Reference section=0 on input line 55.
-Package biblatex Info: Reference segment=0 on input line 55.
- ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 62.
+Package biblatex Info: Reference section=0 on input line 65.
+Package biblatex Info: Reference segment=0 on input line 65.
+ABD: EveryShipout initializing macros
+(./_minted-report/default-pyg-prefix.pygstyle) [1
 
-(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]pdfTeX warning (ext4): dest
+ination with the same identifier (name{page.1}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.115 \newpage
+               [1]
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
+(Font)              using `OT1/cmr/bx/n' instead on input line 117.
+
+(./report.toc
+LaTeX Font Info:    Try loading font information for U+msa on input line 7.
+ (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 62.
+LaTeX Font Info:    Try loading font information for U+msb on input line 7.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [2])
+\tf@toc=\write8
+\openout8 = `report.toc'.
+
+ [3] [4]
+<imgs/bayes_net.png, id=104, 225.09094pt x 73.02281pt>
+File: imgs/bayes_net.png Graphic file (type png)
+
+<use imgs/bayes_net.png>
+Package pdftex.def Info: imgs/bayes_net.png used on input line 205.
+(pdftex.def)             Requested size: 112.54518pt x 36.5113pt.
+ [5 <./imgs/bayes_net.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 280.
+
+
+(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 280.
+ [6]
+<imgs/plane0.png, id=126, 767.86874pt x 237.88875pt>
+File: imgs/plane0.png Graphic file (type png)
+ <use imgs/plane0.png>
+Package pdftex.def Info: imgs/plane0.png used on input line 346.
+(pdftex.def)             Requested size: 191.9667pt x 59.47203pt.
 
-LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
-(Font)              using `OT1/cmr/bx/n' instead on input line 64.
+<imgs/face0.png, id=127, 767.86874pt x 237.88875pt>
+File: imgs/face0.png Graphic file (type png)
+ <use imgs/face0.png>
+Package pdftex.def Info: imgs/face0.png used on input line 347.
+(pdftex.def)             Requested size: 191.9667pt x 59.47203pt.
 
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 64.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 104.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 113.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 113.
-[1
+<imgs/stop0.png, id=128, 767.86874pt x 237.88875pt>
+File: imgs/stop0.png Graphic file (type png)
+ <use imgs/stop0.png>
+Package pdftex.def Info: imgs/stop0.png used on input line 348.
+(pdftex.def)             Requested size: 191.9667pt x 59.47203pt.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 114.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 150.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 154.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 154.
- [2]
+<imgs/dollar0.png, id=129, 767.86874pt x 237.88875pt>
+File: imgs/dollar0.png Graphic file (type png)
+ <use imgs/dollar0.png>
+Package pdftex.def Info: imgs/dollar0.png used on input line 349.
+(pdftex.def)             Requested size: 191.9667pt x 59.47203pt.
 
-Package caption Warning: Unused \captionsetup[table] on input line 44.
-See the caption package documentation for explanation.
+[7 <./imgs/plane0.png> <./imgs/face0.png> <./imgs/stop0.png> <./imgs/dollar0.pn
+g>] <imgs/spn_1.png, id=144, 559.08875pt x 296.10625pt>
+File: imgs/spn_1.png Graphic file (type png)
+ <use imgs/spn_1.png>
+Package pdftex.def Info: imgs/spn_1.png used on input line 428.
+(pdftex.def)             Requested size: 195.68399pt x 103.63873pt.
 
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 158.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language  on input line 158.
-[3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 158.
+<imgs/spn_2.png, id=146, 534.99875pt x 326.21875pt>
+File: imgs/spn_2.png Graphic file (type png)
+ <use imgs/spn_2.png>
+Package pdftex.def Info: imgs/spn_2.png used on input line 429.
+(pdftex.def)             Requested size: 187.25237pt x 114.17827pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[8] [9 <./imgs/spn_1.png> <./imgs/spn_2.png>]
+<imgs/complete.png, id=161, 139.52126pt x 159.59625pt>
+File: imgs/complete.png Graphic file (type png)
+ <use imgs/complete.png>
+Package pdftex.def Info: imgs/complete.png used on input line 513.
+(pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
+
+<imgs/incomplete.png, id=162, 139.52126pt x 159.59625pt>
+File: imgs/incomplete.png Graphic file (type png)
+
+<use imgs/incomplete.png>
+Package pdftex.def Info: imgs/incomplete.png used on input line 514.
+(pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
+
+<imgs/consistent.png, id=163, 139.52126pt x 159.59625pt>
+File: imgs/consistent.png Graphic file (type png)
+
+<use imgs/consistent.png>
+Package pdftex.def Info: imgs/consistent.png used on input line 533.
+(pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
+
+<imgs/inconsistent.png, id=164, 139.52126pt x 159.59625pt>
+File: imgs/inconsistent.png Graphic file (type png)
+
+<use imgs/inconsistent.png>
+Package pdftex.def Info: imgs/inconsistent.png used on input line 534.
+(pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
+ [10 <./imgs/complete.png> <./imgs/incomplete.png> <./imgs/consistent.png> <./i
+mgs/inconsistent.png>] [11] [12]
+<imgs/cstate.png, id=193, 642.4pt x 483.8075pt>
+File: imgs/cstate.png Graphic file (type png)
+ <use imgs/cstate.png>
+Package pdftex.def Info: imgs/cstate.png used on input line 661.
+(pdftex.def)             Requested size: 192.72148pt x 145.14337pt.
+
+<imgs/marginals.png, id=195, 642.4pt x 483.8075pt>
+File: imgs/marginals.png Graphic file (type png)
+ <use imgs/marginals.png>
+Package pdftex.def Info: imgs/marginals.png used on input line 681.
+(pdftex.def)             Requested size: 192.72148pt x 145.14337pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[13 <./imgs/cstate.png (PNG copy)>]
+Overfull \hbox (4.1752pt too wide) in paragraph at lines 695--699
+[][] \OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X\OMS/cmsy/m/n/10 j\OT
+1/cmr/bx/n/10 e\OT1/cmr/m/n/10 )$ of the SPN on Fig-ure 8. The in-di-ca-tors gi
+ven the ev-i-dence $\OT1/cmr/bx/n/10 e$ \OT1/cmr/m/n/10 are $(\OML/cmm/m/it/10 
+x[]; x[]; [][]; [][]\OT1/cmr/m/n/10 ) =
+ []
+
+<imgs/map_botup.png, id=203, 1063.975pt x 522.95375pt>
+File: imgs/map_botup.png Graphic file (type png)
+
+<use imgs/map_botup.png>
+Package pdftex.def Info: imgs/map_botup.png used on input line 706.
+(pdftex.def)             Requested size: 297.91096pt x 146.42604pt.
+
+<imgs/map_topdown.png, id=205, 1063.975pt x 522.95375pt>
+File: imgs/map_topdown.png Graphic file (type png)
+
+<use imgs/map_topdown.png>
+Package pdftex.def Info: imgs/map_topdown.png used on input line 718.
+(pdftex.def)             Requested size: 265.9931pt x 130.73811pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14 <./imgs/marginals.png (PNG copy)> <./imgs/map_botup.png (PNG copy)>]
+[15 <./imgs/map_topdown.png (PNG copy)>]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 753.
+ [16] [17]
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 825.
+ [18] [19]
+Overfull \hbox (5.90808pt too wide) in paragraph at lines 930--932
+[]\OT1/cmr/m/n/10 Introduction to Al-go-rithms [[]Cor+09[]]. 
+ []
+
+[20]
+Overfull \hbox (14.01047pt too wide) in paragraph at lines 960--960
+[]\OT1/cmr/m/n/10 Sang-Woo Lee, Christo-pher Watkins, and Byoung-Tak Zhang. ``N
+on-Parametric Bayesian
+ []
+
+[21]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 962.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 962.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 158.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 158.
-Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 8ACF4AA2E2291D8BB3B6930DAF45CA43;221.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 962.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 962.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1346,31 +1601,35 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 158.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 962.
  ) 
 Here is how much of TeX's memory you used:
- 27520 strings out of 493054
- 535485 string characters out of 6140587
- 998178 words of memory out of 5000000
- 30559 multiletter control sequences out of 15000+600000
- 12332 words of font info for 48 fonts, out of 8000000 for 9000
+ 30653 strings out of 493054
+ 592940 string characters out of 6140587
+ 1091580 words of memory out of 5000000
+ 33540 multiletter control sequences out of 15000+600000
+ 14465 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,7n,76p,933b,1405s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,12n,76p,933b,1774s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
-sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (3 pages, 153760 bytes).
+sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb>
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on report.pdf (22 pages, 976324 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 117 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
- 45 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 449 PDF objects out of 1000 (max. 8388607)
+ 382 compressed objects within 4 object streams
+ 87 named destinations out of 1000 (max. 500000)
+ 304 words of extra memory for PDF output out of 10000 (max. 10000000)
 
