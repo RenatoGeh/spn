@@ -7,6 +7,9 @@
 *.run.xml
 *.toc
 
+# Pygment files
+*.pygstyle
+
 # Compiled Object files
 *.slo
 *.lo

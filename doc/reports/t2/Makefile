@@ -1,11 +1,15 @@
+file = report
+compile = pdflatex -shell-escape $(file).tex
+
 all:
 	make clean; \
-	pdflatex report.tex; pdflatex report.tex; \
- 	biber report; \
- 	pdflatex report.tex; pdflatex report.tex && \
- 	zathura report.pdf
+	$(compile); $(compile); \
+ 	biber $(file); \
+ 	$(compile); $(compile) && \
+ 	zathura $(file).pdf
 
 .PHONY: clean
 clean:
-	rm *.aux *.bbl *.bcf *.blg *.log *.out *.run.xml *.toc
+	rm *.aux *.bbl *.bcf *.blg *.log *.out *.run.xml *.toc;
+	rm -rf _minted-report
 

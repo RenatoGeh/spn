@@ -19,6 +19,9 @@
 \usepackage{abstract}
 \usepackage[titletoc]{appendix}
 \usepackage{bookmark}
+\usepackage{minted}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 \usetikzlibrary{snakes,arrows,shapes}
 
@@ -37,6 +40,9 @@
 \newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
 
 \renewcommand{\abstractnamefont}{\normalfont\Large\bfseries}
+
+\algrenewcommand\algorithmicrequire{\textbf{Input}}
+\algrenewcommand\algorithmicensure{\textbf{Output}}
 
 \titleformat{\section}
   {\normalfont\scshape\bfseries}{\thesection}{1em}{}
@@ -98,6 +104,12 @@
   about the structure of the model. Thirdly, we analyse some properties and theorems. Fourthly, we
   look on how to perform exact tractable inference. And finally we take a look at how to perform
   learning.
+
+  At the end of this work I include a list of subjects I intend to study. They may include both
+  new things as well as already included subjects that I plan on studying further. Since this is a
+  work in progress (and in fact will be for the entirety of my undergraduate studies), some
+  sections (or subsections) will be incomplete (or otherwise just not as thoroughly detailed). This
+  means new sections and subsections may be added in the (near) future.
 \end{abstract}
 \vspace{\fill}
 \newpage
@@ -109,7 +121,7 @@
 \section{Introduction}
 
 We assume the reader has already read the notation [Appendix~\ref{app:not}] and has the
-mathematical background required [Appendix~\ref{app:bak}] defined in the Appendix.
+mathematical background required [Appendix~\ref{app:bak}] defined in the Appendices.
 
 In this section we show what the usual problems with probabilistic graphical models are and what
 led to the creation of Sum-Product Networks. Additionally, we show some results from experiments
@@ -711,6 +723,8 @@ the highest value for each node. Once we reach the leaves we have the $\argmax_X
   }
 \end{figure}
 
+\newpage
+
 By extension of Darwiche's findings on~\cite{diff-approach-darwiche} this procedure will find the
 MPE state successfully if the SPN is decomposable or consistent.
 
@@ -726,18 +740,108 @@ detailed.
 
 \subsection{Learning the weights}
 
-This method for learning an SPN was proposed by Poon and Domings on their article
+This method for learning an SPN was proposed by Poon and Domingos on their article
 \textit{Sum-Product Networks: A New Deep Architecture}~\cite{poon-domingos}.
 
-The idea for this learning algorithm is simple: take a valid, dense, generic and empty SPN, run
-inference on it and update weights until convergence and then prune edges that have weight zero and
-remove non-root nodes that have no parents. Note that we do not learn the structure of the SPN, but
-learn the weights.
+The idea for this learning algorithm is simple: take a valid, dense, and generic SPN, run inference
+on it and update weights until convergence and then prune edges that have weight zero and remove
+non-root nodes that have no parents. Note that we do not learn the structure of the SPN, but learn
+the weights. Algorithm~\ref{pd11-learn}, from Poon and Domingos~\cite{poon-domingos} describes the
+learning method.
 
-\subsection{Learning the structure}
+\begin{algorithm}
+  \caption{LearnSPN}\label{pd11-learn}
+  \begin{algorithmic}[1]
+    \Require Set $\mathbf{D}$ of instances over variables $\mathbf{X}$.
+    \Ensure An SPN with learned structure and parameters.
+    \State $S \gets $GenerateDenseSPN($\mathbf{X}$)
+    \State InitializeWeights($S$)
+    \Repeat
+    \ForAll{$d\in \mathbf{D}$}
+      \State UpdateWeights($S$, Inference($S,d$))
+      \EndFor
+    \Until{convergence}
+    \State $S \gets $PruneZeroWeights(S)
+    \State \textbf{return} $S$
+  \end{algorithmic}
+\end{algorithm}
 
-This subsection is based on the article by Gens and Domingos \textit{Learning the Structure of
-Sum-Product Networks}~\cite{gens-domingos}.
+Although the idea illustrated in Algorithm~\ref{pd11-learn} is simple, creating the starting SPN is
+not that simple. The SPN must be complete and consistent to be flexible and correct when
+representing the training set. Poon and Domingos suggest a general scheme for producing the initial
+SPN\@:
+
+\begin{enumerate}
+  \item Select a set of subsects of the variables.
+  \item For each subset $R$:
+  \begin{enumerate}[label*=\arabic*.]
+    \item Create $k$ sum nodes $S_1^R,\ldots,S_k^R$.
+    \item Select a set of ways to decompose $R$ into other selected subsets $R_1,\ldots,R_l$.
+    \item For each of these decompositions:
+    \begin{enumerate}[label*=\arabic*.]
+      \item For all $1\leq i_1,\ldots,i_l\leq k$:
+      \begin{enumerate}[label*=\arabic*.]
+        \item Create a product node with parents $S_j^R$ and children $S_{i_1}^{R_1},\ldots,
+          S_{i_l}^{R_l}$.
+      \end{enumerate}
+      \item EndFor
+    \end{enumerate}
+  \item EndFor
+  \end{enumerate}
+  \item EndFor
+\end{enumerate}
+
+If we assume that we always select a polynomial number of subsets of the variables, and for each of
+these subsets we only choose a polynomial number of decompositions, then the SPN is guaranteed to
+have a polynomial size and therefore is efficient during the learning and inference passes after
+we run Algorithm~\ref{pd11-learn}.
+
+After we create the initial SPN, we now need to initialize the weights. It is evident that we need
+not concern too much on the values of these initializations, since on the next steps we will be
+performing weight updating. It is a good idea to have all weights of a same sum node initialized
+uniformally to avoid bias.
+
+For weight updating, we may either use Gradient Descent or Expectation-Maximization.
+
+For gradient descent, Computing the partial derivative of the SPN $S$ with respect to the weights
+can be done by computing the inference of the marginal. Let $n_j$ be the child of the sum node
+$n_i$. Then:
+
+\begin{equation*}
+  \frac{\partial S(x)}{\partial w_{ij}} = \frac{\partial S(x)}{\partial S_i(x)}S_j(x)
+\end{equation*}
+
+This can be computed by using marginal inference. Weights are then updated by a gradient step.
+After each update, $S(*)=1$ can be ensured by renormalizing each sum-node's edges at each step.
+
+\newpage
+
+\section{Future work and studies}
+
+This section enumerates things to be added to this paper, similar to a \textit{to do} list. There
+is no order to the list.
+
+\begin{itemize}
+  \item How to perform EM on SPNs by learning weights according to Poon and Domingos on
+    \textit{Sum-Product Networks: A New Deep Architecture}~\cite{poon-domingos}.
+  \item Learning the structure of an SPN according to \textit{Learning the Structure of
+    Sum-Product Networks}~\cite{gens-domingos} by Gens and Domingos.
+  \item Learning the structure of an SPN through greedy search, basing on the work of Dennis and
+    Ventura in \textit{Greedy Structure Search for Sum-Product Networks}~\cite{greedy-search}.
+  \item Learning the SPN architecture through clustering variables, as Dennis and Ventura propose
+    on their \textit{Learning the Architecture of Sum-Product Networks Using Cluster on Variables}
+    \cite{clustering}.
+  \item Learning the structure of non-parametric Bayesian Sum-Product Networks, as seen on Lee,
+    Watkins and Zhang's \textit{Non-Parametric Bayesian Sum-Product Networks}
+    \cite{non-parametric-bayesian}.
+  \item Study and add ID-SPN to this paper based on Rooshenas and Lowd's \textit{Learning
+    Sum-Product Networks with Direct and Indirect Variable Interactions}~\cite{id-spn} and try to
+    understand how their implementation on Libra~\cite{libra} works.
+  \item Write about discriminative and generative learning on SPNs.
+  \item Study other publications on SPN available at~\cite{website:spn-uwashington}.
+  \item Do a comparison on each learning method.
+  \item Implement a learning method.
+\end{itemize}
 
 \newpage
 \begin{appendices}
