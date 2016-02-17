@@ -2264,12 +2264,6 @@
     <bcf:citekey order="22">id-spn</bcf:citekey>
     <bcf:citekey order="23">libra</bcf:citekey>
     <bcf:citekey order="24">website:spn-uwashington</bcf:citekey>
-    <bcf:citekey order="25">aima</bcf:citekey>
-    <bcf:citekey order="26">aima</bcf:citekey>
-    <bcf:citekey order="27">algorithms</bcf:citekey>
-    <bcf:citekey order="28">aima</bcf:citekey>
-    <bcf:citekey order="29">bayes-net-darwiche</bcf:citekey>
-    <bcf:citekey order="30">aima</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt" type="entry" sortscheme="anyt">
   <bcf:sorting>

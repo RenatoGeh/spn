@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.8)  16 FEB 2016 23:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.8)  16 FEB 2016 23:33
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1445,40 +1445,40 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout8 = `report.toc'.
 
  [2] [3]
-<imgs/spn_1.png, id=77, 559.08875pt x 296.10625pt>
+<imgs/spn_1.png, id=75, 559.08875pt x 296.10625pt>
 File: imgs/spn_1.png Graphic file (type png)
  <use imgs/spn_1.png>
 Package pdftex.def Info: imgs/spn_1.png used on input line 191.
 (pdftex.def)             Requested size: 195.68399pt x 103.63873pt.
 
-<imgs/spn_2.png, id=79, 534.99875pt x 326.21875pt>
+<imgs/spn_2.png, id=77, 534.99875pt x 326.21875pt>
 File: imgs/spn_2.png Graphic file (type png)
  <use imgs/spn_2.png>
 Package pdftex.def Info: imgs/spn_2.png used on input line 192.
 (pdftex.def)             Requested size: 187.25237pt x 114.17827pt.
 
 [4 <./imgs/spn_1.png> <./imgs/spn_2.png>]
-<imgs/complete.png, id=93, 139.52126pt x 159.59625pt>
+<imgs/complete.png, id=91, 139.52126pt x 159.59625pt>
 File: imgs/complete.png Graphic file (type png)
  <use imgs/complete.png>
 Package pdftex.def Info: imgs/complete.png used on input line 273.
 (pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
 
-<imgs/incomplete.png, id=94, 139.52126pt x 159.59625pt>
+<imgs/incomplete.png, id=92, 139.52126pt x 159.59625pt>
 File: imgs/incomplete.png Graphic file (type png)
 
 <use imgs/incomplete.png>
 Package pdftex.def Info: imgs/incomplete.png used on input line 274.
 (pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
 
-<imgs/consistent.png, id=95, 139.52126pt x 159.59625pt>
+<imgs/consistent.png, id=93, 139.52126pt x 159.59625pt>
 File: imgs/consistent.png Graphic file (type png)
 
 <use imgs/consistent.png>
 Package pdftex.def Info: imgs/consistent.png used on input line 291.
 (pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
 
-<imgs/inconsistent.png, id=96, 139.52126pt x 159.59625pt>
+<imgs/inconsistent.png, id=94, 139.52126pt x 159.59625pt>
 File: imgs/inconsistent.png Graphic file (type png)
 
 <use imgs/inconsistent.png>
@@ -1489,7 +1489,7 @@ Package pdftex.def Info: imgs/inconsistent.png used on input line 292.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [5 <./imgs/complete.png> <./imgs/incomplete.png>] [6 <./imgs/consistent.png> <.
-/imgs/inconsistent.png>] <imgs/cstate.png, id=117, 642.4pt x 483.8075pt>
+/imgs/inconsistent.png>] <imgs/cstate.png, id=115, 642.4pt x 483.8075pt>
 File: imgs/cstate.png Graphic file (type png)
 
 <use imgs/cstate.png>
@@ -1499,7 +1499,7 @@ Package pdftex.def Info: imgs/cstate.png used on input line 408.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7] <imgs/marginals.png, id=126, 642.4pt x 483.8075pt>
+[7] <imgs/marginals.png, id=124, 642.4pt x 483.8075pt>
 File: imgs/marginals.png Graphic file (type png)
 
 <use imgs/marginals.png>
@@ -1513,14 +1513,14 @@ ven the ev-i-dence $\OT1/cmr/bx/n/10 e$ \OT1/cmr/m/n/10 are $(\OML/cmm/m/it/10
 x[]; x[]; [][]; [][]\OT1/cmr/m/n/10 ) =
  []
 
-<imgs/map_botup.png, id=129, 1063.975pt x 522.95375pt>
+<imgs/map_botup.png, id=127, 1063.975pt x 522.95375pt>
 File: imgs/map_botup.png Graphic file (type png)
 
 <use imgs/map_botup.png>
 Package pdftex.def Info: imgs/map_botup.png used on input line 452.
 (pdftex.def)             Requested size: 297.91096pt x 146.42604pt.
  [8 <./imgs/cstate.png (PNG copy)> <./imgs/marginals.png (PNG copy)>] <imgs/map
-_topdown.png, id=138, 1063.975pt x 522.95375pt>
+_topdown.png, id=136, 1063.975pt x 522.95375pt>
 File: imgs/map_topdown.png Graphic file (type png)
 
 <use imgs/map_topdown.png>
@@ -1537,12 +1537,8 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 562.
 
-Overfull \hbox (5.90808pt too wide) in paragraph at lines 608--610
-[]\OT1/cmr/m/n/10 Introduction to Al-go-rithms [[]Cor+09[]]. 
- []
-
-[11] [12]
-Overfull \hbox (14.01047pt too wide) in paragraph at lines 638--638
+[11]
+Overfull \hbox (11.62155pt too wide) in paragraph at lines 585--585
 []\OT1/cmr/m/n/10 Sang-Woo Lee, Christo-pher Watkins, and Byoung-Tak Zhang. ``N
 on-Parametric Bayesian
  []
@@ -1551,12 +1547,12 @@ on-Parametric Bayesian
 Package caption Warning: Unused \captionsetup[table] on input line 56.
 See the caption package documentation for explanation.
 
-[13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 640.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 640.
+[12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 587.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 587.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 640.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 640.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 587.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 587.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1564,13 +1560,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 640.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 587.
  ) 
 Here is how much of TeX's memory you used:
- 30591 strings out of 493054
- 592070 string characters out of 6140587
- 1091545 words of memory out of 5000000
- 33507 multiletter control sequences out of 15000+600000
+ 30574 strings out of 493054
+ 591777 string characters out of 6140587
+ 1091460 words of memory out of 5000000
+ 33495 multiletter control sequences out of 15000+600000
  14465 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,12n,76p,933b,1531s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1589,10 +1585,10 @@ e1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
 b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (14 pages, 720380 bytes).
+Output written on report.pdf (13 pages, 715546 bytes).
 PDF statistics:
- 341 PDF objects out of 1000 (max. 8388607)
- 288 compressed objects within 3 object streams
- 63 named destinations out of 1000 (max. 500000)
- 215 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 322 PDF objects out of 1000 (max. 8388607)
+ 270 compressed objects within 3 object streams
+ 58 named destinations out of 1000 (max. 500000)
+ 207 words of extra memory for PDF output out of 10000 (max. 10000000)
 
