@@ -1,4 +1,7 @@
-file = report
+draft = aispn
+final = report
+
+file = $(final)
 compile = pdflatex -shell-escape $(file).tex
 
 all:

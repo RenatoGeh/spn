@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.8)  14 FEB 2016 22:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.8)  16 FEB 2016 23:17
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1432,168 +1432,131 @@ LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
 (Font)              using `OT1/cmr/bx/n' instead on input line 117.
 
 (./report.toc
-LaTeX Font Info:    Try loading font information for U+msa on input line 7.
+LaTeX Font Info:    Try loading font information for U+msa on input line 9.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 7.
+LaTeX Font Info:    Try loading font information for U+msb on input line 9.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [2])
+))
 \tf@toc=\write8
 \openout8 = `report.toc'.
 
- [3] [4]
-<imgs/bayes_net.png, id=104, 225.09094pt x 73.02281pt>
-File: imgs/bayes_net.png Graphic file (type png)
-
-<use imgs/bayes_net.png>
-Package pdftex.def Info: imgs/bayes_net.png used on input line 205.
-(pdftex.def)             Requested size: 112.54518pt x 36.5113pt.
- [5 <./imgs/bayes_net.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 280.
-
-
-(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 280.
- [6]
-<imgs/plane0.png, id=126, 767.86874pt x 237.88875pt>
-File: imgs/plane0.png Graphic file (type png)
- <use imgs/plane0.png>
-Package pdftex.def Info: imgs/plane0.png used on input line 346.
-(pdftex.def)             Requested size: 191.9667pt x 59.47203pt.
-
-<imgs/face0.png, id=127, 767.86874pt x 237.88875pt>
-File: imgs/face0.png Graphic file (type png)
- <use imgs/face0.png>
-Package pdftex.def Info: imgs/face0.png used on input line 347.
-(pdftex.def)             Requested size: 191.9667pt x 59.47203pt.
-
-<imgs/stop0.png, id=128, 767.86874pt x 237.88875pt>
-File: imgs/stop0.png Graphic file (type png)
- <use imgs/stop0.png>
-Package pdftex.def Info: imgs/stop0.png used on input line 348.
-(pdftex.def)             Requested size: 191.9667pt x 59.47203pt.
-
-<imgs/dollar0.png, id=129, 767.86874pt x 237.88875pt>
-File: imgs/dollar0.png Graphic file (type png)
- <use imgs/dollar0.png>
-Package pdftex.def Info: imgs/dollar0.png used on input line 349.
-(pdftex.def)             Requested size: 191.9667pt x 59.47203pt.
-
-[7 <./imgs/plane0.png> <./imgs/face0.png> <./imgs/stop0.png> <./imgs/dollar0.pn
-g>] <imgs/spn_1.png, id=144, 559.08875pt x 296.10625pt>
+ [2] [3]
+<imgs/spn_1.png, id=77, 559.08875pt x 296.10625pt>
 File: imgs/spn_1.png Graphic file (type png)
  <use imgs/spn_1.png>
-Package pdftex.def Info: imgs/spn_1.png used on input line 428.
+Package pdftex.def Info: imgs/spn_1.png used on input line 191.
 (pdftex.def)             Requested size: 195.68399pt x 103.63873pt.
 
-<imgs/spn_2.png, id=146, 534.99875pt x 326.21875pt>
+<imgs/spn_2.png, id=79, 534.99875pt x 326.21875pt>
 File: imgs/spn_2.png Graphic file (type png)
  <use imgs/spn_2.png>
-Package pdftex.def Info: imgs/spn_2.png used on input line 429.
+Package pdftex.def Info: imgs/spn_2.png used on input line 192.
 (pdftex.def)             Requested size: 187.25237pt x 114.17827pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[8] [9 <./imgs/spn_1.png> <./imgs/spn_2.png>]
-<imgs/complete.png, id=161, 139.52126pt x 159.59625pt>
+[4 <./imgs/spn_1.png> <./imgs/spn_2.png>]
+<imgs/complete.png, id=93, 139.52126pt x 159.59625pt>
 File: imgs/complete.png Graphic file (type png)
  <use imgs/complete.png>
-Package pdftex.def Info: imgs/complete.png used on input line 513.
+Package pdftex.def Info: imgs/complete.png used on input line 273.
 (pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
 
-<imgs/incomplete.png, id=162, 139.52126pt x 159.59625pt>
+<imgs/incomplete.png, id=94, 139.52126pt x 159.59625pt>
 File: imgs/incomplete.png Graphic file (type png)
 
 <use imgs/incomplete.png>
-Package pdftex.def Info: imgs/incomplete.png used on input line 514.
+Package pdftex.def Info: imgs/incomplete.png used on input line 274.
 (pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
 
-<imgs/consistent.png, id=163, 139.52126pt x 159.59625pt>
+<imgs/consistent.png, id=95, 139.52126pt x 159.59625pt>
 File: imgs/consistent.png Graphic file (type png)
 
 <use imgs/consistent.png>
-Package pdftex.def Info: imgs/consistent.png used on input line 533.
+Package pdftex.def Info: imgs/consistent.png used on input line 291.
 (pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
 
-<imgs/inconsistent.png, id=164, 139.52126pt x 159.59625pt>
+<imgs/inconsistent.png, id=96, 139.52126pt x 159.59625pt>
 File: imgs/inconsistent.png Graphic file (type png)
 
 <use imgs/inconsistent.png>
-Package pdftex.def Info: imgs/inconsistent.png used on input line 534.
+Package pdftex.def Info: imgs/inconsistent.png used on input line 292.
 (pdftex.def)             Requested size: 69.76045pt x 79.79791pt.
- [10 <./imgs/complete.png> <./imgs/incomplete.png> <./imgs/consistent.png> <./i
-mgs/inconsistent.png>] [11] [12]
-<imgs/cstate.png, id=193, 642.4pt x 483.8075pt>
-File: imgs/cstate.png Graphic file (type png)
- <use imgs/cstate.png>
-Package pdftex.def Info: imgs/cstate.png used on input line 661.
-(pdftex.def)             Requested size: 192.72148pt x 145.14337pt.
 
-<imgs/marginals.png, id=195, 642.4pt x 483.8075pt>
-File: imgs/marginals.png Graphic file (type png)
- <use imgs/marginals.png>
-Package pdftex.def Info: imgs/marginals.png used on input line 681.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5 <./imgs/complete.png> <./imgs/incomplete.png>] [6 <./imgs/consistent.png> <.
+/imgs/inconsistent.png>] <imgs/cstate.png, id=117, 642.4pt x 483.8075pt>
+File: imgs/cstate.png Graphic file (type png)
+
+<use imgs/cstate.png>
+Package pdftex.def Info: imgs/cstate.png used on input line 408.
 (pdftex.def)             Requested size: 192.72148pt x 145.14337pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13 <./imgs/cstate.png (PNG copy)>]
-Overfull \hbox (4.1752pt too wide) in paragraph at lines 695--699
+[7] <imgs/marginals.png, id=126, 642.4pt x 483.8075pt>
+File: imgs/marginals.png Graphic file (type png)
+
+<use imgs/marginals.png>
+Package pdftex.def Info: imgs/marginals.png used on input line 427.
+(pdftex.def)             Requested size: 192.72148pt x 145.14337pt.
+
+Overfull \hbox (4.1752pt too wide) in paragraph at lines 441--445
 [][] \OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X\OMS/cmsy/m/n/10 j\OT
-1/cmr/bx/n/10 e\OT1/cmr/m/n/10 )$ of the SPN on Fig-ure 8. The in-di-ca-tors gi
+1/cmr/bx/n/10 e\OT1/cmr/m/n/10 )$ of the SPN on Fig-ure 6. The in-di-ca-tors gi
 ven the ev-i-dence $\OT1/cmr/bx/n/10 e$ \OT1/cmr/m/n/10 are $(\OML/cmm/m/it/10 
 x[]; x[]; [][]; [][]\OT1/cmr/m/n/10 ) =
  []
 
-<imgs/map_botup.png, id=203, 1063.975pt x 522.95375pt>
+<imgs/map_botup.png, id=129, 1063.975pt x 522.95375pt>
 File: imgs/map_botup.png Graphic file (type png)
 
 <use imgs/map_botup.png>
-Package pdftex.def Info: imgs/map_botup.png used on input line 706.
+Package pdftex.def Info: imgs/map_botup.png used on input line 452.
 (pdftex.def)             Requested size: 297.91096pt x 146.42604pt.
-
-<imgs/map_topdown.png, id=205, 1063.975pt x 522.95375pt>
+ [8 <./imgs/cstate.png (PNG copy)> <./imgs/marginals.png (PNG copy)>] <imgs/map
+_topdown.png, id=138, 1063.975pt x 522.95375pt>
 File: imgs/map_topdown.png Graphic file (type png)
 
 <use imgs/map_topdown.png>
-Package pdftex.def Info: imgs/map_topdown.png used on input line 718.
+Package pdftex.def Info: imgs/map_topdown.png used on input line 464.
 (pdftex.def)             Requested size: 265.9931pt x 130.73811pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[14 <./imgs/marginals.png (PNG copy)> <./imgs/map_botup.png (PNG copy)>]
-[15 <./imgs/map_topdown.png (PNG copy)>]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 753.
- [16] [17]
+put line 492.
+ [9 <./imgs/map_botup.png (PNG copy)> <./imgs/map_topdown.png (PNG copy)>] [10]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 562.
+
+ (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 825.
- [18] [19]
-Overfull \hbox (5.90808pt too wide) in paragraph at lines 930--932
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 562.
+
+Overfull \hbox (5.90808pt too wide) in paragraph at lines 608--610
 []\OT1/cmr/m/n/10 Introduction to Al-go-rithms [[]Cor+09[]]. 
  []
 
-[20]
-Overfull \hbox (14.01047pt too wide) in paragraph at lines 960--960
+[11] [12]
+Overfull \hbox (14.01047pt too wide) in paragraph at lines 638--638
 []\OT1/cmr/m/n/10 Sang-Woo Lee, Christo-pher Watkins, and Byoung-Tak Zhang. ``N
 on-Parametric Bayesian
  []
 
-[21]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 962.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 962.
+
+Package caption Warning: Unused \captionsetup[table] on input line 56.
+See the caption package documentation for explanation.
+
+[13]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 640.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 640.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 962.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 962.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 640.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 640.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1601,16 +1564,16 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 962.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 640.
  ) 
 Here is how much of TeX's memory you used:
- 30653 strings out of 493054
- 592940 string characters out of 6140587
- 1091580 words of memory out of 5000000
- 33540 multiletter control sequences out of 15000+600000
+ 30591 strings out of 493054
+ 592070 string characters out of 6140587
+ 1091545 words of memory out of 5000000
+ 33507 multiletter control sequences out of 15000+600000
  14465 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,12n,76p,933b,1774s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,12n,76p,933b,1531s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -1626,10 +1589,10 @@ e1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
 b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (22 pages, 976324 bytes).
+Output written on report.pdf (14 pages, 720380 bytes).
 PDF statistics:
- 449 PDF objects out of 1000 (max. 8388607)
- 382 compressed objects within 4 object streams
- 87 named destinations out of 1000 (max. 500000)
- 304 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 341 PDF objects out of 1000 (max. 8388607)
+ 288 compressed objects within 3 object streams
+ 63 named destinations out of 1000 (max. 500000)
+ 215 words of extra memory for PDF output out of 10000 (max. 10000000)
 
