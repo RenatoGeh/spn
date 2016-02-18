@@ -120,7 +120,7 @@
 
 \section{Introduction}
 
-Probabilistic graphical models can compactly represent many distributions of probability. However,
+Probabilistic graphical models can compactly represent many probability distributions. However,
 exact inference in most of them is intractable and models that can compute exact inference in
 tractable time are quite limited in compactly representing distributions. An alternative to this
 are the use of deep architectures that use multiple hidden variables to increase the compactness
@@ -129,17 +129,18 @@ of graphical models, but makes inference in them even more difficult.
 In 2011, Poon and Domingos introduced sum-product networks (SPNs). Adding new layers to this new
 class of deep architecture not only increases its expressivity but also retains its tractability.
 Compared to other tractable models, sum-product networks have shown to be more general
-\cite{poon-domingos} and easier to perform learning and inference. Experiments have shown promising
-results, with SPNs performing better and faster than other graphical models in vision problems.
+\cite{poon-domingos} and easier to perform learning and inference on. Experiments have shown
+promising results, with SPNs performing better and faster than other graphical models in vision
+problems.
 
 In this paper, we show what an SPN is, its properties and how to perform inference and learning on
 it.
 
 \section{Structure of Sum-Product Networks}
 
-We will base this section on the works of Poon and Domingos on their article \textit{Sum-Product
-Networks: A New Deep Architecture}~\cite{poon-domingos} and also on Gens and Domingos'
-\textit{Learning the Structure of Sum-Product Networks}~\cite{gens-domingos}.
+We will base this section on Poon and Domingo's article \textit{Sum-Product Networks: A New Deep
+Architecture}~\cite{poon-domingos} and also on Gens and Domingos' \textit{Learning the Structure of
+Sum-Product Networks}~\cite{gens-domingos}.
 
 \subsection{Partition function}
 
@@ -179,7 +180,7 @@ two will be evident (e.g. $P(x_1,x_2)$ vs $S(x_1,x_2,\overline{x}_1,\overline{x}
 \begin{spn-def}
   A sum-product network (SPN) is an acyclic digraph. An SPN $S$ over variables $X_1,\ldots,X_n$ has
   leaves as indicators $x_1,\ldots,x_n,\overline{x}_1,\ldots,\overline{x}_n$ and internal nodes as
-  sums and nodes in alternating layers. For each edge $(i,j)$ that emanates from a sum node $i$,
+  sums and products in alternating layers. For each edge $(i,j)$ that emanates from a sum node $i$,
   there exists a non-zero weight $w_{ij}$. The value of a sum node $i$ is $\sum_{j\in Ch(i)}
   w_{ij}v_j$, where $Ch(i)$ is the set of children of $i$ and $v_j$ is the value of the node $j$.
   The value of a product node $i$ is $\prod_{j\in Ch(i)} v_j$. The value of an SPN is the value of
@@ -207,13 +208,13 @@ according to the variables of the set. For example, given the set $\{X_1=1,X_3=0
 $(x_1,x_2,x_3,\overline{x}_1,\overline{x}_2,\overline{x}_3)$ must be set to $(1,1,0,0,1,1)$.
 
 An SPN $S$ as a function of the indicator variables $x_1,\ldots,x_n,\overline{x}_1,\ldots,
-\overline{x}_n$ will be denoted by $S(x_1,\ldots,x_n,\overline{x}_1,\ldots,x_n)$. A complete state
-$x$ means that, for each variable $X_i$, there are two possible outcomes for the indicators: either
-$x_i=1,\overline{x}_i=0$ or $x_i=0,\overline{x}_i=1$. When an SPN $S$ has a complete state $x$,
-instead of enumerating each indicator, we simply abbreviate it to $S(x)$. $S(e)$ will be used to
-denote when the indicators are specified according to the evidence $e$. The partition function is
-the value of the network polynomial when all indicators are set to 1. If an SPN $S$ has all
-indicators set to 1, we refer to it as $S(*)$.
+\overline{x}_n$ will be denoted by $S(x_1,\ldots,x_n,\overline{x}_1,\ldots,\overline{x}_n)$. A
+complete state $\mathbf{x}$ means that, for each variable $X_i$, there are two possible outcomes
+for the indicators: either $x_i=1,\overline{x}_i=0$ or $x_i=0,\overline{x}_i=1$. When an SPN $S$
+has a complete state $\mathbf{x}$, instead of enumerating each indicator, we simply abbreviate it
+to $S(\mathbf{x})$. $S(e)$ will be used to denote when the indicators are specified according to
+the evidence $e$. The partition function is the value of the network polynomial when all indicators
+are set to 1. If an SPN $S$ has all indicators set to 1, we refer to it as $S(*)$.
 
 SPNs are defined recursively. The subnetwork $S_n$ rooted at an arbitrary node $n$ in an SPN $S$
 is an SPN in itself. Let $\mathbf{X}$ be the set of variables in an SPN $S$, then for all $x\in
@@ -240,9 +241,9 @@ The network polynomial is then:
   \Phi = (0.5\times0.6\times0.3+0.2\times0.6\times0.2+0.3\times0.9\times0.2)x_1x_2+\ldots
 \end{equation*}
 
-If we have a complete state $x$ as $X_1=1,X_2=0$ then $S(x)=S(x_1,x_2,\overline{x}_1,
-\overline{x}_2)=S(1,0,0,1)$. If the evidence $e$ is $X_1=1$, then, following the consistency rule,
-we have that $S(e)=S(1,1,0,1)$. And $S(*)=S(1,1,1,1)$.
+If we have a complete state $\mathbf{x}=\{X_1=1,X_2=0\}$ then $S(\mathbf{x})=S(x_1,x_2,
+\overline{x}_1,\overline{x}_2)=S(1,0,0,1)$. If the evidence $e$ is $X_1=1$, then, following the
+consistency rule, we have that $S(e)=S(1,1,0,1)$. And $S(*)=S(1,1,1,1)$.
 
 \section{Properties of Sum-Product Networks}
 
@@ -375,12 +376,12 @@ P(X_i=x_i^j)$.
 
 We can construct SPNs with continuous variables by assuming variables have an infinite number of
 values. The sum of the indicators $\sum_{j=1}^m p_i^j x_i^j$ can be viewed as an integration of the
-densities $\int p(x)dx$ with $p(x)$ as the probability density function of $X$\footnote{I plan on
-elaborating more on this later.}. For more information see~\cite{poon-domingos}.
+densities $\int p(x)dx$ with $p(x)$ as the probability density function of $X$.\footnote{I plan on
+elaborating more on this later.} For more information see~\cite{poon-domingos}.
 
 \section{Inference on Sum-Product Networks}
 
-As we have seen, inference on SPNs is tractable. In fact, we can compute marginals and MAP in time
+As we have seen, inference on SPNs is tractable. In fact, we can compute marginals and MPE in time
 linear to the SPN's edges. In this section we will first take a look on how to compute the
 probability of a complete state, then we show how to find the marginals of an SPN\@. And finally
 we see that computing the MPE is possible my maximizing the nodes.
@@ -492,7 +493,7 @@ learning method.
   \caption{LearnSPN}\label{pd11-learn}
   \begin{algorithmic}[1]
     \Require Set $\mathbf{D}$ of instances over variables $\mathbf{X}$.
-    \Ensure An SPN with learned structure and parameters.
+    \Ensure An SPN with learned weights.
     \State $S \gets $GenerateDenseSPN($\mathbf{X}$)
     \State InitializeWeights($S$)
     \Repeat
