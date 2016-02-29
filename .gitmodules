@@ -1,0 +1,3 @@
+[submodule "mac6916"]
+	path = mac6916
+	url = git@github.com:RenatoGeh/mac6916.git
